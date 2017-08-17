@@ -1,0 +1,46 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<div class="item-list">
+	<table id="topics-table" class="table table-with-titles">
+		<tr>
+			<td colspan="3" class="table-title">
+				<h2 class="h-nostyle">
+				<a href="#" data-original-title="">${question_common_title}</a>
+				</h2>
+			</td>
+		</tr>
+		<c:forEach items="${requestScope.questions}" var = "questions">
+		<tr class="question">
+			<td class="title-col">
+				<div class="pull-left">
+					<h3 class="h-nostyle">
+						<a class="branch-title" href="controller?command=show_question&question_id=${questions.id}" data-original-title="">${questions.title}</a>
+					</h3>
+					<span class="forum-sections-branch-description-container" id="branchDescriptionLabel26" data-original-title="">${questions.content}</span>
+					<div class="forum-sections-moderators-container"></div>
+				</div>
+			</td>
+			<td class="topics-posts shrink-to-fit">Количество ответов<span class="test-topics-count space-left-small" data-original-title="">${questions.answerCount}</span>
+			</td>
+			<td class="latest-by shrink-to-fit">
+				<a class="date" href="#" data-original-title="">${questions.dateCreated}</a>
+				<p>Автор<a class="space-left-small" href="#" data-original-title="Нажмите для просмотра профиля">${questions.userLogin}</a>
+				</p>
+			</td>
+		</tr>
+		</c:forEach>		
+		</table>
+		<div class="pagination">
+			<c:forEach begin="1" end="${requestScope.amont_page}" var="i">
+			<c:choose>
+				<c:when test="${requestScope.current_page == i}">
+					<a href="controller?command=home&number_page=${i}" class="active">${i}</a>
+				</c:when>
+				<c:otherwise>
+					<a href="controller?command=home&number_page=${i}">${i}</a>	
+				</c:otherwise>
+			</c:choose>
+			</c:forEach>
+		</div>
+</div>

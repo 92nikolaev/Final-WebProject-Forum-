@@ -1,0 +1,153 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+<fmt:setLocale value="${sessionScope.locale}" />
+<fmt:setBundle basename="local" var="loc" />
+
+<!-- MENU NAVIGATION -->
+
+<fmt:message bundle="${loc}" key="nav.management" var="nav_management" />
+<fmt:message bundle="${loc}" key="nav.users" var="nav_users" />
+<fmt:message bundle="${loc}" key="nav.language" var="nav_language" />
+<fmt:message bundle="${loc}" key="nav.english" var="nav_english" />
+<fmt:message bundle="${loc}" key="nav.russian" var="nav_russian" />
+<fmt:message bundle="${loc}" key="nav.news" var="nav_news" />
+<fmt:message bundle="${loc}" key="nav.signIn" var="nav_signIn" />
+<fmt:message bundle="${loc}" key="nav.logout" var="nav_logout" />
+<fmt:message bundle="${loc}" key="nav.searchform" var="nav_searchform" />
+
+<!-- ELEMENT QUESTION ITEM -->
+<fmt:message bundle="${loc}" key="question.item.title" var="question_common_title" />
+
+
+<!-- ELEMENT SIGN IN POP UP -->
+<fmt:message bundle="${loc}" key="popUp.signIn.title" var="popUp_signIn_title" />
+<fmt:message bundle="${loc}" key="popUp.signIn.description.action" var="popUp_signIn_description_action" />
+<fmt:message bundle="${loc}" key="popUp.signIn.login" var="popUp_signIn_login" />
+<fmt:message bundle="${loc}" key="popUp.signIn.password" var="popUp_signIn_password" />
+<fmt:message bundle="${loc}" key="popUp.signIn.signUp" var="popUp_signIn_signUp" />
+<fmt:message bundle="${loc}" key="popUp.signIn.signIp" var="popUp_signIn_signIp" />
+
+<!-- ELEMENT SIGN UP -->
+<fmt:message bundle="${loc}" key="signUp.name" var="sign_up_name" />
+<fmt:message bundle="${loc}" key="signUp.surname" var="sign_up_surname" />
+<fmt:message bundle="${loc}" key="signUp.login" var="sign_up_login" />
+<fmt:message bundle="${loc}" key="signUp.password" var="sign_up_password" />
+<fmt:message bundle="${loc}" key="signUp.confirm.password" var="sign_up_confirm_password" />
+<fmt:message bundle="${loc}" key="signUp.email" var="sign_up_email" />
+<fmt:message bundle="${loc}" key="signUp.btn" var="sign_up_btn" />
+
+<!-- ELEMENT SIGN UP SUCCESS-->
+<fmt:message bundle="${loc}" key="success.signUp.title" var="success_signUp_title" />
+<fmt:message bundle="${loc}" key="success.signUp.action" var="success_signUp_action" />
+
+<!-- ELEMENT PERSONAL AREA -->
+<fmt:message bundle="${loc}" key="profile.title" var="profile_title" />
+<fmt:message bundle="${loc}" key="profile.ask.question" var="profile_ask_question" />
+<fmt:message bundle="${loc}" key="profile.personal.info" var="profile_personal_info" />
+<fmt:message bundle="${loc}" key="profile.user.name" var="profile_user_name" />
+<fmt:message bundle="${loc}" key="profile.user.surname" var="profile_user_surname" />
+<fmt:message bundle="${loc}" key="profile.user.login" var="profile_user_login" />
+<fmt:message bundle="${loc}" key="profile.user.email" var="profile_user_email" />
+<fmt:message bundle="${loc}" key="profile.profile.settings" var="profile_user_settings" />
+<fmt:message bundle="${loc}" key="profile.edit.data" var="profile_edit_user_data" />
+<fmt:message bundle="${loc}" key="profile.change.password" var="profile_change_password" />
+<fmt:message bundle="${loc}" key="profile.my.discussion" var="profile_my_discussion" />
+<fmt:message bundle="${loc}" key="profile.edit.question" var="profile_edit_question" />
+
+<fmt:message bundle="${loc}" key="profile.edit.profile" var="profile_edit_profile" />
+<fmt:message bundle="${loc}" key="profile.edit.profile.description.action" var="profile_edit_profile_description_action" />
+<fmt:message bundle="${loc}" key="profile.edit.user.name" var="profile_edit_user_name" />
+<fmt:message bundle="${loc}" key="profile.edit.user.surname" var="profile_edit_user_surname" />
+<fmt:message bundle="${loc}" key="profile.edit.user.email" var="profile_edit_user_email" />
+<fmt:message bundle="${loc}" key="profile.edit.profile.btn" var="profile_edit_profile_btn" />
+
+<fmt:message bundle="${loc}" key="profile.title.edit.password" var="profile_title_edit_password" />
+<fmt:message bundle="${loc}" key="profile.password.old" var="profile_password_old" />
+<fmt:message bundle="${loc}" key="profile.password.new" var="profile_password_new" />
+<fmt:message bundle="${loc}" key="profile.password.verefication" var="profile_password_verefication" />
+<fmt:message bundle="${loc}" key="profile.password.change.btn" var="profile_password_change_btn" />
+
+<fmt:message bundle="${loc}" key="profile.title.create.question" var="profile_title_create_question" />
+<fmt:message bundle="${loc}" key="profile.question.title" var="profile_question_title" />
+<fmt:message bundle="${loc}" key="profile.question.description" var="profile_question_description" />
+<fmt:message bundle="${loc}" key="profile.title.create.question.btn" var="profile_title_create_question_btn" />
+<fmt:message bundle="${loc}" key="profile.create.question.error.message" var="profile_create_question_error_message" />
+
+<!-- ELEMENT QUESTION -->
+<fmt:message bundle="${loc}" key="question.question" var="question_colm" />
+<fmt:message bundle="${loc}" key="question.avatar" var="question_avatar" />
+<fmt:message bundle="${loc}" key="question.answers" var="question_answers" />
+<fmt:message bundle="${loc}" key="question.answer" var="question_answer" />
+<fmt:message bundle="${loc}" key="question.average.rating" var="question_average_rating" />
+<fmt:message bundle="${loc}" key="question.rate.answer" var="question_rate_answer" />
+<fmt:message bundle="${loc}" key="question.edit.answer" var="question_edit_answer" />
+<fmt:message bundle="${loc}" key="question.create.answer" var="question_create_answer" />
+<fmt:message bundle="${loc}" key="question.signIn.response" var="question_signIn_response" />
+<fmt:message bundle="${loc}" key="question.create.answer.action.description" var="question_create_answer_action_description" />
+<fmt:message bundle="${loc}" key="question.create.answer.btn" var="question_create_answer_btn" />
+
+<!-- ELEMENT EDIT QUESTION PAGE -->
+<fmt:message bundle="${loc}" key="question.edit.title" var="question_edit_title" />
+<fmt:message bundle="${loc}" key="question.edit.btn" var="question_edit_btn" />
+
+<!-- ELEMENT EDIT ANSWER PAGE -->
+<fmt:message bundle="${loc}" key="answer.edit.title" var="answer_edit_title" />
+<fmt:message bundle="${loc}" key="answer.edit.btn" var="answer_edit_btn" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

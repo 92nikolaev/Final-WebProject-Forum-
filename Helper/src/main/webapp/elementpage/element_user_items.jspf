@@ -1,0 +1,88 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<div class="container">
+	<table class=table_list>
+		<thead>
+			<tr>
+				<th>Login</th>
+				<th>Role</th>
+				<th>Date of registration</th>
+				<th>Rating for answers</th>
+				<th>Number of ratings</th>
+				<th>Number of questions</th>
+				<c:if test="${user.status == 1}">
+					<th>Lock/Unlock</th>
+				</c:if>
+			</tr>
+		</thead>
+		<tbody>
+		<c:choose>
+			<c:when test="${sessionScope.user.role == 1}">
+				<c:forEach items="${requestScope.users}" var = "user">
+				<tr>
+				<td>${user.login}</td>
+				<c:choose>
+					<c:when test="${user.role == 1}">
+						<td>Administrator</td>
+					</c:when>
+					<c:otherwise>
+						<td>User</td>
+					</c:otherwise>
+				</c:choose>
+				<td>${user.dateCreated}</td>
+				<td>${user.averageMark}</td>
+				<td>${user.countMark}</td>
+				<td>${user.countAnswer}</td>
+				<td>
+					<c:choose>
+						<c:when test="${user.status == 1}">
+							<form action="controller" method="post">
+								<input type="hidden" name="user_id" value="${user.id}">
+								<button class="btn" type="submit" name="command" value="lock_user"><i class="fa fa-lock" aria-hidden="true"></i>lock</button>							</form>
+						</c:when>
+						<c:otherwise>
+							<form action="controller" method="post">
+								<input type="hidden" name="user_id" value="${user.id}">
+								<button class="btn" type="submit" name="command" value="unlock_user"><i class="fa fa-unlock" aria-hidden="true"></i>unlock</button>
+							</form>
+						</c:otherwise>
+					</c:choose>	
+					</td>
+				</tr>
+				</c:forEach>
+			</c:when>
+			<c:otherwise>
+				<c:forEach items="${requestScope.users}" var = "user">
+				<tr>
+				<td>${user.login}</td>
+				<c:choose>
+					<c:when test="${user.role == 1}">
+						<td>Administrator</td>
+					</c:when>
+					<c:otherwise>
+						<td>User</td>
+					</c:otherwise>
+				</c:choose>
+				<td>${user.dateCreated}</td>
+				<td>${user.averageMark}</td>
+				<td>${user.countMark}</td>
+				<td>${user.countAnswer}</td>
+				</tr>
+				</c:forEach>
+			</c:otherwise>
+		</c:choose>
+		</tbody>
+	</table>
+	<div class="pagination">
+		<c:forEach begin="1" end="${requestScope.amont_page}" var="i">
+			<c:choose>
+				<c:when test="${requestScope.current_page == i}">
+					<a href="controller?command=showAllUsers&number_page=${i}" class="active">${i}</a>
+				</c:when>
+				<c:otherwise>
+					<a href="controller?command=showAllUsers&number_page=${i}">${i}</a>	
+				</c:otherwise>
+			</c:choose>
+		</c:forEach>
+	</div>
+</div>	
