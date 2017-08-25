@@ -15,14 +15,27 @@ import by.epam.training.helper.bean.Question;
 import by.epam.training.helper.bean.User;
 import by.epam.training.helper.command.Command;
 import by.epam.training.helper.command.exception.CommandException;
+import by.epam.training.helper.constant.ErrorMessage;
 import by.epam.training.helper.constant.ParameterName;
 import by.epam.training.helper.constant.Url;
 import by.epam.training.helper.service.QuestionService;
 import by.epam.training.helper.service.UserService;
 import by.epam.training.helper.service.exception.ServiceException;
 import by.epam.training.helper.service.factory.ServiceFactory;
+/**
+ * The class is used to enter personal area and display personal information and asked a question
+ * @author Nikolaev Ilya
+ *
+ */
 public class GetUserProfile implements Command {
 	private static final Logger logger = LogManager.getLogger(GetUserProfile.class);
+	/**
+	 *  display personal information and asked a question
+	 *	@param request - request from client to get parameters to work with it
+	 *  @param response - send response to client with parameters to work with on client side
+	 *  @throws IOException  
+     * 	@throws ServletException
+	 */
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException, CommandException {
@@ -42,11 +55,11 @@ public class GetUserProfile implements Command {
 				request.setAttribute(ParameterName.MESSAGE, request.getParameter(ParameterName.MESSAGE));
 				request.getRequestDispatcher(Url.PROFILE).forward(request, response);
 			} catch (ServiceException e) {
-				logger.error(e);
-				e.printStackTrace();
-				throw new CommandException();
+				logger.error(ErrorMessage.ERROR_ENTER_CABINET);
+				response.sendRedirect(Url.REDIRECT_SIGN_IN);
 			}
 		}else{
+			logger.error(ErrorMessage.ERROR_ENTER_CABINET);
 			response.sendRedirect(Url.SIGN_IN);
 		}
 		

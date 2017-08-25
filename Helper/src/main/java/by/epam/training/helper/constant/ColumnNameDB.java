@@ -28,6 +28,8 @@ public class ColumnNameDB {
 	/* NEWS  */
 	public static final String NEWS_ID = "news_id";
 	public static final String NEWS_TITLE = "news_title";
+	public static final String NEWS_CONTENT = "news_content";
+	public static final String NEWS_COUNT = "news_count";
 	
 	/*ANSWER*/
 	public static final String ANSWER_ID = "answer_id";
@@ -35,10 +37,12 @@ public class ColumnNameDB {
 	public static final String ANSWER_AVERAGE_MARK = "average_mark";
 	public static final String ANSWER_TEXT = "answer_content";
 	public static final String ANSWER_COUNT = "count_answer";
+	
 	/*MARK*/
 	public static final String MARK_COUNT = "count_mark";
 	public static final String MARK_ID = "mark_id";
 	public static final String MARK_VALUE = "mark_value";
+	
 	
 	
 }

@@ -16,6 +16,7 @@ import by.epam.training.helper.command.exception.CommandException;
 import by.epam.training.helper.constant.ErrorMessage;
 import by.epam.training.helper.constant.ParameterName;
 import by.epam.training.helper.constant.SuccessMessage;
+import by.epam.training.helper.constant.Url;
 import by.epam.training.helper.service.UserService;
 import by.epam.training.helper.service.exception.ServiceException;
 import by.epam.training.helper.service.factory.ServiceFactory;
@@ -34,11 +35,11 @@ public class EditProfile implements Command {
 		UserService userService = serviceFactory.getUserService();
 		try {
 			userService.editProfile(user.getId(), nameEdit, surnameEdit, emailEdit);
-			response.sendRedirect("controller?command=user_profile&message="+SuccessMessage.EDIT_USER_FIELD);
+			response.sendRedirect(Url.REDIRECT_USER_PROFILE + SuccessMessage.EDIT_USER_FIELD);
 		} catch (ServiceException e) {
 			e.printStackTrace();
 			logger.error(e);
-			response.sendRedirect("controller?command=user_profile&message="+ErrorMessage.ERROR_EDIT_USER_FIELD);
+			response.sendRedirect(Url.REDIRECT_USER_PROFILE + ErrorMessage.ERROR_EDIT_USER_FIELD);
 		}
 	}
 

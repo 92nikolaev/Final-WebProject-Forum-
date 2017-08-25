@@ -44,7 +44,7 @@ public class Validation {
 				}	
 		} catch (DAOException e) {
 			logger.error(ErrorMessage.ERROR_CHECK_USER_EXISTS, e);
-			throw new ValidationException(ErrorMessage.ERROR_CHECK_USER_EXISTS + e);
+			throw new ValidationException(ErrorMessage.ERROR_CHECK_USER_EXISTS);
 		}	
 	}
 	public static void validateSignIn(String login, String password) throws ValidationException {
@@ -82,14 +82,14 @@ public class Validation {
 			logger.error(ErrorMessage.INVALID_SURNAME + user.getSurname());
 			throw new ValidationException(ErrorMessage.INVALID_SURNAME);
 		}
-		if(!Pattern.matches(RegularExpression.EMAIL_REGEX, user.getEmail())){
-			logger.error(ErrorMessage.INVALID_EMAIL + user.getEmail());
-			throw new ValidationException(ErrorMessage.INVALID_EMAIL);
-		}
 		if(!Pattern.matches(RegularExpression.LOGIN_REGEX, user.getLogin())){
 			logger.error(ErrorMessage.INVALID_LOGIN + user.getLogin());
 			throw new ValidationException(ErrorMessage.INVALID_LOGIN);
 		}	
+		if(!Pattern.matches(RegularExpression.EMAIL_REGEX, user.getEmail())){
+			logger.error(ErrorMessage.INVALID_EMAIL + user.getEmail());
+			throw new ValidationException(ErrorMessage.INVALID_EMAIL);
+		}
 	}
 	public static void validateUserField(String nameEdit, String surnameEdit, String emailEdit) throws ValidationException{
 		if(!Pattern.matches(RegularExpression.NAME_REGEX, nameEdit)){

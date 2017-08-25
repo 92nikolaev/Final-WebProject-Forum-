@@ -23,9 +23,9 @@ import by.epam.training.helper.service.factory.ServiceFactory;
 import by.epam.training.helper.tools.StringInNumber;
 import by.epam.training.helper.validation.Validation;
 
-public class LockUser implements Command {
-	private static final Logger logger = LogManager.getLogger(LockUser.class);
-	byte BLOCK_STATUS = 0;
+public class UnlockUser implements Command {
+	private static final Logger logger = LogManager.getLogger(UnlockUser.class);
+	byte UNLOCK_STATUS = 1;
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException, CommandException {
@@ -37,26 +37,22 @@ public class LockUser implements Command {
 			UserService userService = serviceFactory.getUserService();
 			try{
 				int userId = StringInNumber.parseString(userIdParametr);
-				if(user.getId() != userId){
-					if(Validation.isValidationId(userId)){
-						userService.lockUser(userId, BLOCK_STATUS);
-						response.sendRedirect(Url.SHOW_ALL_USER_WITH_MESSAGE + SuccessMessage.USER_LOCK);
-					}else{
-						response.sendRedirect(Url.SHOW_ALL_USER_WITH_MESSAGE + ErrorMessage.ERROR_USER_INDEFINED);
-					}
-				}else {
-					logger.error(ErrorMessage.ERROR_LOCK_HIMSELF);
-					response.sendRedirect(Url.SHOW_ALL_USER_WITH_MESSAGE + ErrorMessage.ERROR_LOCK_HIMSELF);
+				if(Validation.isValidationId(userId)){
+					userService.lockUser(userId, UNLOCK_STATUS);
+					response.sendRedirect(Url.SHOW_ALL_USER_WITH_MESSAGE + SuccessMessage.USER_UNLOCK);
+				}else{
+					response.sendRedirect(Url.SHOW_ALL_USER_WITH_MESSAGE + ErrorMessage.ERROR_USER_INDEFINED);
 				}
 			}catch (NumberFormatException e) {
 				logger.error(ErrorMessage.ERROR_DETERMIN_ID);
 				response.sendRedirect(Url.SHOW_ALL_USER_WITH_MESSAGE + ErrorMessage.ERROR_USER_INDEFINED);
 			} catch (ServiceException e) {
 				logger.error(ErrorMessage.ERROR_LOCK_USER);
-				response.sendRedirect(Url.SHOW_ALL_USER_WITH_MESSAGE + ErrorMessage.ERROR_LOCK);
+				response.sendRedirect(Url.SHOW_ALL_USER_WITH_MESSAGE + ErrorMessage.ERROR_UNLOCK);
 			}	
 		}else{
 			response.sendRedirect(Url.SIGN_IN);
 		}
 	}
+
 }

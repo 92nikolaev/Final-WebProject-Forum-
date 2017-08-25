@@ -10,7 +10,18 @@
 <body>
 <%@ include file="../elementpage/element_header.jspf" %>
 	<div class="container">
-			<div><p>${message}</p></div>
+		<c:if test="${message == 'changed successfully'}">
+			<div><p>${profile_data_changed_successfully}</p></div>
+		</c:if>
+		<c:if test="${message == 'faild change'}">
+			<div><p>${profile_data_changed_faild}</p></div>
+		</c:if>
+		<c:if test="${message == 'Successfully changed pasword'}">
+			<div><p>Successfully changed pasword</p></div>
+		</c:if>
+		<c:if test="${message == 'Failed to change password'}">
+			<div><p>Failed to change password</p></div>
+		</c:if>
 		<div class="inner-content">
 			<div class="big-heading">
 				<h2>${profile_title}</h2>
@@ -72,15 +83,15 @@
 			<table>
 				<tr>
 					<td>${profile_edit_user_name}</td>
-					<td><input class="icon-user1" type="text" name="user_name" placeholder="${profile_edit_user_name}" value="${user.name}" required="required"></td>
+					<td><input class="icon-user1" type="text" name="user_name" placeholder="${profile_edit_user_name}" value="${user.name}" required pattern="^[a-zA-Zа-яА-Я]{4,}$"></td>
 				</tr>
 				<tr>
 					<td>${profile_edit_user_surname}</td>
-					<td><input class="icon-user1" type="text" name="user_surname" placeholder="${profile_edit_user_surname}" value="${user.surname}" required="required"></td>
+					<td><input class="icon-user1" type="text" name="user_surname" placeholder="${profile_edit_user_surname}" value="${user.surname}" required pattern="^[a-zA-Zа-яА-Я]{4,}$"></td>
 				</tr>
 				<tr>
 					<td>${profile_edit_user_email}</td>
-					<td><input class="icon-user1" type="text" name="user_email" placeholder="${profile_edit_user_email}" value="${user.email}" required="required"></td>
+					<td><input class="icon-user1" type="text" name="user_email" placeholder="${profile_edit_user_email}" value="${user.email}" required pattern="/^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/"></td>
 				</tr>	
 			</table>
 				<button class="btn" type="submit" name="command" value="edit_profile">${profile_edit_profile_btn}</button>
@@ -90,19 +101,20 @@
 		<div class="modal-content-edit modal_edit_password">
 			<button class="modal-content-close" type="button" title="Close">Close</button>
 			<h2 class="modal-content-title">${profile_title_edit_password}</h2>
+			<p>Например Nikolaev123</p>
 			<form class="login-form1-cabinet" action="controller" method="post">
 			<table>
 				<tr>
 					<td>${profile_password_old}</td>
-					<td><input id="old_password" class="icon-user1" type="password" name="old_password" placeholder="${profile_password_old}" required="required"></td>
+					<td><input id="old_password" class="icon-user1" type="password" name="old_password" placeholder="${profile_password_old}" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])\w{6,}$"></td>
 				</tr>
 				<tr>
 					<td>${profile_password_new}</td>
-					<td><input id="new_password" class="icon-user1" type="password" name="new_password" placeholder="${profile_password_new}" required="required"></td>
+					<td><input id="new_password" class="icon-user1" type="password" name="new_password" placeholder="${profile_password_new}" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])\w{6,}$"></td>
 				</tr>
 				<tr>
 					<td>${profile_password_verefication}</td>
-					<td><input id="new_verefication_password" class="icon-user1" type="password" name="new_verefication_password" placeholder="${profile_password_verefication}" required="required"></td>
+					<td><input id="new_verefication_password" class="icon-user1" type="password" name="new_verefication_password" placeholder="${profile_password_verefication}"  required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])\w{6,}$"></td>
 				</tr>	
 			</table>
 				<button id="сhange_password" class="btn" type="submit" name="command" value="сhange_password">${profile_password_change_btn}</button>

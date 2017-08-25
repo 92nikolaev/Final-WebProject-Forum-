@@ -9,22 +9,27 @@ import org.apache.log4j.Logger;
 import by.epam.training.helper.command.exception.CommandNotFoundException;
 import by.epam.training.helper.command.impl.AddAnswer;
 import by.epam.training.helper.command.impl.ChangePassword;
+import by.epam.training.helper.command.impl.CreateNews;
 import by.epam.training.helper.command.impl.CreateQuestion;
 import by.epam.training.helper.command.impl.EditAnswer;
 import by.epam.training.helper.command.impl.EditProfile;
 import by.epam.training.helper.command.impl.EditQuestion;
+import by.epam.training.helper.command.impl.EvaluateAnswer;
 import by.epam.training.helper.command.impl.GetAllUsers;
 import by.epam.training.helper.command.impl.GetHomePage;
 import by.epam.training.helper.command.impl.GetPageEditAnswer;
 import by.epam.training.helper.command.impl.GetPageEditQuestion;
 import by.epam.training.helper.command.impl.GetQuestionById;
+import by.epam.training.helper.command.impl.GetSignInPage;
 import by.epam.training.helper.command.impl.GetSignUpPage;
 import by.epam.training.helper.command.impl.GetUserProfile;
 import by.epam.training.helper.command.impl.LockUser;
 import by.epam.training.helper.command.impl.SetLocale;
+import by.epam.training.helper.command.impl.ShowNews;
 import by.epam.training.helper.command.impl.SignIn;
 import by.epam.training.helper.command.impl.SignOut;
 import by.epam.training.helper.command.impl.SignUp;
+import by.epam.training.helper.command.impl.UnlockUser;
 import by.epam.training.helper.constant.CommandName;
 
 
@@ -38,7 +43,7 @@ public class CommandHelper {
 		commands.put(CommandName.SET_LOCALE, new SetLocale());
 		commands.put(CommandName.SIGN_UP, new SignUp());
 		commands.put(CommandName.SIGN_IN, new SignIn());
-		commands.put(CommandName.SIGN_IN_PAGE, new GetSignUpPage());
+		commands.put(CommandName.SIGN_UP_PAGE, new GetSignUpPage());
 		commands.put(CommandName.SIGN_OUT, new SignOut());
 		commands.put(CommandName.USER_PROFILE, new GetUserProfile());
 		commands.put(CommandName.CREATE_QUESTION, new CreateQuestion());
@@ -48,11 +53,15 @@ public class CommandHelper {
 		commands.put(CommandName.ADD_ANSWER, new AddAnswer());
 		commands.put(CommandName.SHOW_USERS, new GetAllUsers());
 		commands.put(CommandName.LOCK_USER, new LockUser());
+		commands.put(CommandName.UNLOCK_USER, new UnlockUser());
 		commands.put(CommandName.GET_PAGE_EDIT_ANSWER, new GetPageEditAnswer());
 		commands.put(CommandName.GET_PAGE_EDIT_QUESTION, new GetPageEditQuestion());
 		commands.put(CommandName.EDIT_ANSWER, new EditAnswer());
 		commands.put(CommandName.EDIT_QUESTION, new EditQuestion());
 		commands.put(CommandName.EVALUATE_ANSWER, new EvaluateAnswer());
+		commands.put(CommandName.CREATE_NEWS, new CreateNews());
+		commands.put(CommandName.SHOW_NEWS, new ShowNews());
+		commands.put(CommandName.SIGN_IN_PAGE, new GetSignInPage());
 	}
 	
 	public static CommandHelper getInstance() {

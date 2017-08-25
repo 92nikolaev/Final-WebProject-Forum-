@@ -9,6 +9,7 @@ public class SQLCommand {
 	public static final String INSERT_QUESTION = "INSERT INTO question (question.user_id, question.question_title, question.question_content, question.question_created) VALUES (?, ?, ?, NOW())";
 	public static final String INSERT_ANSWER = "INSERT INTO answer (answer.user_id, answer.question_id,answer.answer_content, answer.answer_created) VALUES (?,?,?, NOW())";
 	public static final String INSERT_MARK = "INSERT INTO mark (user_id, answer_id, mark_value) VALUES(?,?,?)";
+	public static final String INSERT_NEWS = "INSERT INTO news (news_title, news_content) VALUES (?, ?)";
 	public static final String UPDATE_USER_PROFILE = "UPDATE user SET user_name = ?, user_surname = ?, user_email = ? WHERE user_id = ?";
 	public static final String UPDATE_USER_PASSWORD= "UPDATE user SET user_password = ? WHERE user_id = ?";
 	public static final String UPDATE_USER_STATUS = "UPDATE user SET user.user_status = ? WHERE user.user_id = ?";
@@ -32,4 +33,6 @@ public class SQLCommand {
 	public static final String SELECT_QUESTIONS_SEARCH_WITH_LIMIT = "SELECT question.question_id, question.question_title, question.question_content, user.user_login, COUNT(answer.question_id) as count_answer FROM question JOIN user ON question.user_id = user.user_id LEFT JOIN answer ON question.question_id = answer.question_id WHERE ((LOWER(question.question_content) LIKE LOWER(?)) OR (LOWER(question.question_title) LIKE LOWER(?))) GROUP BY question.question_id ORDER BY question.question_id DESC LIMIT ?,?";
 	public static final String SELECT_QUESTIONS_COUNT_SEARCH = "SELECT COUNT(*) AS count_search_qestion FROM question WHERE ((LOWER(question.question_content) LIKE LOWER(?)) OR (LOWER(question.question_title) LIKE LOWER(?)))";
 	public static final String SELECT_ANSWER_BY_ID = "SELECT * FROM answer WHERE answer.answer_id = ?";
+	public static final String SELECT_NEWS_WITH_LIMIT = "SELECT news_id, news_title, news_content FROM news ORDER BY news_title DESC LIMIT ?,?";
+	public static final String SELECT_NEWS_COUNT = "SELECT COUNT(*) AS news_count FROM news";
 }

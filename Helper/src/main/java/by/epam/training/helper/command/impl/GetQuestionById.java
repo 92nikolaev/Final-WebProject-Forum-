@@ -12,8 +12,9 @@ import org.apache.log4j.Logger;
 import by.epam.training.helper.bean.Answer;
 import by.epam.training.helper.bean.Question;
 import by.epam.training.helper.command.Command;
-import by.epam.training.helper.command.exception.CommandException;
+import by.epam.training.helper.constant.ErrorMessage;
 import by.epam.training.helper.constant.ParameterName;
+import by.epam.training.helper.constant.Url;
 import by.epam.training.helper.service.AnswerService;
 import by.epam.training.helper.service.QuestionService;
 import by.epam.training.helper.service.exception.ServiceException;
@@ -27,7 +28,8 @@ public class GetQuestionById implements Command{
 	private static final Logger logger = LogManager.getLogger(GetQuestionById.class);
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException, CommandException {
+			throws ServletException, IOException {
+		String message = request.getParameter(ParameterName.MESSAGE);
 		String pageIndex = request.getParameter(ParameterName.NUMBER_PAGE);
 		String questionIdParametr = request.getParameter(ParameterName.QUESTION_ID);
 		int pageNumber = 1;
@@ -39,8 +41,8 @@ public class GetQuestionById implements Command{
 			pageNumber = StringInNumber.parseString(pageIndex, pageNumber);
 		}
 		if(!NullOrEmpty.isNullOrEmpty(questionIdParametr)){
-			questionId = StringInNumber.parseString(questionIdParametr, questionId);
 			try {
+				questionId = StringInNumber.parseString(questionIdParametr);
 				question = questionService.getQuestionById(questionId);
 				if(question != null){
 					 AnswerService answerService = serviceFactory.getAnswerService();
@@ -49,17 +51,24 @@ public class GetQuestionById implements Command{
 					 request.setAttribute(ParameterName.QUESTION, question);
 					 request.setAttribute(ParameterName.ANSWERS, answerManager.getItems());
 					 request.setAttribute(ParameterName.CURRENT_PAGE, pageNumber);
-					 request.getRequestDispatcher("question.jsp").forward(request, response);
+					 if(!NullOrEmpty.isNullOrEmpty(message)){
+						 request.setAttribute(ParameterName.MESSAGE, message);
+					 }
+					 request.getRequestDispatcher(Url.QUESTION).forward(request, response);
 				 }else{
-					 request.getRequestDispatcher("controller?command=home").forward(request, response); 
+					 logger.error(ErrorMessage.ERROR_QUESTION_NOT_FOUND);
+					 request.getRequestDispatcher(Url.REDIRECT_HOME_PAGE_WITH_MESSAGE + ErrorMessage.ERROR_QUESTION_NOT_FOUND).forward(request, response); 
 				 }
 			} catch (ServiceException e) {
-				logger.error(e);
-				e.printStackTrace();
-				throw new CommandException(e);
-			} 
+				logger.error(ErrorMessage.ERROR_QUESTION_NOT_FOUND);
+				request.getRequestDispatcher(Url.REDIRECT_HOME_PAGE_WITH_MESSAGE + ErrorMessage.ERROR_QUESTION_NOT_FOUND).forward(request, response);
+			} catch (NumberFormatException e) {
+				logger.error(ErrorMessage.ERROR_DETERMINETED_QUESTION_ID);
+				request.getRequestDispatcher(Url.REDIRECT_HOME_PAGE_WITH_MESSAGE + ErrorMessage.ERROR_QUESTION_NOT_FOUND).forward(request, response);
+			}
 		}else{
-			 request.getRequestDispatcher("controller?command=home").forward(request, response); 
+			 logger.error(ErrorMessage.ERROR_QUESTION_ID_EMPTY);
+			 request.getRequestDispatcher(Url.REDIRECT_HOME_PAGE_WITH_MESSAGE + ErrorMessage.ERROR_QUESTION_NOT_FOUND).forward(request, response); 
 		}
 		
 	}

@@ -13,7 +13,7 @@ import by.epam.training.helper.dao.factory.DAOFactory;
 import by.epam.training.helper.service.QuestionService;
 import by.epam.training.helper.service.exception.ServiceException;
 import by.epam.training.helper.tools.Calculation;
-import by.epam.training.helper.tools.ConverterString;
+import by.epam.training.helper.tools.FormatterString;
 import by.epam.training.helper.tools.ItemManager;
 import by.epam.training.helper.validation.Validation;
 import by.epam.training.helper.validation.exception.ValidationException;
@@ -31,12 +31,13 @@ public class QuestionServiceImpl implements QuestionService {
 		QuestionDAO questionDAO = daoFactory.getQuestionDAO();
 		try {
 			questions = questionDAO.getQuestionsWithLimit(offset, itemOnPage);
+			formattingQuestion(questions);
 			amountQuestions = questionDAO.getAmountQuestions();
 			int amountPage = Calculation.pageCounting(amountQuestions, itemOnPage);
 			item = new ItemManager<Question>(questions, amountPage);
 		} catch (DAOException e) {
 			logger.error(e);
-			throw new ServiceException(e);
+			throw new ServiceException();
 		}
 		return item;
 	}
@@ -48,12 +49,12 @@ public class QuestionServiceImpl implements QuestionService {
 		int countQuestions = 0;
 		int itemOnPage = 5;
 		int offset = (pageNumber - 1) * itemOnPage;
-		
 		DAOFactory daoFactory = DAOFactory.getInstance();
 		QuestionDAO questionDAO = daoFactory.getQuestionDAO();
 		try {
-			String query = ConverterString.conversionForSearchDB(searchQuestion);
+			String query = FormatterString.conversionForSearchDB(searchQuestion);
 			questions = questionDAO.getSearchQuestionWithLimit(offset, itemOnPage, query);
+			formattingQuestion(questions);
 			countQuestions = questionDAO.getAmountSearchQuestion(searchQuestion);
 			int amountPage = Calculation.pageCounting(countQuestions, itemOnPage);
 			item = new ItemManager<>(questions, amountPage);
@@ -71,13 +72,13 @@ public class QuestionServiceImpl implements QuestionService {
 		QuestionDAO questionDAO = daoFactory.getQuestionDAO();
 		try {
 			questions = questionDAO.getUserQuestion(user_id);
+			formattingQuestionTitle(questions);
 		} catch (DAOException e) {
 			logger.error(ErrorMessage.ERROR_QUESTIONS_DB , e);
 			throw new  ServiceException(e);
 		}
 		return questions;
 	}
-
 	@Override
 	public void addNewQuestion(int user_id, String questionTitle, String questionContent) throws ServiceException {
 		DAOFactory daoFactory = DAOFactory.getInstance();
@@ -144,4 +145,19 @@ public class QuestionServiceImpl implements QuestionService {
 		}
 		
 	}
+	private void formattingQuestion(ArrayList<Question> questions) {
+		for (Question question : questions) {
+			String title = FormatterString.formattingTitle(question.getTitle());
+			question.setTitle(title);
+			String content = FormatterString.formattingContent(question.getContent());
+			question.setContent(content);
+		}	
+	}
+	private void formattingQuestionTitle(ArrayList<Question> questions) {
+		for (Question question : questions) {
+			String title = FormatterString.formattingTitle(question.getTitle());
+			question.setTitle(title);
+		}	
+	}
 }
+

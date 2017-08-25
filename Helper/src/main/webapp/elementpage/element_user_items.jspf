@@ -4,14 +4,14 @@
 	<table class=table_list>
 		<thead>
 			<tr>
-				<th>Login</th>
-				<th>Role</th>
-				<th>Date of registration</th>
-				<th>Rating for answers</th>
-				<th>Number of ratings</th>
-				<th>Number of questions</th>
+				<th>${users_login}</th>
+				<th>${users_role}</th>
+				<th>${users_date_registration}</th>
+				<th>${users_rating_answers}</th>
+				<th>${users_count_mark}</th>
+				<th>${users_count_question}</th>
 				<c:if test="${user.status == 1}">
-					<th>Lock/Unlock</th>
+					<th>${users_lock_unlock}</th>
 				</c:if>
 			</tr>
 		</thead>
@@ -23,10 +23,10 @@
 				<td>${user.login}</td>
 				<c:choose>
 					<c:when test="${user.role == 1}">
-						<td>Administrator</td>
+						<td>${users_administrator}</td>
 					</c:when>
 					<c:otherwise>
-						<td>User</td>
+						<td>${users_user}</td>
 					</c:otherwise>
 				</c:choose>
 				<td>${user.dateCreated}</td>
@@ -34,19 +34,28 @@
 				<td>${user.countMark}</td>
 				<td>${user.countAnswer}</td>
 				<td>
-					<c:choose>
+				<c:choose>
+					<c:when test="${sessionScope.user.id == user.id}">
+					<form action="controller" method="post">
+						<button class="btn" type="submit" name="command" value="user_profile"><i class="fa fa-user" aria-hidden="true"></i>${users_profile}</button>
+					</form>
+					</c:when>
+					<c:otherwise>
+						<c:choose>
 						<c:when test="${user.status == 1}">
 							<form action="controller" method="post">
 								<input type="hidden" name="user_id" value="${user.id}">
-								<button class="btn" type="submit" name="command" value="lock_user"><i class="fa fa-lock" aria-hidden="true"></i>lock</button>							</form>
+								<button class="btn" type="submit" name="command" value="lock_user"><i class="fa fa-lock" aria-hidden="true"></i>${users_lock}</button>							</form>
 						</c:when>
 						<c:otherwise>
 							<form action="controller" method="post">
 								<input type="hidden" name="user_id" value="${user.id}">
-								<button class="btn" type="submit" name="command" value="unlock_user"><i class="fa fa-unlock" aria-hidden="true"></i>unlock</button>
+								<button class="btn" type="submit" name="command" value="unlock_user"><i class="fa fa-unlock" aria-hidden="true"></i>${users_unlock}</button>
 							</form>
 						</c:otherwise>
 					</c:choose>	
+					</c:otherwise>
+				</c:choose>		
 					</td>
 				</tr>
 				</c:forEach>
@@ -57,10 +66,10 @@
 				<td>${user.login}</td>
 				<c:choose>
 					<c:when test="${user.role == 1}">
-						<td>Administrator</td>
+						<td>${users_administrator}</td>
 					</c:when>
 					<c:otherwise>
-						<td>User</td>
+						<td>${users_user}</td>
 					</c:otherwise>
 				</c:choose>
 				<td>${user.dateCreated}</td>

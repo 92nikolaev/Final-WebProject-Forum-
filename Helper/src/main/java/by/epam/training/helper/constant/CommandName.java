@@ -7,7 +7,7 @@ public class CommandName {
 	public static final String SIGN_UP = "sign_up";
 	public static final String SIGN_IN = "sign_in";
 	public static final String SIGN_OUT = "logout";
-	public static final String SIGN_IN_PAGE = "sign_up_page";
+	public static final String SIGN_UP_PAGE = "sign_up_page";
 	public static final String USER_PROFILE = "user_profile";
 	public static final String CREATE_QUESTION = "new_question";
 	public static final String CHANGE_PASSWORD = "ñhange_password";
@@ -21,5 +21,9 @@ public class CommandName {
 	public static final String GET_PAGE_EDIT_QUESTION = "page_edit_question";
 	public static final String EDIT_QUESTION = "edit_question";
 	public static final String EVALUATE_ANSWER = "evaluate_answer";
+	public static final String CREATE_NEWS = "create_news";
+	public static final String SHOW_NEWS = "show_all_news";
+	public static final String SIGN_IN_PAGE = "sign_in_page";
+	public static final String UNLOCK_USER = "unlock_user";
 
 }

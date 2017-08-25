@@ -7,6 +7,7 @@
 <!-- MENU NAVIGATION -->
 
 <fmt:message bundle="${loc}" key="nav.management" var="nav_management" />
+<fmt:message bundle="${loc}" key="nav.write.news" var="nav_write_news" />
 <fmt:message bundle="${loc}" key="nav.users" var="nav_users" />
 <fmt:message bundle="${loc}" key="nav.language" var="nav_language" />
 <fmt:message bundle="${loc}" key="nav.english" var="nav_english" />
@@ -15,6 +16,12 @@
 <fmt:message bundle="${loc}" key="nav.signIn" var="nav_signIn" />
 <fmt:message bundle="${loc}" key="nav.logout" var="nav_logout" />
 <fmt:message bundle="${loc}" key="nav.searchform" var="nav_searchform" />
+
+<!-- ELEMENT ADMINISTRATOR ITEM -->
+<fmt:message bundle="${loc}" key="administrator.title.create.news" var="administrator_title_create_news" />
+<fmt:message bundle="${loc}" key="administrator.title.news" var="administrator_title_news" />
+<fmt:message bundle="${loc}" key="administrator.create.news.btn" var="administrator_news_create_btn" />
+<fmt:message bundle="${loc}" key="administrator.content.news" var="administrator_content_news" />
 
 <!-- ELEMENT QUESTION ITEM -->
 <fmt:message bundle="${loc}" key="question.item.title" var="question_common_title" />
@@ -26,7 +33,9 @@
 <fmt:message bundle="${loc}" key="popUp.signIn.login" var="popUp_signIn_login" />
 <fmt:message bundle="${loc}" key="popUp.signIn.password" var="popUp_signIn_password" />
 <fmt:message bundle="${loc}" key="popUp.signIn.signUp" var="popUp_signIn_signUp" />
-<fmt:message bundle="${loc}" key="popUp.signIn.signIp" var="popUp_signIn_signIp" />
+<fmt:message bundle="${loc}" key="popUp.signIn.signIn" var="popUp_signIn_signIn" />
+<fmt:message bundle="${loc}" key="popUp.signIn.description.action.error" var="popUp_signIn_description_action_error" />
+<fmt:message bundle="${loc}" key="popUp.signIn.description.action.ban" var="popUp_signIn_description_action_ban" />
 
 <!-- ELEMENT SIGN UP -->
 <fmt:message bundle="${loc}" key="signUp.name" var="sign_up_name" />
@@ -36,6 +45,17 @@
 <fmt:message bundle="${loc}" key="signUp.confirm.password" var="sign_up_confirm_password" />
 <fmt:message bundle="${loc}" key="signUp.email" var="sign_up_email" />
 <fmt:message bundle="${loc}" key="signUp.btn" var="sign_up_btn" />
+
+<fmt:message bundle="${loc}" key="sign.up.invalid.name" var="sign_up_invalid_name" />
+<fmt:message bundle="${loc}" key="sign.up.invalid.surname" var="sign_up_invalid_surname" />
+<fmt:message bundle="${loc}" key="sign.up.invalid.login" var="sign_up_invalid_login" />
+<fmt:message bundle="${loc}" key="sign.up.login.exist" var="sign_up_login_exist" />
+<fmt:message bundle="${loc}" key="sign.up.login.email.exests" var="sign_up_login_email_exests" />
+<fmt:message bundle="${loc}" key="sign.up.invalid.password" var="sign_up_invalid_password" />
+<fmt:message bundle="${loc}" key="sign.up.invalid.email" var="sign_up_invalid_email" />
+<fmt:message bundle="${loc}" key="sign.up.email.exests" var="sign_up_email_exests" />
+
+
 
 <!-- ELEMENT SIGN UP SUCCESS-->
 <fmt:message bundle="${loc}" key="success.signUp.title" var="success_signUp_title" />
@@ -74,6 +94,9 @@
 <fmt:message bundle="${loc}" key="profile.title.create.question.btn" var="profile_title_create_question_btn" />
 <fmt:message bundle="${loc}" key="profile.create.question.error.message" var="profile_create_question_error_message" />
 
+<fmt:message bundle="${loc}" key="profile.data.changed.successfully" var="profile_data_changed_successfully" />
+<fmt:message bundle="${loc}" key="profile.data.changed.faild" var="profile_data_changed_faild" />
+
 <!-- ELEMENT QUESTION -->
 <fmt:message bundle="${loc}" key="question.question" var="question_colm" />
 <fmt:message bundle="${loc}" key="question.avatar" var="question_avatar" />
@@ -87,6 +110,27 @@
 <fmt:message bundle="${loc}" key="question.create.answer.action.description" var="question_create_answer_action_description" />
 <fmt:message bundle="${loc}" key="question.create.answer.btn" var="question_create_answer_btn" />
 
+<!-- ELEMENT ALL USER PAGE-->
+<fmt:message bundle="${loc}" key="users.login" var="users_login" />
+<fmt:message bundle="${loc}" key="users.role" var="users_role" />
+<fmt:message bundle="${loc}" key="users.date.registration" var="users_date_registration" />
+<fmt:message bundle="${loc}" key="users.rating.answers" var="users_rating_answers" />
+<fmt:message bundle="${loc}" key="users.count.mark" var="users_count_mark" />
+<fmt:message bundle="${loc}" key="users.count.question" var="users_count_question" />
+<fmt:message bundle="${loc}" key="users.lock.unlock" var="users_lock_unlock" />
+<fmt:message bundle="${loc}" key="users.unlock.user" var="users_unlock_user" />
+<fmt:message bundle="${loc}" key="users.lock.user" var="users_lock_user" />
+<fmt:message bundle="${loc}" key="users.indefined.user" var="users_indefined_user" />
+<fmt:message bundle="${loc}" key="users.error.unlock.user" var="users_error_unlock_user" />
+<fmt:message bundle="${loc}" key="users.error.lock.user" var="users_error_lock_user" />
+<fmt:message bundle="${loc}" key="users.administrator" var="users_administrator" />
+<fmt:message bundle="${loc}" key="users.user" var="users_user" />
+<fmt:message bundle="${loc}" key="users.lock" var="users_lock" />
+<fmt:message bundle="${loc}" key="users.unlock" var="users_unlock" />
+<fmt:message bundle="${loc}" key="users.error.lock.himself" var="users_error_lock_himself" />
+<fmt:message bundle="${loc}" key="users.profile" var="users_profile" />
+
+
 <!-- ELEMENT EDIT QUESTION PAGE -->
 <fmt:message bundle="${loc}" key="question.edit.title" var="question_edit_title" />
 <fmt:message bundle="${loc}" key="question.edit.btn" var="question_edit_btn" />
@@ -96,7 +140,8 @@
 <fmt:message bundle="${loc}" key="answer.edit.btn" var="answer_edit_btn" />
 
 
-
+<!-- ELEMENT VALIDATION -->
+<fmt:message bundle="${loc}" key="validation.name" var="validation_name" />
 
 
 

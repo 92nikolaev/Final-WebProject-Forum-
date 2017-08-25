@@ -1,5 +1,6 @@
 package by.epam.training.helper.constant;
 
+
 public class ErrorMessage {
 	
 	public static final String INVALID_NAME = "Invalid user name ";
@@ -15,11 +16,11 @@ public class ErrorMessage {
 	public static final String ERROR_SAVE_USER = "Failed to save user to database ";
 	public static final String ERROR_GET_USER = "Failed to get user data from database ";
 	public static final String ERROR_GET_USERS = "Failed to get users  from database ";
-	public static final String ERROR_NOT_EXISTS_USER = "User not exist or login or passwor incorect ";
+	public static final String ERROR_NOT_EXISTS_USER = "User not exist or login or password incorrect ";
 	public static final String ERROR_CONNECTION ="An error occurred while connecting to the database ";
 	public static final String ERROR_GET_COUNT_USERS = "Failed to get the number of users  from database ";
 	public static final String ERROR_USER_NOT_FOUND = "User not found in database";
-	public static final String ERROR_SIGN_IN = "Could not sign in ";
+	public static final String ERROR_SIGN_IN = "Failed sign in";
 	public static final String ERROR_QUESTIONS_DB = "questions not found in database ";
 	public static final String ERROR_GET_QUESTIONS = "Failed to get questions data from database";
 	public static final String ERROR_GET_SEARCH_QUESTIONS = "Failed to get search questions data from database";
@@ -31,7 +32,7 @@ public class ErrorMessage {
 	public static final String ERROR_GET_CURRENT_PASSWORD = "Failed to get the current user passwordd ";
 	public static final String ERROR_UPDATE_PASSWORD = "Failed to update user password from database";
 	public static final String ERROR_CHANGE_PASSWORD = "Failed to change password";
-	public static final String ERROR_EDIT_USER_FIELD = "Could not change user data";
+	public static final String ERROR_EDIT_USER_FIELD = "faild change";
 	public static final String ERROR_UPDATE_USER = "Failed to update user  from database";
 	public static final String ERROR_GET_ANSWER = "Failed to get answers from database";
 	public static final String ERROR_GET_COUNT_ANSWERS = "Failed to get the number of users  from database";
@@ -44,4 +45,26 @@ public class ErrorMessage {
 	public static final String USER_TRY_EVALUATE_HIMSELF = "The user try to evaluate himself";
 	public static final String ERROR_MARK_VALIDATION = "Mark is less than zero or more than the maximum";
 	public static final String ERROR_INSER_MARK = "From evaluate the answer";
+	public static final String ERROR_GET_NEWS = "Failed to get news from database";
+	public static final String ERROR_NOT_ADD_NEWS = "The news has not been added";
+	public static final String ERROR_ADD_NEWS = "Failed to check and add news";
+	public static final String USER_CAN_NOT_CREATE_NEWS = "User can not create news";
+	public static final String USER_NOT_SIGN_IP = "User is not sign in or the session has expired";
+	public static final String INVALID_TITLE_OR_CONTET_NEWS = "The title and text can not contain less than 5 characters";
+	public static final String ERROR_INSER_NEWS = "Failed to save news in database";
+	public static final String ERROR_GET_COUNT_NEWS = "Failed to get number of news  from database";
+	public static final String ERROR_NEWS = "The news was not found";
+	public static final String ERROR_SIGN_UP = "Error sign up";
+	public static final String ERROR_ENCRYPTION = "Error encryption";
+	public static final String ERROR_USER_BAN = "User is locked";
+	public static final String ERROR_LOCK = "Error lock";
+	public static final String ERROR_USER_INDEFINED = "Error user indefined";
+	public static final String ERROR_UNLOCK = "Error unlock";
+	public static final String ERROR_LOCK_HIMSELF = "Error lock himself";
+	public static final String ERROR_ENTER_CABINET = "Unable to enter your personal cabinet";
+	public static final String ERROR_ANSWER_INVALID = "Invalid answer";
+	public static final String ERROR_UNABLE_DETERMINE_NUMBER = "Unable to determine the number, came to regueste: " ;
+	public static final String ERROR_QUESTION_NOT_FOUND = "question notfound";
+	public static final String ERROR_DETERMINETED_QUESTION_ID = "Failed to determine the id of the question";
+	public static final String ERROR_QUESTION_ID_EMPTY = "question id empty";
 }

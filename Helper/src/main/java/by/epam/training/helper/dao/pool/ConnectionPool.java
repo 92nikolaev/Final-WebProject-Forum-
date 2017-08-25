@@ -53,7 +53,7 @@ public class ConnectionPool implements Closeable {
 	}
 
 
-	public void init() throws ConnectionPoolException {
+	 void init() throws ConnectionPoolException {
 		freeConnection = new ArrayBlockingQueue<Connection>(poolsize);
 		busyConnection = new ArrayBlockingQueue<Connection>(poolsize);
 		try {

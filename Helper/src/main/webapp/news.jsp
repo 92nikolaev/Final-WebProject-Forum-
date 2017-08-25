@@ -6,20 +6,19 @@
 <html>
 <head>
 <%@ include file="../elementpage/element_head.jspf"%>
-<title>Helper</title>
+<title>News</title>
 </head>
 <body>
 	<%@ include file="../elementpage/element_header.jspf"%>
-	<div class="container">
-		<c:if test="${message != null}">
-			<c:if test="${message == 'question notfound'}">
-				<div>Вопрос не найден</div>
-			</c:if>
+	<c:if test="${sessionScope.user.role == 1 }">
+		<c:if test="${requestScope.message != null }">
+			<script type="text/javascript">
+				alert( "Новость добавлена" );
+			</script>
 		</c:if>
-		<%@include file="../elementpage/element_question_items.jspf"%>
-		<aside>
-			<%@include file="../elementpage/element_news.jspf"%>
-		</aside>
+	</c:if>
+	<div class="container">
+		<%@include file="../elementpage/element_news_items.jspf"%>
 	</div>
 	<%@include file="../elementpage/element_footer.jspf"%>
 	<%@include file="../elementpage/element_popUp.jspf"%>

@@ -2,7 +2,6 @@ package by.epam.training.helper.command.impl;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,6 +24,15 @@ import by.epam.training.helper.service.factory.ServiceFactory;
  */
 public class SignUp implements Command {
 	private static final Logger logger = LogManager.getLogger(SignUp.class);
+	/**
+	 * Take the input parameters from the HttpServletRequest and create the User object
+	 *  and send it to the Service layer
+	 *  @param request - request from client to get parameters to work with it
+	 *  @param response - send response to client with parameters to work with on client side
+	 *  @throws IOException  
+     * 	@throws ServletException
+     *  @throws CommandException  If the command can not be executed
+	 */
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException, CommandException {
@@ -42,13 +50,11 @@ public class SignUp implements Command {
 		
 		try {
 			userService.signUp(user, password, verificationPassword);
-			response.sendRedirect("successful.jsp");
+			response.sendRedirect(Url.SUCCESSFUL);
 		} catch (ServiceException e) {
-			e.printStackTrace();
 			logger.error(e);
-			request.setAttribute(ParameterName.ERROR, true);
-			RequestDispatcher dispatcher = request.getRequestDispatcher(Url.SIGN_UP);
-			dispatcher.forward(request, response);
+			String errorStatus= e.getMessage();
+			response.sendRedirect(Url.REDIRECT_SIGN_UP + errorStatus);
 			
 		}
 

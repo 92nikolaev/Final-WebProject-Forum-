@@ -11,7 +11,7 @@
 				<li><a href="#"><i class="fa fa-cogs" aria-hidden="true"></i>${nav_management} </a>
 					<ul class="dropdown-menu dropdown-menu_admin">
               		<li>
-              			<a href="controller?command=new_news">Write_News</a>
+              			<a class="createNews" href="controller?command=get_page_new_news">${nav_write_news}</a>
               		</li>
               		<li>
               			<a href="controller?command=show_questions">Show_question</a>
@@ -21,27 +21,26 @@
               		</li>
 				</ul>
 				</li>
-				
 			</c:if>
 			<li><a href="controller?command=showAllUsers"><i class="fa fa-users" aria-hidden="true"></i>${nav_users}</a></li>
-			<li><a href="controller?command=showAllNews"><i class="fa fa-newspaper-o" aria-hidden="true"></i>${nav_news}</a></li>
+			<li><a href="controller?command=show_all_news"><i class="fa fa-newspaper-o" aria-hidden="true"></i>${nav_news}</a></li>
+			<li>
+				<a href="#"><i class="fa fa-language" aria-hidden="true"></i>${nav_language}</a>
+				<ul class="dropdown-menu">
+					<li class="language">
+						<a class="language_drop" href="controller?command=set_locale&locale=en&from=${pageContext.request.requestURL}">${nav_english}</a>
+              		</li>
+              		<li class="language">
+              			<a class="language_drop"  href="controller?command=set_locale&locale=ru&from=${pageContext.request.requestURL}">${nav_russian}</a>
+              		</li>
+				</ul>
+			</li>
 			<c:if test="${sessionScope.logged != true}">
 				<li><a class="login" href="signIn.jsp"><i class="fa fa-sign-in" aria-hidden="true"></i>${nav_signIn}</a></li>
 			</c:if>	
 			<c:if test="${sessionScope.logged == true}">
 				<li><a class="login11" href="controller?command=user_profile"><i class="fa fa-user" aria-hidden="true"></i>${sessionScope.user.login}</a></li>
 			</c:if>
-			<li>
-				<a href="#"><i class="fa fa-language" aria-hidden="true"></i>${nav_language}</a>
-				<ul class="dropdown-menu">
-					<li>
-						<a class="language_drop" href="controller?command=set_locale&locale=en&from=${pageContext.request.requestURL}">${nav_english}</a>
-              		</li>
-              		<li>
-              			<a class="language_drop"  href="controller?command=set_locale&locale=ru&from=${pageContext.request.requestURL}">${nav_russian}</a>
-              		</li>
-				</ul>
-			</li>
 			<c:if test="${sessionScope.logged == true}">
 				<li><a class="" href="controller?command=logout"><i class="fa fa-sign-out" aria-hidden="true"></i>${nav_logout}</a></li>
 			</c:if>	

@@ -25,7 +25,7 @@
 			</td>
 			<td class="latest-by shrink-to-fit">
 				<a class="date" href="#" data-original-title="">${questions.dateCreated}</a>
-				<p>Автор<a class="space-left-small" href="#" data-original-title="Нажмите для просмотра профиля">${questions.userLogin}</a>
+				<p>Автор<a class="space-left-small" href="#" >${questions.userLogin}</a>
 				</p>
 			</td>
 		</tr>

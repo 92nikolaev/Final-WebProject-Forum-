@@ -1,0 +1,24 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	<div class="message">
+		<c:choose>
+			<c:when test="${message == 'User unlock'}">
+				<div>${users_unlock_user}</div>
+			</c:when>
+			<c:when test="${message == 'User lock'}">
+				<div>${users_lock_user}</div>
+			</c:when>
+			<c:when test="${message == 'Error user indefined'}">
+				<div>${users_indefined_user}</div>
+			</c:when>
+			<c:when test="${message == 'Error unlock'}">
+				<div>${users_error_unlock_user}</div>
+			</c:when>
+			<c:when test="${message == 'Error lock'}">
+				<div>${users_error_lock_user}</div>
+			</c:when>	
+			<c:when test="${message == 'Error lock himself'}">
+				<div>${users_error_lock_himself}</div>
+			</c:when>	
+		</c:choose>
+	</div>
