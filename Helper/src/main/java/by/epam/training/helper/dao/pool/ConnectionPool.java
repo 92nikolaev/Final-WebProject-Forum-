@@ -12,16 +12,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
-
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-
+import by.epam.training.helper.constant.ErrorMessageDAO;
 import by.epam.training.helper.constant.ParameterDB;
-import by.epam.training.helper.dao.exception.ConnectionIsNullException;
 import by.epam.training.helper.dao.exception.ConnectionPoolException;
 /**
+ * A class that provides connections for user requests.
  * @author Nikolaev Ilya
- *
  */
 public class ConnectionPool implements Closeable {
 	private static final Logger logger = LogManager.getLogger(ConnectionPool.class);
@@ -34,9 +32,11 @@ public class ConnectionPool implements Closeable {
 	private BlockingQueue<Connection> freeConnection ;
 	private BlockingQueue<Connection> busyConnection;
 	
-	/**init connection parametrs*/
+	/**
+	 * This constructor serves to initialize the connection parameters to the database. 
+	 */
 	private ConnectionPool() {
-		ResourceManagerBD resourceManager = ResourceManagerBD.getInstance();
+		ResourceManagerDB resourceManager = ResourceManagerDB.getInstance();
 		this.driver = resourceManager.getValue(ParameterDB.DRIVER_DB);
 		this.url = resourceManager.getValue(ParameterDB.URL_DB);
 		this.user = resourceManager.getValue(ParameterDB.USER_DB);
@@ -52,7 +52,10 @@ public class ConnectionPool implements Closeable {
 		return instance;
 	}
 
-
+	/**This method creates free connections.
+	 * And also creates list busy connection.
+	 * @throws ConnectionPoolException
+	 */
 	 void init() throws ConnectionPoolException {
 		freeConnection = new ArrayBlockingQueue<Connection>(poolsize);
 		busyConnection = new ArrayBlockingQueue<Connection>(poolsize);
@@ -63,28 +66,39 @@ public class ConnectionPool implements Closeable {
 				freeConnection.add(connection);
 			}
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+			logger.error(ErrorMessageDAO.ERROR_DB_DRIVER + e);
+			throw new ConnectionPoolException(ErrorMessageDAO.ERROR_DB_DRIVER);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.error(ErrorMessageDAO.ERROR_SQL + e);
+			throw new ConnectionPoolException(ErrorMessageDAO.ERROR_SQL);
 		}
 	}
-	
+	 
+	 /** The method provides a free connection.
+	  * @return {@link Connection}
+	  * @throws ConnectionPoolException
+	  */
 	public Connection take() throws ConnectionPoolException{
 		Connection connection = null;
-		
 		try {
 			connection = freeConnection.take();
 			busyConnection.put(connection);
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+			logger.error(ErrorMessageDAO.ERROR_CONNECTING + e);
+			throw new ConnectionPoolException(ErrorMessageDAO.ERROR_CONNECTING);
 		}
 		return connection;	
 	}
-	public void free(Connection connection) throws InterruptedException, ConnectionIsNullException{
+	
+	/**Method of transferring a connection from a statute busy status is free.
+	 * @param connection
+	 * @throws InterruptedException
+	 * @throws @throws ConnectionPoolException
+	 */
+	public void free(Connection connection) throws InterruptedException, ConnectionPoolException{
 		if (connection == null) {
-			logger.error("connection is empty");
-			System.out.println("connection is empty method free");
-			throw new ConnectionIsNullException();
+			logger.error(ErrorMessageDAO.ERROR_CONNECTION_EMPTY);
+			throw new ConnectionPoolException(ErrorMessageDAO.ERROR_CONNECTION_EMPTY);
 		}
 		Connection temporaryConnection = connection;
 		connection = null;
@@ -92,6 +106,9 @@ public class ConnectionPool implements Closeable {
 		freeConnection.put(temporaryConnection);
 	}
 	
+	/**
+	 * Method for close all connection
+	 */
 	@Override
 	public void close() throws IOException {
 		 List<Connection> connections = new ArrayList<>();
@@ -104,10 +121,8 @@ public class ConnectionPool implements Closeable {
 					connection.close();
 				}
 			} catch (SQLException e) {
-				e.printStackTrace();
+				logger.error(ErrorMessageDAO.ERROR_SQL_CLOSE + e);
 			}
-		}
-		
+		}		
 	}
-
 }

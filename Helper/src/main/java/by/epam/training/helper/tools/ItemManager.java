@@ -2,11 +2,16 @@ package by.epam.training.helper.tools;
 
 import java.util.List;
 
+import by.epam.training.helper.bean.Entity;
+
 /**
- * @author Nikolaev Ilya
- *	The class is used to get the list of items and the number of pages
+ *  The class is used to get a list of items and the number of pages.
+ *	It is used to receive all the data on the service layer and send them to the command layer.
+ *	Used for patination
+ * 	@author Nikolaev Ilya
+ *  @param <E> 
  */
-public final class ItemManager<E> {
+public final class ItemManager<E extends Entity> {
 	private List<E> items;
     private int pageCount;
 	

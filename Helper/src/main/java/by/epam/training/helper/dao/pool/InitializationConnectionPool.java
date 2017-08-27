@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import by.epam.training.helper.dao.exception.ConnectionPoolException;
 /**
+ * Connection pool initializing class
  * @author Nikolaev Ilya
  *
  */

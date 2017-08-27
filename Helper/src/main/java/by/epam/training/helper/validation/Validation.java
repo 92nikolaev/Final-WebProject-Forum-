@@ -132,7 +132,6 @@ public class Validation {
 		String answer;
 		try {
 			answer = validationDAO.checkeExistQuestion(questionId);
-			System.out.println("answer это валидатор " + answer);
 			switch (answer) {
 				case ParameterName.EXISTS_QUESTION:{
 					logger.info(SuccessMessage.QUESTION_EXISTS + questionId);
@@ -140,7 +139,7 @@ public class Validation {
 				}break;
 				case ParameterName.NOT_EXISTS:{
 					logger.error(ErrorMessage.ERROR_QUESTION_NOT_EXISTS + questionId);
-					throw new ValidationException(ErrorMessage.LOGIN_EXISTS + questionId);
+					throw new ValidationException(ErrorMessage.ERROR_QUESTION_NOT_EXISTS + questionId);
 				}
 			}
 		} catch (DAOException e) {

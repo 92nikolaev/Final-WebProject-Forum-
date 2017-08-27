@@ -11,26 +11,10 @@
 <%@ include file="../elementpage/element_header.jspf" %>
 	<div class="container">
 		<div class="big-heading">
-			<h2>${profile_title}</h2>
+			<h2>Error page</h2>
 		</div>
 		<h3>
-			<c:choose>
-	    		<c:when test="${pageContext.errorData.statusCode == 404}">
-	       			${error_404_message}
-	    		</c:when>
-	    		<c:when test="${pageContext.errorData.statusCode == 403}">
-	       			${error_403_message}
-	       		</c:when>
-	    		<c:when test="${pageContext.errorData.statusCode == 414}">
-	       			${error_414_message}
-	       		</c:when>
-	    		<c:when test="${pageContext.errorData.statusCode == 504}">
-	       			${error_504_message}
-	       		</c:when>
-	    		<c:otherwise>
-	    			Unknown error
-	    		</c:otherwise>
-			</c:choose>
+			We apologize, there were unforeseen difficulties when working with the system, try to execute the actions again....
 		</h3>
 	</div>
 	<%@include file="../elementpage/element_footer.jspf" %>

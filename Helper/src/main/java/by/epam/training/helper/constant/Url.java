@@ -1,5 +1,6 @@
 package by.epam.training.helper.constant;
 
+
 public class Url {
 
 	public static final String ERROR = "error.jsp";
@@ -19,8 +20,9 @@ public class Url {
 	public static final String REDIRECT_HOME_PAGE = "controller?command=home";
 	public static final String REDIRECT_USER_PROFILE = "controller?command=user_profile&message=";
 	public static final String SHOW_ALL_USER_WITH_MESSAGE = "controller?command=showAllUsers&message=";
-	public static final String REDIRECT_QUESTION_PAGE = "controller?command=show_question&qestion_id=";
+	public static final String REDIRECT_QUESTION_PAGE = "controller?command=show_question&question_id=";
 	public static final String REDIRECT_HOME_PAGE_WITH_MESSAGE = "controller?command=home&message=";
+	public static final String REDIRECT_QUESTION_PAGE_WITH_MESSAGE = "controller?command=show_question&question_id=%s&message=%s";
 	
 	
 }

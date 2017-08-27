@@ -28,7 +28,7 @@ public class ParameterName {
 	public static final String OLD_PASSWORD = "old_password";
 	public static final String NEW_PASSWORD = "new_password";
 	public static final String NEW_VERIFICATION_PASSWORD = "new_verefication_password";
-	public static final String NOT_EXISTS = "not exists";
+	public static final String NOT_EXISTS = "question not exists";
 	public static final String EXISTS_LOGIN = "exists login";
 	public static final String EXISTS_EMAIL = "exists email";
 	public static final String EXISTS_LOGIN_AND_EMAIL = "exists login and email";
@@ -36,7 +36,7 @@ public class ParameterName {
 	public static final String QUESTION_CONTENT = "question_content";
 	public static final String MESSAGE = "message";
 	public static final String ANSWER_CONTENT = "answer_content";
-	public static final String EXISTS_QUESTION = "exists_question";
+	public static final String EXISTS_QUESTION = "exists question";
 	public static final String ERROR = "error_message";
 	public static final String USER_ID = "user_id";
 	public static final byte ADMIN = 1;

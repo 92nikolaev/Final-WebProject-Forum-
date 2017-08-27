@@ -15,5 +15,7 @@ public class ErrorStatus {
 	public static final String ERROR_USER_NOT_FOUND = "User_not_found";
 	public static final String ERROR_PASSWORD_NOT_EQUALS = "The password in the database does not match what the user entered";
 	public static final String USER_NOT_LOCK = "user_not_lock";
+	public static final String ERROR_DETERMINE_MARK = "error determineted mark";
+	public static final String ERROR_NOT_SIGN_IN = "User not logged in or session timeout";
 
 }

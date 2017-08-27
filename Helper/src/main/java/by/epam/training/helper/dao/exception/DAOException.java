@@ -4,6 +4,7 @@
 package by.epam.training.helper.dao.exception;
 
 /**
+ * This is an exception for working on a DAO layer
  * @author Nikolaev Ilya
  *
  */
@@ -19,11 +20,11 @@ public class DAOException extends Exception {
 		super();
 	}
 
-	public DAOException(String message, Throwable cause) {
+	public DAOException(String message, Exception cause) {
 		super(message, cause);
 	}
 
-	public DAOException(Throwable cause) {
+	public DAOException(Exception cause) {
 		super(cause);
 	}
 }

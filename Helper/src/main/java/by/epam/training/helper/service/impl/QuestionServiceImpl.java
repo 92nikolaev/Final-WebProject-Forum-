@@ -36,8 +36,8 @@ public class QuestionServiceImpl implements QuestionService {
 			int amountPage = Calculation.pageCounting(amountQuestions, itemOnPage);
 			item = new ItemManager<Question>(questions, amountPage);
 		} catch (DAOException e) {
-			logger.error(e);
-			throw new ServiceException();
+			logger.error(ErrorMessage.ERROR_GET_QUESTION_PAGE);
+			throw new ServiceException(ErrorMessage.ERROR_GET_QUESTION_PAGE);
 		}
 		return item;
 	}
@@ -59,8 +59,8 @@ public class QuestionServiceImpl implements QuestionService {
 			int amountPage = Calculation.pageCounting(countQuestions, itemOnPage);
 			item = new ItemManager<>(questions, amountPage);
 		} catch (DAOException e) {
-			logger.error(e);
-			throw new ServiceException(e);
+			logger.error(ErrorMessage.ERROR_GET_SEARCH_QUESTION_PAGE);
+			throw new ServiceException(ErrorMessage.ERROR_GET_SEARCH_QUESTION_PAGE);
 		}
 		return item;
 	}
@@ -74,7 +74,7 @@ public class QuestionServiceImpl implements QuestionService {
 			questions = questionDAO.getUserQuestion(user_id);
 			formattingQuestionTitle(questions);
 		} catch (DAOException e) {
-			logger.error(ErrorMessage.ERROR_QUESTIONS_DB , e);
+			logger.error(ErrorMessage.ERROR_NOT_FOUND_QUESTIONS);
 			throw new  ServiceException(e);
 		}
 		return questions;
@@ -88,9 +88,8 @@ public class QuestionServiceImpl implements QuestionService {
 		try {
 			questionDAO.addQuestion(user_id, title, content);
 		} catch (DAOException e) {
-			e.printStackTrace();
-			logger.error(e);
-			throw new ServiceException(e);
+			logger.error(ErrorMessage.ERROR_CREATE_QUESTION);
+			throw new ServiceException(ErrorMessage.ERROR_CREATE_QUESTION);
 		}	
 	}
 
@@ -101,11 +100,15 @@ public class QuestionServiceImpl implements QuestionService {
 		QuestionDAO questionDAO = daoFactory.getQuestionDAO();
 		
 		try {
+			Validation.isExistQuestion(questionId);
 			question = questionDAO.getQestionById(questionId);
 		} catch (DAOException e) {
-			logger.error(e);
+			logger.error(ErrorMessage.ERROR_QUESTION_NOT_FOUND);
 			e.printStackTrace();
-			throw new ServiceException();
+			throw new ServiceException(ErrorMessage.ERROR_NOT_FOUND);
+		} catch (ValidationException e) {
+			logger.error(ErrorMessage.ERROR_QUESTION_NOT_EXISTS + questionId);
+			throw new ServiceException(ErrorMessage.ERROR_NOT_EXISTS);
 		}
 		return question;
 	}
@@ -114,11 +117,9 @@ public class QuestionServiceImpl implements QuestionService {
 	public boolean isExistQuestion(int questionId) throws ServiceException {
 		if(Validation.isValidationId(questionId)){
 			try {
-				System.out.println("validation  is exits question  " + Validation.isExistQuestion(questionId));
 				return	Validation.isExistQuestion(questionId);
 			} catch (ValidationException e) {
 				logger.error(e);
-				e.printStackTrace();
 				throw new ServiceException();
 			}
 		}
@@ -145,6 +146,10 @@ public class QuestionServiceImpl implements QuestionService {
 		}
 		
 	}
+	/**
+	 * Calls the method for formatting the question for a uniform display on the page
+	 * @param questions
+	 */
 	private void formattingQuestion(ArrayList<Question> questions) {
 		for (Question question : questions) {
 			String title = FormatterString.formattingTitle(question.getTitle());
@@ -153,6 +158,10 @@ public class QuestionServiceImpl implements QuestionService {
 			question.setContent(content);
 		}	
 	}
+	/**
+	 * Calls the method for formatting the question title for a uniform display on the page
+	 * @param questions
+	 */
 	private void formattingQuestionTitle(ArrayList<Question> questions) {
 		for (Question question : questions) {
 			String title = FormatterString.formattingTitle(question.getTitle());

@@ -14,6 +14,7 @@ import by.epam.training.helper.bean.News;
 import by.epam.training.helper.bean.Question;
 import by.epam.training.helper.command.Command;
 import by.epam.training.helper.command.exception.CommandException;
+import by.epam.training.helper.constant.ErrorMessage;
 import by.epam.training.helper.constant.ParameterName;
 import by.epam.training.helper.constant.Url;
 import by.epam.training.helper.service.NewsService;
@@ -60,9 +61,8 @@ public class GetHomePage implements Command {
 			}
 			request.getRequestDispatcher(Url.HOME).forward(request, response);
 		} catch (ServiceException e) {
-			logger.error(e);
-			e.printStackTrace();
-			throw new CommandException(e);
+			logger.error(ErrorMessage.ERROR_HOME_PAGE_NOT_DISPLAY, e);
+			throw new CommandException(ErrorMessage.ERROR_HOME_PAGE_NOT_DISPLAY);
 		}
 	}
 	

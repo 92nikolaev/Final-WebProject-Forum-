@@ -21,7 +21,7 @@ public class ErrorMessage {
 	public static final String ERROR_GET_COUNT_USERS = "Failed to get the number of users  from database ";
 	public static final String ERROR_USER_NOT_FOUND = "User not found in database";
 	public static final String ERROR_SIGN_IN = "Failed sign in";
-	public static final String ERROR_QUESTIONS_DB = "questions not found in database ";
+	public static final String ERROR_QUESTIONS_DB = "questions not found user question in database ";
 	public static final String ERROR_GET_QUESTIONS = "Failed to get questions data from database";
 	public static final String ERROR_GET_SEARCH_QUESTIONS = "Failed to get search questions data from database";
 	public static final String ERROR_GET_COUNT_QUESTIONS = "Failed to get number of questions  from database";
@@ -64,7 +64,14 @@ public class ErrorMessage {
 	public static final String ERROR_ENTER_CABINET = "Unable to enter your personal cabinet";
 	public static final String ERROR_ANSWER_INVALID = "Invalid answer";
 	public static final String ERROR_UNABLE_DETERMINE_NUMBER = "Unable to determine the number, came to regueste: " ;
-	public static final String ERROR_QUESTION_NOT_FOUND = "question notfound";
+	public static final String ERROR_QUESTION_NOT_FOUND = "question not_found";
 	public static final String ERROR_DETERMINETED_QUESTION_ID = "Failed to determine the id of the question";
 	public static final String ERROR_QUESTION_ID_EMPTY = "question id empty";
+	public static final String ERROR_NOT_FOUND = "failed found";
+	public static final String ERROR_NOT_EXISTS = "don't exists";
+	public static final String ERROR_GET_QUESTION_PAGE = "Error getting page of questions";
+	public static final String ERROR_GET_SEARCH_QUESTION_PAGE = "Error retrieving search questions page";
+	public static final String ERROR_NOT_FOUND_QUESTIONS = "Could not get list of questions from the user";
+	public static final String ERROR_HOME_PAGE_NOT_DISPLAY = "Home can not be displayed";
+	
 }

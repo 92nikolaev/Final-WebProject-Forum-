@@ -17,7 +17,7 @@ public class Answer extends Entity {
 	private String content;
 	private Date dateCreated;
 	private int averageMark;
-	private int markCont;
+	private int markCount;
 	
 	public Answer() {
 		super();
@@ -32,7 +32,7 @@ public class Answer extends Entity {
 		this.content = content;
 		this.dateCreated = created;
 		this.averageMark = averageMark;
-		this.markCont = markCont;
+		this.markCount = markCont;
 	}
 
 	public int getQuestionId() {
@@ -83,12 +83,12 @@ public class Answer extends Entity {
 		this.averageMark = averageMark;
 	}
 
-	public int getMarkCont() {
-		return markCont;
+	public int getMarkCount() {
+		return markCount;
 	}
 
-	public void setMarkCont(int markCont) {
-		this.markCont = markCont;
+	public void setMarkCount(int markCount) {
+		this.markCount = markCount;
 	}
 
 	@Override
@@ -98,7 +98,7 @@ public class Answer extends Entity {
 		result = prime * result + averageMark;
 		result = prime * result + ((content == null) ? 0 : content.hashCode());
 		result = prime * result + ((dateCreated == null) ? 0 : dateCreated.hashCode());
-		result = prime * result + markCont;
+		result = prime * result + markCount;
 		result = prime * result + questionId;
 		result = prime * result + userId;
 		result = prime * result + ((userLogin == null) ? 0 : userLogin.hashCode());
@@ -126,7 +126,7 @@ public class Answer extends Entity {
 				return false;
 		} else if (!dateCreated.equals(other.dateCreated))
 			return false;
-		if (markCont != other.markCont)
+		if (markCount != other.markCount)
 			return false;
 		if (questionId != other.questionId)
 			return false;
@@ -143,6 +143,6 @@ public class Answer extends Entity {
 	@Override
 	public String toString() {
 		return "Answer [questionId=" + questionId + ", userId=" + userId + ", userLogin=" + userLogin + ", content="
-				+ content + ", dateCreated=" + dateCreated + ", averageMark=" + averageMark + ", markCont=" + markCont + "]";
+				+ content + ", dateCreated=" + dateCreated + ", averageMark=" + averageMark + ", markCont=" + markCount + "]";
 	}
 }

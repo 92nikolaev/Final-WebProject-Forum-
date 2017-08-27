@@ -13,6 +13,14 @@
 	<div class="container">
 		<div class = title_question>
 			<h1>${requestScope.question.title}</h1>
+			<c:if test="${message != null}">
+			<c:if test="${message == 'rate answer'}">
+				<div>Выставил оценку</div>
+			</c:if>
+			<c:if test="${message == 'error determineted mark'}">
+				<div class="error">Неудалось выставить оценку</div>
+			</c:if>
+		</c:if>
 		</div>	
 		<div class="post">
 			<table class="table_question">

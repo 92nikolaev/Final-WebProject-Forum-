@@ -11,11 +11,6 @@
 <body>
 	<%@ include file="../elementpage/element_header.jspf"%>
 	<div class="container">
-		<c:if test="${message != null}">
-			<c:if test="${message == 'question notfound'}">
-				<div>Вопрос не найден</div>
-			</c:if>
-		</c:if>
 		<%@include file="../elementpage/element_question_items.jspf"%>
 		<aside>
 			<%@include file="../elementpage/element_news.jspf"%>
@@ -26,5 +21,12 @@
 	<%@include file="../elementpage/element_modal_overlay.jspf"%>
 	<script type="text/javascript" src="js/common.js"></script>
 	<%@include file="../elementpage/element_news_create.jspf"%>
+	<c:if test="${message != null}">
+		<c:if test="${message == 'question not_found'}">	
+			<script type="text/javascript">
+					alert("Вопрос не найден");
+			</script>
+		</c:if>
+	</c:if>
 </body>
 </html>
