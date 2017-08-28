@@ -137,6 +137,7 @@
 			</div>
 		</div>
 	<%@include file="../elementpage/element_modal_overlay.jspf" %>
+	<%@include file="../elementpage/element_news_create.jspf"%>
 	<script type="text/javascript" src="js/common.js"></script>
 	<script type="text/javascript" src="js/profileScript.js"></script>
 </body>

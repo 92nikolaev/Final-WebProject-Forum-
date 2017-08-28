@@ -6,7 +6,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import by.epam.training.helper.bean.Question;
-import by.epam.training.helper.constant.ErrorMessage;
+import by.epam.training.helper.constant.ErrorMessageService;
 import by.epam.training.helper.dao.QuestionDAO;
 import by.epam.training.helper.dao.exception.DAOException;
 import by.epam.training.helper.dao.factory.DAOFactory;
@@ -20,24 +20,24 @@ import by.epam.training.helper.validation.exception.ValidationException;
 
 public class QuestionServiceImpl implements QuestionService {
 	private static final Logger logger = LogManager.getLogger(QuestionServiceImpl.class);
+	private final int ITEM_ON_PAGE = 10;
 	@Override
 	public ItemManager<Question> getQuestionsPage(int pageNumber) throws ServiceException {
 		ItemManager<Question> item = null;
 		ArrayList<Question> questions = null;
 		int amountQuestions = 0;
-		int itemOnPage = 5;
-		int offset = (pageNumber - 1) * itemOnPage;
+		int offset = (pageNumber - 1) * ITEM_ON_PAGE;
 		DAOFactory daoFactory = DAOFactory.getInstance();
 		QuestionDAO questionDAO = daoFactory.getQuestionDAO();
 		try {
-			questions = questionDAO.getQuestionsWithLimit(offset, itemOnPage);
+			questions = questionDAO.getQuestionsWithLimit(offset, ITEM_ON_PAGE);
 			formattingQuestion(questions);
 			amountQuestions = questionDAO.getAmountQuestions();
-			int amountPage = Calculation.pageCounting(amountQuestions, itemOnPage);
+			int amountPage = Calculation.pageCounting(amountQuestions, ITEM_ON_PAGE);
 			item = new ItemManager<Question>(questions, amountPage);
 		} catch (DAOException e) {
-			logger.error(ErrorMessage.ERROR_GET_QUESTION_PAGE);
-			throw new ServiceException(ErrorMessage.ERROR_GET_QUESTION_PAGE);
+			logger.error(ErrorMessageService.ERROR_GET_QUESTION_PAGE);
+			throw new ServiceException(ErrorMessageService.ERROR_GET_QUESTION_PAGE);
 		}
 		return item;
 	}
@@ -47,20 +47,19 @@ public class QuestionServiceImpl implements QuestionService {
 		ItemManager<Question> item = null;
 		ArrayList<Question> questions = null;
 		int countQuestions = 0;
-		int itemOnPage = 5;
-		int offset = (pageNumber - 1) * itemOnPage;
+		int offset = (pageNumber - 1) * ITEM_ON_PAGE;
 		DAOFactory daoFactory = DAOFactory.getInstance();
 		QuestionDAO questionDAO = daoFactory.getQuestionDAO();
 		try {
 			String query = FormatterString.conversionForSearchDB(searchQuestion);
-			questions = questionDAO.getSearchQuestionWithLimit(offset, itemOnPage, query);
+			questions = questionDAO.getSearchQuestionWithLimit(offset, ITEM_ON_PAGE, query);
 			formattingQuestion(questions);
 			countQuestions = questionDAO.getAmountSearchQuestion(searchQuestion);
-			int amountPage = Calculation.pageCounting(countQuestions, itemOnPage);
+			int amountPage = Calculation.pageCounting(countQuestions, ITEM_ON_PAGE);
 			item = new ItemManager<>(questions, amountPage);
 		} catch (DAOException e) {
-			logger.error(ErrorMessage.ERROR_GET_SEARCH_QUESTION_PAGE);
-			throw new ServiceException(ErrorMessage.ERROR_GET_SEARCH_QUESTION_PAGE);
+			logger.error(ErrorMessageService.ERROR_GET_SEARCH_QUESTION_PAGE,e);
+			throw new ServiceException(ErrorMessageService.ERROR_GET_SEARCH_QUESTION_PAGE);
 		}
 		return item;
 	}
@@ -74,22 +73,22 @@ public class QuestionServiceImpl implements QuestionService {
 			questions = questionDAO.getUserQuestion(user_id);
 			formattingQuestionTitle(questions);
 		} catch (DAOException e) {
-			logger.error(ErrorMessage.ERROR_NOT_FOUND_QUESTIONS);
-			throw new  ServiceException(e);
+			logger.error(ErrorMessageService.ERROR_NOT_FOUND_QUESTIONS, e);
+			throw new  ServiceException(ErrorMessageService.ERROR_NOT_FOUND_QUESTIONS);
 		}
 		return questions;
 	}
 	@Override
-	public void addNewQuestion(int user_id, String questionTitle, String questionContent) throws ServiceException {
+	public void addNewQuestion(int userId, String questionTitle, String questionContent) throws ServiceException {
 		DAOFactory daoFactory = DAOFactory.getInstance();
 		QuestionDAO questionDAO = daoFactory.getQuestionDAO();
 		String title = questionTitle.trim();
 		String content = questionContent.trim();
 		try {
-			questionDAO.addQuestion(user_id, title, content);
+			questionDAO.addQuestion(userId, title, content);
 		} catch (DAOException e) {
-			logger.error(ErrorMessage.ERROR_CREATE_QUESTION);
-			throw new ServiceException(ErrorMessage.ERROR_CREATE_QUESTION);
+			logger.error(ErrorMessageService.ERROR_ADD_QUESTION, e);
+			throw new ServiceException(ErrorMessageService.ERROR_ADD_QUESTION);
 		}	
 	}
 
@@ -103,12 +102,11 @@ public class QuestionServiceImpl implements QuestionService {
 			Validation.isExistQuestion(questionId);
 			question = questionDAO.getQestionById(questionId);
 		} catch (DAOException e) {
-			logger.error(ErrorMessage.ERROR_QUESTION_NOT_FOUND);
-			e.printStackTrace();
-			throw new ServiceException(ErrorMessage.ERROR_NOT_FOUND);
+			logger.error(ErrorMessageService.ERROR_QUESTION_NOT_FOUND, e);
+			throw new ServiceException(ErrorMessageService.ERROR_QUESTION_NOT_FOUND);
 		} catch (ValidationException e) {
-			logger.error(ErrorMessage.ERROR_QUESTION_NOT_EXISTS + questionId);
-			throw new ServiceException(ErrorMessage.ERROR_NOT_EXISTS);
+			logger.error(ErrorMessageService.ERROR_QUESTION_NOT_EXISTS + questionId);
+			throw new ServiceException(ErrorMessageService.ERROR_QUESTION_NOT_EXISTS + questionId);
 		}
 		return question;
 	}
@@ -119,8 +117,8 @@ public class QuestionServiceImpl implements QuestionService {
 			try {
 				return	Validation.isExistQuestion(questionId);
 			} catch (ValidationException e) {
-				logger.error(e);
-				throw new ServiceException();
+				logger.error(ErrorMessageService.ERROR_QUESTION_NOT_EXISTS + questionId);
+				throw new ServiceException(ErrorMessageService.ERROR_QUESTION_NOT_EXISTS + questionId);
 			}
 		}
 		return false;
@@ -135,14 +133,12 @@ public class QuestionServiceImpl implements QuestionService {
 			try {
 				questionDAO.updateQuestionById(questionId,questionTitle,questionContent);
 			} catch (DAOException e) {
-				logger.error(e);
-				e.printStackTrace();
-				throw new ServiceException();
+				logger.error(ErrorMessageService.ERROR_QUESTION_NOT_UPDATE + questionId);
+				throw new ServiceException(ErrorMessageService.ERROR_QUESTION_NOT_UPDATE);
 			}
-			
 		}else {
-			logger.error(ErrorMessage.INVALID_ID);
-			throw new ServiceException(ErrorMessage.INVALID_ID);
+			logger.error(ErrorMessageService.INVALID_ID + questionId);
+			throw new ServiceException(ErrorMessageService.INVALID_ID + questionId);
 		}
 		
 	}

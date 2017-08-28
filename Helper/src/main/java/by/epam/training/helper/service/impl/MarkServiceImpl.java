@@ -6,7 +6,7 @@ import org.apache.log4j.Logger;
 import by.epam.training.helper.bean.Answer;
 import by.epam.training.helper.bean.Mark;
 import by.epam.training.helper.bean.User;
-import by.epam.training.helper.constant.ErrorMessage;
+import by.epam.training.helper.constant.ErrorMessageService;
 import by.epam.training.helper.dao.MarkDAO;
 import by.epam.training.helper.dao.exception.DAOException;
 import by.epam.training.helper.dao.factory.DAOFactory;
@@ -37,17 +37,15 @@ public class MarkServiceImpl implements MarkService {
 					markDAO.updateMark(mark.getId(), newMark);
 				}
 			} catch (ValidationException e) {
-				logger.error(e);
-				e.printStackTrace();
-				throw new ServiceException();	
+				logger.error(ErrorMessageService.ERROR_PROCESSING);
+				throw new ServiceException(ErrorMessageService.ERROR_PROCESSING);
 			} catch (DAOException e) {
-				logger.error(e);
-				e.printStackTrace();
-				throw new ServiceException();
+				logger.error(ErrorMessageService.ERROR_ADD_MARK);
+				throw new ServiceException(ErrorMessageService.ERROR_ADD_MARK);
 			}
 		}else{
-			logger.warn(ErrorMessage.USER_TRY_EVALUATE_HIMSELF);;
-			throw new ServiceException();
+			logger.warn(ErrorMessageService.USER_TRY_EVALUATE_HIMSELF);
+			throw new ServiceException(ErrorMessageService.USER_TRY_EVALUATE_HIMSELF);
 		}
 		
 	}

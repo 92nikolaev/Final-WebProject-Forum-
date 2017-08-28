@@ -6,13 +6,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-
 import by.epam.training.helper.bean.Question;
 import by.epam.training.helper.constant.ColumnNameDB;
-import by.epam.training.helper.constant.ErrorMessage;
+import by.epam.training.helper.constant.ErrorMessageDAO;
 import by.epam.training.helper.constant.SQLCommand;
 import by.epam.training.helper.dao.QuestionDAO;
 import by.epam.training.helper.dao.exception.ConnectionPoolException;
@@ -44,13 +42,12 @@ public class QuestionSQL implements QuestionDAO {
 						}
 					} 
 			} catch (SQLException e) {
-				logger.error(ErrorMessage.ERROR_GET_QUESTIONS, e);
-				throw new DAOException(ErrorMessage.ERROR_GET_QUESTIONS);
+				logger.error(ErrorMessageDAO.ERROR_GET_QUESTIONS, e);
+				throw new DAOException(ErrorMessageDAO.ERROR_GET_QUESTIONS);
 			}
 		} catch (ConnectionPoolException e) {
-			e.printStackTrace();
-			logger.error(ErrorMessage.ERROR_CONNECTION, e);
-			throw new DAOException(ErrorMessage.ERROR_CONNECTION);
+			logger.error(ErrorMessageDAO.ERROR_CONNECTION, e);
+			throw new DAOException(ErrorMessageDAO.ERROR_CONNECTION);
 		}finally {
 			ReleaseConnection.freeConnection(connection, connectionPool);
 		}
@@ -82,12 +79,12 @@ public class QuestionSQL implements QuestionDAO {
 					} 
 			} catch (SQLException e) {
 				e.printStackTrace();
-				logger.error(ErrorMessage.ERROR_GET_SEARCH_QUESTIONS, e);
-				throw new DAOException(ErrorMessage.ERROR_GET_SEARCH_QUESTIONS);					
+				logger.error(ErrorMessageDAO.ERROR_GET_SEARCH_QUESTIONS, e);
+				throw new DAOException(ErrorMessageDAO.ERROR_GET_SEARCH_QUESTIONS);					
 			}
 		} catch (ConnectionPoolException e) {
-			logger.error(ErrorMessage.ERROR_CONNECTION, e);
-			throw new DAOException(ErrorMessage.ERROR_CONNECTION);
+			logger.error(ErrorMessageDAO.ERROR_CONNECTION, e);
+			throw new DAOException(ErrorMessageDAO.ERROR_CONNECTION);
 		}finally {
 			ReleaseConnection.freeConnection(connection, connectionPool);
 		}
@@ -108,13 +105,12 @@ public class QuestionSQL implements QuestionDAO {
 					}
 				}
 			} catch (SQLException e) {
-				e.printStackTrace();
-				logger.error(ErrorMessage.ERROR_GET_COUNT_QUESTIONS, e);
-				throw new DAOException(ErrorMessage.ERROR_GET_COUNT_QUESTIONS);
+				logger.error(ErrorMessageDAO.ERROR_GET_COUNT_QUESTIONS, e);
+				throw new DAOException(ErrorMessageDAO.ERROR_GET_COUNT_QUESTIONS);
 			}
 		} catch (ConnectionPoolException e) {
-			logger.error(ErrorMessage.ERROR_CONNECTION, e);
-			throw new DAOException(ErrorMessage.ERROR_CONNECTION);
+			logger.error(ErrorMessageDAO.ERROR_CONNECTION, e);
+			throw new DAOException(ErrorMessageDAO.ERROR_CONNECTION);
 		}finally {
 			ReleaseConnection.freeConnection(connection, connectionPool);
 		}
@@ -136,13 +132,12 @@ public class QuestionSQL implements QuestionDAO {
 					}
 				}
 			} catch (SQLException e) {
-				e.printStackTrace();
-				logger.error(ErrorMessage.ERROR_GET_COUNT_QUESTIONS, e);
-				throw new DAOException(ErrorMessage.ERROR_GET_COUNT_QUESTIONS);
+				logger.error(ErrorMessageDAO.ERROR_GET_COUNT_QUESTIONS, e);
+				throw new DAOException(ErrorMessageDAO.ERROR_GET_COUNT_QUESTIONS);
 			}
 		} catch (ConnectionPoolException e) {
-			logger.error(ErrorMessage.ERROR_CONNECTION, e);
-			throw new DAOException(ErrorMessage.ERROR_CONNECTION);
+			logger.error(ErrorMessageDAO.ERROR_CONNECTION, e);
+			throw new DAOException(ErrorMessageDAO.ERROR_CONNECTION);
 		}finally {
 			ReleaseConnection.freeConnection(connection, connectionPool);
 		}
@@ -170,11 +165,11 @@ public class QuestionSQL implements QuestionDAO {
 			}
 		}catch (SQLException e) {
 			e.printStackTrace();
-			logger.error(ErrorMessage.ERROR_GET_QUESTIONS, e);
-			throw new DAOException(ErrorMessage.ERROR_GET_QUESTIONS);
+			logger.error(ErrorMessageDAO.ERROR_GET_USER_QUESTIONS, e);
+			throw new DAOException(ErrorMessageDAO.ERROR_GET_USER_QUESTIONS);
 		} catch (ConnectionPoolException e) {
-			logger.error(ErrorMessage.ERROR_CONNECTION, e);
-			throw new DAOException(ErrorMessage.ERROR_CONNECTION);
+			logger.error(ErrorMessageDAO.ERROR_CONNECTION, e);
+			throw new DAOException(ErrorMessageDAO.ERROR_CONNECTION);
 		}finally {
 			ReleaseConnection.freeConnection(connection, connectionPool);
 		}
@@ -193,12 +188,12 @@ public class QuestionSQL implements QuestionDAO {
 				preparedStatement.setString(3, content);
 				preparedStatement.executeUpdate();
 			}catch (SQLException e) {
-				logger.error(ErrorMessage.ERROR_SAVE_QUESTION, e);
-				throw new DAOException(ErrorMessage.ERROR_SAVE_QUESTION);
+				logger.error(ErrorMessageDAO.ERROR_SAVE_QUESTION, e);
+				throw new DAOException(ErrorMessageDAO.ERROR_SAVE_QUESTION);
 			}
 		} catch (ConnectionPoolException e) {
-			logger.error(ErrorMessage.ERROR_CONNECTION, e);
-			throw new DAOException(ErrorMessage.ERROR_CONNECTION + e);
+			logger.error(ErrorMessageDAO.ERROR_CONNECTION, e);
+			throw new DAOException(ErrorMessageDAO.ERROR_CONNECTION);
 		}finally {
 			ReleaseConnection.freeConnection(connection, connectionPool);
 		}	
@@ -226,12 +221,12 @@ public class QuestionSQL implements QuestionDAO {
 					}
 				}
 			} catch (SQLException e) {
-				logger.error(ErrorMessage.ERROR_GET_QUESTIONS, e);
-				throw new DAOException(ErrorMessage.ERROR_GET_QUESTIONS);
+				logger.error(ErrorMessageDAO.ERROR_GET_QUESTION_BY_ID, e);
+				throw new DAOException(ErrorMessageDAO.ERROR_GET_QUESTION_BY_ID);
 			}
 		} catch (ConnectionPoolException e) {
-			logger.error(ErrorMessage.ERROR_CONNECTION, e);
-			throw new DAOException(ErrorMessage.ERROR_CONNECTION);
+			logger.error(ErrorMessageDAO.ERROR_CONNECTION, e);
+			throw new DAOException(ErrorMessageDAO.ERROR_CONNECTION);
 		}finally {
 			ReleaseConnection.freeConnection(connection, connectionPool);
 		}
@@ -250,12 +245,12 @@ public class QuestionSQL implements QuestionDAO {
 				preparedStatement.setInt(3, questionId);
 				preparedStatement.executeUpdate();
 			}catch (SQLException e) {
-				logger.error(ErrorMessage.ERROR_UPDATE_QUESTION, e);
-				throw new DAOException(ErrorMessage.ERROR_UPDATE_QUESTION);
+				logger.error(ErrorMessageDAO.ERROR_UPDATE_QUESTION, e);
+				throw new DAOException(ErrorMessageDAO.ERROR_UPDATE_QUESTION);
 			}
 		} catch (ConnectionPoolException e) {
-			logger.error(ErrorMessage.ERROR_CONNECTION, e);
-			throw new DAOException(ErrorMessage.ERROR_CONNECTION + e);
+			logger.error(ErrorMessageDAO.ERROR_CONNECTION, e);
+			throw new DAOException(ErrorMessageDAO.ERROR_CONNECTION);
 		}finally {
 			ReleaseConnection.freeConnection(connection, connectionPool);
 		}	

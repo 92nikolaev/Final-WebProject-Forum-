@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 
 import by.epam.training.helper.bean.User;
 import by.epam.training.helper.constant.ErrorMessage;
+import by.epam.training.helper.constant.ErrorMessageService;
 import by.epam.training.helper.constant.ErrorStatus;
 import by.epam.training.helper.constant.ParameterName;
 import by.epam.training.helper.dao.UserDAO;
@@ -32,15 +33,15 @@ public class UserServiceImpl implements UserService {
 			UserDAO userDAO = daoFactory.getUserDAO();
 			userDAO.signUp(user);
 		} catch (DAOException e) {
-				logger.error(ErrorMessage.ERROR_SIGN_UP);
-				throw new ServiceException(ErrorMessage.ERROR_SIGN_UP);
+				logger.error(ErrorMessageService.ERROR_SIGN_UP);
+				throw new ServiceException(ErrorMessageService.ERROR_SIGN_UP);
 		} catch (ValidationException e) {
 			String error = getErrorStatus(e.getMessage());
-			logger.error(error);
+			logger.error(ErrorMessageService.EROR_VERIFICATION_FIELDS + error);
 			throw new ServiceException(error);
 		} catch (NoSuchAlgorithmException e) {
-			logger.error(ErrorMessage.ERROR_ENCRYPTION);
-			throw new ServiceException(ErrorMessage.ERROR_SIGN_UP);
+			logger.error(ErrorMessageService.ERROR_ENCRYPTION);
+			throw new ServiceException(ErrorMessageService.ERROR_SIGN_UP);
 		}
 		
 	}
@@ -54,23 +55,22 @@ public class UserServiceImpl implements UserService {
 			user = userDAO.signIn(login, Encryption.getHahsCode(login, password));
 			if(user != null){
 				if(user.getStatus() == ParameterName.BAN){
-					logger.error(ErrorMessage.ERROR_USER_BAN);
-					throw new ServiceException(ErrorMessage.ERROR_USER_BAN);
+					logger.error(ErrorMessageService.ERROR_USER_BAN);
+					throw new ServiceException(ErrorMessageService.ERROR_USER_BAN);
 				}
 			}else{
-				logger.error(ErrorMessage.ERROR_NOT_EXISTS_USER);
-				throw new ServiceException(ErrorMessage.ERROR_SIGN_IN);
+				logger.error(ErrorMessageService.ERROR_NOT_EXISTS_USER);
+				throw new ServiceException(ErrorMessageService.ERROR_SIGN_IN);
 			}
 		} catch (DAOException e) {
-			logger.error(ErrorMessage.ERROR_SIGN_IN);
-			throw new ServiceException(ErrorMessage.ERROR_SIGN_IN);
+			logger.error(ErrorMessageService.ERROR_SIGN_IN);
+			throw new ServiceException(ErrorMessageService.ERROR_SIGN_IN);
 		}catch (ValidationException e) {
-			e.printStackTrace();
 			String error = getErrorStatus(e.getMessage());
 			throw new ServiceException(error);
 		}catch (NoSuchAlgorithmException e) {
-			logger.error(ErrorMessage.ERROR_ENCRYPTION);
-			throw new ServiceException(ErrorMessage.ERROR_SIGN_IN);
+			logger.error(ErrorMessageService.ERROR_ENCRYPTION);
+			throw new ServiceException(ErrorMessageService.ERROR_SIGN_IN);
 		}
 		return user;
 	}
@@ -90,28 +90,28 @@ public class UserServiceImpl implements UserService {
 			itemManager = new ItemManager<>(users, countPage);
 			return itemManager;
 		} catch (DAOException e) {
-			logger.error(ErrorMessage.ERROR_GET_USERS);
+			logger.error(ErrorMessageService.ERROR_GET_USERS);
 			e.printStackTrace();
-			throw new ServiceException(ErrorMessage.ERROR_GET_USERS);
+			throw new ServiceException(ErrorMessageService.ERROR_GET_USERS);
 		}
 	}
 	@Override
-	public User getUserById(int user_id) throws ServiceException {
+	public User getUserById(int userId) throws ServiceException {
 		User user = null;
 		try {
-			Validation.validationId(user_id);
+			Validation.validationId(userId);
 			DAOFactory daoFactory = DAOFactory.getInstance();
 			UserDAO userDAO = daoFactory.getUserDAO();
-			user = userDAO.getUserById(user_id);
+			user = userDAO.getUserById(userId);
 			if(user == null){
-				logger.error(ErrorStatus.ERROR_USER_NOT_FOUND);
-				throw new  ServiceException(ErrorStatus.ERROR_USER_NOT_FOUND);
+				logger.error(ErrorMessageService.ERROR_NOT_EXISTS_USER);
+				throw new ServiceException(ErrorMessageService.ERROR_SIGN_IN);
 				}
 		} catch (DAOException e) {
-				logger.error(ErrorMessage.ERROR_USER_NOT_FOUND);
-				throw new  ServiceException(ErrorMessage.ERROR_USER_NOT_FOUND);
+			logger.error(ErrorMessageService.ERROR_NOT_EXISTS_USER);
+			throw new ServiceException(ErrorMessageService.ERROR_GET_USER);
 		} catch (ValidationException e) {
-			throw new ServiceException(ErrorStatus.INVALID_ID);
+			throw new ServiceException(ErrorMessageService.INVALID_ID);
 		}
 		return user;
 	}
@@ -131,11 +131,11 @@ public class UserServiceImpl implements UserService {
 			logger.error(ErrorMessage.ERROR_USER_NOT_FOUND);
 			throw new ServiceException(e);
 		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
-			throw new ServiceException(e);
+			logger.error(ErrorMessageService.ERROR_ENCRYPTION);
+			throw new ServiceException(ErrorMessageService.ERROR_UPDATE_PASSWORD);
 		} catch (DAOException e) {
-			e.printStackTrace();
-			throw new ServiceException(e);
+			logger.error(ErrorMessageService.ERROR_UPDATE_PASSWORD, e);
+			throw new ServiceException(ErrorMessageService.ERROR_UPDATE_PASSWORD);
 		}
 		
 	}
@@ -146,8 +146,8 @@ public class UserServiceImpl implements UserService {
 		String hashPassword = null;
 		hashPassword = userDAO.getPasswordById(userId);
 		if(!key.equals(hashPassword)){
-			logger.error(ErrorMessage.ERROR_PASSWORD_NOT_EQUALS);
-			throw new ServiceException(ErrorMessage.ERROR_PASSWORD_NOT_EQUALS);
+			logger.error(ErrorMessageService.ERROR_PASSWORD_NOT_EQUALS);
+			throw new ServiceException(ErrorMessageService.ERROR_PASSWORD_NOT_EQUALS);
 		}
 		
 		
@@ -161,10 +161,10 @@ public class UserServiceImpl implements UserService {
 			UserDAO userDAO = daoFactory.getUserDAO();
 			userDAO.editUserField(userId, nameEdit, surnameEdit, emailEdit);
 		} catch (DAOException e) {
-			logger.error(ErrorStatus.ERROR_USER_NOT_FOUND);
-				e.printStackTrace();
-				throw new ServiceException(ErrorStatus.ERROR_USER_NOT_FOUND);
+			logger.error(ErrorMessageService.ERROR_UPDATE_USER_FIELLDS);
+			throw new ServiceException(ErrorMessageService.ERROR_UPDATE_USER_FIELLDS);
 		} catch (ValidationException e) {
+			logger.error(ErrorMessageService.ERROR_CHECK_FIELDS);
 			String error = getErrorStatus(e.getMessage());
 			throw new ServiceException(error);
 		}	
@@ -176,8 +176,7 @@ public class UserServiceImpl implements UserService {
 		try {
 			userDAO.lockUnlockUser(userId, status);
 		} catch (DAOException e) {
-			logger.error(ErrorStatus.USER_NOT_LOCK);
-			e.printStackTrace();
+			logger.error(ErrorMessageService.ERROR_LOCK_UNLOCK_USER);
 			throw new ServiceException(ErrorStatus.USER_NOT_LOCK);
 		}
 	}

@@ -6,7 +6,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import by.epam.training.helper.bean.Answer;
-import by.epam.training.helper.constant.ErrorMessage;
+import by.epam.training.helper.constant.ErrorMessageService;
 import by.epam.training.helper.dao.AnswerDAO;
 import by.epam.training.helper.dao.exception.DAOException;
 import by.epam.training.helper.dao.factory.DAOFactory;
@@ -34,9 +34,8 @@ public class AnswerServiceImpl implements AnswerService {
 			int amountPage = Calculation.pageCounting(amountAnswers, itemOnPage);
 			item = new ItemManager<>(answers, amountPage);
 		} catch (DAOException e) {
-			logger.error(e);
-			e.printStackTrace();
-			throw new ServiceException();
+			logger.error(ErrorMessageService.ERROR_GET_DATA, e);
+			throw new ServiceException(ErrorMessageService.ERROR_GET_DATA);
 		}
 		return item;
 	}
@@ -50,10 +49,12 @@ public class AnswerServiceImpl implements AnswerService {
 		try {
 			answerDAO.addAnswer(answer);
 		} catch (DAOException e) {
-			logger.error(e);
-			e.printStackTrace();
-			throw new ServiceException();
+			logger.error(ErrorMessageService.ERROR_ADD_ANSWER, e);
+			throw new ServiceException(ErrorMessageService.ERROR_ADD_ANSWER);
 		}
+		}else{
+			logger.error(ErrorMessageService.ERROR_ANSWER_IS_EMPTY);
+			throw new ServiceException(ErrorMessageService.ERROR_ANSWER_IS_EMPTY);
 		}
 	}
 	@Override
@@ -65,13 +66,12 @@ public class AnswerServiceImpl implements AnswerService {
 			try {
 				answer = answerDAO.answerById(answerId);
 			} catch (DAOException e) {
-				logger.error(e);
-				e.printStackTrace();
-				throw new ServiceException();
+				logger.error(ErrorMessageService.ERROR_GET_ANSWER_BY_ID + answerId, e);
+				throw new ServiceException(ErrorMessageService.ERROR_GET_ANSWER_BY_ID + answerId);
 			}
 		}else {
-			logger.error(ErrorMessage.INVALID_ID);
-			throw new ServiceException(ErrorMessage.INVALID_ID);
+			logger.error(ErrorMessageService.INVALID_ID + answerId);
+			throw new ServiceException(ErrorMessageService.INVALID_ID + answerId);
 		}
 		return answer;
 	}
@@ -83,13 +83,12 @@ public class AnswerServiceImpl implements AnswerService {
 			try {
 				answerDAO.updateAnswerById(answerId, answerContent);
 			} catch (DAOException e) {
-				logger.error(e);
-				e.printStackTrace();
-				throw new ServiceException();
+				logger.error(ErrorMessageService.ERROR_UPDATE_ANSWER_BY_ID + answerId, e);
+				throw new ServiceException(ErrorMessageService.ERROR_UPDATE_ANSWER_BY_ID + answerId);
 			}
 		}else {
-			logger.error(ErrorMessage.INVALID_ID);
-			throw new ServiceException(ErrorMessage.INVALID_ID);
+			logger.error(ErrorMessageService.INVALID_ID + answerId);
+			throw new ServiceException(ErrorMessageService.INVALID_ID + answerId);
 		}
 		
 	}

@@ -11,7 +11,7 @@ import org.apache.log4j.Logger;
 
 import by.epam.training.helper.bean.Answer;
 import by.epam.training.helper.constant.ColumnNameDB;
-import by.epam.training.helper.constant.ErrorMessage;
+import by.epam.training.helper.constant.ErrorMessageDAO;
 import by.epam.training.helper.constant.SQLCommand;
 import by.epam.training.helper.dao.AnswerDAO;
 import by.epam.training.helper.dao.exception.ConnectionPoolException;
@@ -44,12 +44,12 @@ public class AnswerSQL implements AnswerDAO {
 					}
 				}
 			} catch (SQLException e) {
-				logger.error(ErrorMessage.ERROR_GET_ANSWER, e);
-				throw new DAOException(ErrorMessage.ERROR_GET_ANSWER);
+				logger.error(ErrorMessageDAO.ERROR_GET_ANSWER, e);
+				throw new DAOException(ErrorMessageDAO.ERROR_GET_ANSWER);
 			}
 		} catch (ConnectionPoolException e) {
-			logger.error(ErrorMessage.ERROR_CONNECTION, e);
-			throw new DAOException(ErrorMessage.ERROR_CONNECTION);
+			logger.error(ErrorMessageDAO.ERROR_CONNECTION, e);
+			throw new DAOException(ErrorMessageDAO.ERROR_CONNECTION);
 		}finally {
 			ReleaseConnection.freeConnection(connection, connectionPool);
 		}
@@ -71,13 +71,12 @@ public class AnswerSQL implements AnswerDAO {
 					}
 				}
 			} catch (SQLException e) {
-				logger.error(ErrorMessage.ERROR_GET_COUNT_ANSWERS, e);
-				throw new DAOException(ErrorMessage.ERROR_GET_COUNT_ANSWERS);
+				logger.error(ErrorMessageDAO.ERROR_GET_COUNT_ANSWERS, e);
+				throw new DAOException(ErrorMessageDAO.ERROR_GET_COUNT_ANSWERS);
 			}
 		} catch (ConnectionPoolException e) {
-			logger.error(ErrorMessage.ERROR_CONNECTION, e);
-			throw new DAOException(ErrorMessage.ERROR_CONNECTION);
-			
+			logger.error(ErrorMessageDAO.ERROR_CONNECTION, e);
+			throw new DAOException(ErrorMessageDAO.ERROR_CONNECTION);	
 		}finally {
 			ReleaseConnection.freeConnection(connection, connectionPool);
 		}
@@ -96,12 +95,12 @@ public class AnswerSQL implements AnswerDAO {
 				preparedStatement.setString(3, answer.getContent());
 				preparedStatement.executeUpdate();
 			} catch (SQLException e) {
-				logger.error(ErrorMessage.ERROR_GET_ANSWER, e);
-				throw new DAOException(ErrorMessage.ERROR_GET_ANSWER);
+				logger.error(ErrorMessageDAO.ERROR_ADD_ANSWER, e);
+				throw new DAOException(ErrorMessageDAO.ERROR_ADD_ANSWER);
 			}
 		} catch (ConnectionPoolException e) {
-			logger.error(ErrorMessage.ERROR_CONNECTION, e);
-			throw new DAOException(ErrorMessage.ERROR_CONNECTION);
+			logger.error(ErrorMessageDAO.ERROR_CONNECTION, e);
+			throw new DAOException(ErrorMessageDAO.ERROR_CONNECTION);	
 		}finally {
 			ReleaseConnection.freeConnection(connection, connectionPool);
 		}
@@ -126,12 +125,12 @@ public class AnswerSQL implements AnswerDAO {
 					}
 				}
 			} catch (SQLException e) {
-				logger.error(ErrorMessage.ERROR_GET_ANSWER, e);
-				throw new DAOException(ErrorMessage.ERROR_GET_ANSWER);
+				logger.error(ErrorMessageDAO.ERROR_GET_ANSWER_BY_ID, e);
+				throw new DAOException(ErrorMessageDAO.ERROR_GET_ANSWER_BY_ID);
 			}
 		} catch (ConnectionPoolException e) {
-			logger.error(ErrorMessage.ERROR_CONNECTION, e);
-			throw new DAOException(ErrorMessage.ERROR_CONNECTION);
+			logger.error(ErrorMessageDAO.ERROR_CONNECTION, e);
+			throw new DAOException(ErrorMessageDAO.ERROR_CONNECTION);	
 		}finally {
 			ReleaseConnection.freeConnection(connection, connectionPool);
 		}
@@ -149,12 +148,12 @@ public class AnswerSQL implements AnswerDAO {
 				preparedStatement.setInt(2, answerId);
 				preparedStatement.executeUpdate();
 			} catch (SQLException e) {
-				logger.error(ErrorMessage.ERROR_UPDATE_ANSWER, e);
-				throw new DAOException(ErrorMessage.ERROR_GET_ANSWER);
+				logger.error(ErrorMessageDAO.ERROR_UPDATE_ANSWER, e);
+				throw new DAOException(ErrorMessageDAO.ERROR_UPDATE_ANSWER);
 			}
 		} catch (ConnectionPoolException e) {
-			logger.error(ErrorMessage.ERROR_CONNECTION, e);
-			throw new DAOException(ErrorMessage.ERROR_CONNECTION);
+			logger.error(ErrorMessageDAO.ERROR_CONNECTION, e);
+			throw new DAOException(ErrorMessageDAO.ERROR_CONNECTION);	
 		}finally {
 			ReleaseConnection.freeConnection(connection, connectionPool);
 		}

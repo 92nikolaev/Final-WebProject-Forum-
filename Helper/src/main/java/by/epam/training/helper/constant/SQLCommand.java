@@ -35,4 +35,5 @@ public class SQLCommand {
 	public static final String SELECT_ANSWER_BY_ID = "SELECT * FROM answer WHERE answer.answer_id = ?";
 	public static final String SELECT_NEWS_WITH_LIMIT = "SELECT news_id, news_title, news_content FROM news ORDER BY news_title DESC LIMIT ?,?";
 	public static final String SELECT_NEWS_COUNT = "SELECT COUNT(*) AS news_count FROM news";
+	public static final String SELECT_USER_PASSWORD_BY_USER_ID = "SELECT user_password FROM user WHERE user_id = ?";
 }

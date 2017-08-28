@@ -12,7 +12,7 @@ import org.apache.log4j.Logger;
 
 import by.epam.training.helper.bean.User;
 import by.epam.training.helper.command.Command;
-import by.epam.training.helper.constant.ErrorMessage;
+import by.epam.training.helper.constant.ErrorMessageCommand;
 import by.epam.training.helper.constant.ParameterName;
 import by.epam.training.helper.constant.Url;
 import by.epam.training.helper.service.UserService;
@@ -49,7 +49,7 @@ public class SignIn implements Command{
 			response.sendRedirect(Url.REDIRECT_HOME_PAGE);	
 		} catch (ServiceException e) {
 			String errorStatus = e.getMessage();
-			logger.error(ErrorMessage.ERROR_SIGN_IN);
+			logger.error(ErrorMessageCommand.ERROR_SIGN_IN);
 			response.sendRedirect(Url.REDIRECT_SIGN_IN + errorStatus);
 		}	
 	}

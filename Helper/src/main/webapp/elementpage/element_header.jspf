@@ -13,12 +13,6 @@
               		<li>
               			<a class="createNews" href="controller?command=get_page_new_news">${nav_write_news}</a>
               		</li>
-              		<li>
-              			<a href="controller?command=show_questions">Show_question</a>
-              		</li>
-              		<li>
-						<a href="controller?command=lock_users">User lock</a>
-              		</li>
 				</ul>
 				</li>
 			</c:if>

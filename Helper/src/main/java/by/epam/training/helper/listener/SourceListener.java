@@ -8,8 +8,7 @@ import javax.servlet.annotation.WebListener;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-
-import by.epam.training.helper.constant.ErrorMessage;
+import by.epam.training.helper.constant.ErrorMessageDAO;
 import by.epam.training.helper.dao.exception.ConnectionPoolException;
 import by.epam.training.helper.dao.pool.InitializationConnectionPool;
 
@@ -34,9 +33,9 @@ public class SourceListener implements ServletContextListener {
 			pool.destroy();
 			
 		} catch (ConnectionPoolException e) {
-			logger.error(ErrorMessage.ERROR_CONNECTION, e);
+			logger.error(ErrorMessageDAO.ERROR_CONNECTION, e);
 		} catch (IOException e) {
-			logger.error(ErrorMessage.ERROR_CONNECTION, e);
+			logger.error(ErrorMessageDAO.ERROR_CONNECTION, e);
 		}
     }
 
@@ -50,7 +49,7 @@ public class SourceListener implements ServletContextListener {
 			
 			pool.init();
 		} catch (ConnectionPoolException e) {
-			logger.error(ErrorMessage.ERROR_CONNECTION, e);
+			logger.error(ErrorMessageDAO.ERROR_CONNECTION, e);
 		}
     }
 	

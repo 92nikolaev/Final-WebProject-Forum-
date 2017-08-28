@@ -4,11 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-
-import by.epam.training.helper.constant.ErrorMessage;
+import by.epam.training.helper.constant.ErrorMessageDAO;
 import by.epam.training.helper.constant.SQLCommand;
 import by.epam.training.helper.dao.ValidationDAO;
 import by.epam.training.helper.dao.exception.ConnectionPoolException;
@@ -34,12 +32,12 @@ public class ValidationSQL implements ValidationDAO {
 						}
 					}
 				} catch (SQLException e) {
-					logger.error(ErrorMessage.ERROR_CHECK_USER_EXISTS, e);
-					throw new DAOException(ErrorMessage.ERROR_CHECK_USER_EXISTS + e);
+					logger.error(ErrorMessageDAO.ERROR_CHECK_USER_EXISTS, e);
+					throw new DAOException(ErrorMessageDAO.ERROR_CHECK_USER_EXISTS);
 				}
 		} catch (ConnectionPoolException e) {
-			logger.error(ErrorMessage.ERROR_CONNECTION , e);
-			throw new DAOException(ErrorMessage.ERROR_CONNECTION  + e);
+			logger.error(ErrorMessageDAO.ERROR_CONNECTION, e);
+			throw new DAOException(ErrorMessageDAO.ERROR_CONNECTION);
 		}finally {
 			ReleaseConnection.freeConnection(connection, connectionPool);
 		}
@@ -60,12 +58,12 @@ public class ValidationSQL implements ValidationDAO {
 						}
 					}
 				} catch (SQLException e) {
-					logger.error(ErrorMessage.ERROR_QUESTION_NOT_EXISTS, e);
-					throw new DAOException(ErrorMessage.ERROR_QUESTION_NOT_EXISTS + e);
+					logger.error(ErrorMessageDAO.ERROR_CHECK_QUESTION_EXISTS, e);
+					throw new DAOException(ErrorMessageDAO.ERROR_CHECK_QUESTION_EXISTS);
 				}
 		} catch (ConnectionPoolException e) {
-			logger.error(ErrorMessage.ERROR_CONNECTION , e);
-			throw new DAOException(ErrorMessage.ERROR_CONNECTION  + e);
+			logger.error(ErrorMessageDAO.ERROR_CONNECTION, e);
+			throw new DAOException(ErrorMessageDAO.ERROR_CONNECTION);
 		}finally {
 			ReleaseConnection.freeConnection(connection, connectionPool);
 		}

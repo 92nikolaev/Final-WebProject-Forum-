@@ -12,7 +12,7 @@ import org.apache.log4j.Logger;
 
 import by.epam.training.helper.bean.User;
 import by.epam.training.helper.constant.ColumnNameDB;
-import by.epam.training.helper.constant.ErrorMessage;
+import by.epam.training.helper.constant.ErrorMessageDAO;
 import by.epam.training.helper.constant.SQLCommand;
 import by.epam.training.helper.dao.UserDAO;
 import by.epam.training.helper.dao.exception.ConnectionPoolException;
@@ -37,12 +37,12 @@ public class UserSQL implements UserDAO {
 				preparedStatement.setString(5, user.getPassword());
 				preparedStatement.executeUpdate();
 			}catch (SQLException e) {
-				logger.error(ErrorMessage.ERROR_SAVE_USER, e);
-				throw new DAOException(ErrorMessage.ERROR_SAVE_USER + e);
+				logger.error(ErrorMessageDAO.ERROR_SAVE_USER, e);
+				throw new DAOException(ErrorMessageDAO.ERROR_SAVE_USER);
 			}
 		} catch (ConnectionPoolException e) {
-			logger.error(ErrorMessage.ERROR_CONNECTION, e);
-			throw new DAOException(ErrorMessage.ERROR_CONNECTION + e);
+			logger.error(ErrorMessageDAO.ERROR_CONNECTION, e);
+			throw new DAOException(ErrorMessageDAO.ERROR_CONNECTION);
 		}finally {
 			ReleaseConnection.freeConnection(connection, connectionPool);
 		}	
@@ -67,12 +67,12 @@ public class UserSQL implements UserDAO {
 					}
 				}
 			} catch (SQLException e) {
-				logger.error(ErrorMessage.ERROR_GET_USER, e);
-				throw new DAOException(ErrorMessage.ERROR_GET_USER + e);
+				logger.error(ErrorMessageDAO.ERROR_GET_USER, e);
+				throw new DAOException(ErrorMessageDAO.ERROR_GET_USER);
 			}
 		} catch (ConnectionPoolException e) {
-			logger.error(ErrorMessage.ERROR_CONNECTION, e);
-			throw new DAOException(ErrorMessage.ERROR_CONNECTION + e);
+			logger.error(ErrorMessageDAO.ERROR_CONNECTION, e);
+			throw new DAOException(ErrorMessageDAO.ERROR_CONNECTION);
 		}finally {
 			ReleaseConnection.freeConnection(connection, connectionPool);
 		}
@@ -103,12 +103,12 @@ public class UserSQL implements UserDAO {
 						}
 					}
 				} catch (SQLException e) {
-					logger.error(ErrorMessage.ERROR_GET_USERS, e);
-					throw new DAOException(ErrorMessage.ERROR_GET_USERS + e);
+					logger.error(ErrorMessageDAO.ERROR_GET_USERS, e);
+					throw new DAOException(ErrorMessageDAO.ERROR_GET_USERS);
 				}
 			} catch (ConnectionPoolException e) {
-				logger.error(ErrorMessage.ERROR_CONNECTION, e);
-				throw new DAOException(ErrorMessage.ERROR_CONNECTION + e);
+				logger.error(ErrorMessageDAO.ERROR_CONNECTION, e);
+				throw new DAOException(ErrorMessageDAO.ERROR_CONNECTION);
 			}finally {
 				ReleaseConnection.freeConnection(connection, connectionPool);
 			}
@@ -129,12 +129,12 @@ public class UserSQL implements UserDAO {
 					}
 				}
 			} catch (SQLException e) {
-				logger.error(ErrorMessage.ERROR_GET_COUNT_USERS, e);
-				throw new DAOException(ErrorMessage.ERROR_GET_COUNT_USERS + e);
+				logger.error(ErrorMessageDAO.ERROR_GET_COUNT_USERS, e);
+				throw new DAOException(ErrorMessageDAO.ERROR_GET_COUNT_USERS);
 			}
 		} catch (ConnectionPoolException e) {
-			logger.error(ErrorMessage.ERROR_CONNECTION, e);
-			throw new DAOException(ErrorMessage.ERROR_CONNECTION + e);
+			logger.error(ErrorMessageDAO.ERROR_CONNECTION, e);
+			throw new DAOException(ErrorMessageDAO.ERROR_CONNECTION);
 		}finally {
 			ReleaseConnection.freeConnection(connection, connectionPool);
 		}
@@ -145,7 +145,6 @@ public class UserSQL implements UserDAO {
 		ConnectionPool connectionPool = ConnectionPool.getInstance();
 		Connection connection = null;
 		User user = null;
-		
 		try {
 			connection = connectionPool.take();
 			try(PreparedStatement preparedStatement = connection.prepareStatement(SQLCommand.SELECT_USER_BY_ID)){
@@ -162,12 +161,12 @@ public class UserSQL implements UserDAO {
 					}
 				}
 			} catch (SQLException e) {
-				logger.error(ErrorMessage.ERROR_GET_USER, e);
-				throw new DAOException(ErrorMessage.ERROR_GET_USER  + e);
+				logger.error(ErrorMessageDAO.ERROR_GET_USER_BY_ID, e);
+				throw new DAOException(ErrorMessageDAO.ERROR_GET_USER_BY_ID);
 			}
 		} catch (ConnectionPoolException e) {
-			logger.error(ErrorMessage.ERROR_CONNECTION, e);
-			throw new DAOException(ErrorMessage.ERROR_CONNECTION + e);
+			logger.error(ErrorMessageDAO.ERROR_CONNECTION, e);
+			throw new DAOException(ErrorMessageDAO.ERROR_CONNECTION);
 		}finally {
 			ReleaseConnection.freeConnection(connection, connectionPool);
 		}
@@ -180,7 +179,7 @@ public class UserSQL implements UserDAO {
 		String answer = null;
 		try {
 			connection = connectionPool.take();
-			try(PreparedStatement preparedStatement = connection.prepareStatement("SELECT user_password FROM user WHERE user_id = ?")) {
+			try(PreparedStatement preparedStatement = connection.prepareStatement(SQLCommand.SELECT_USER_PASSWORD_BY_USER_ID)) {
 				preparedStatement.setInt(1, userId);
 				try(ResultSet resultSet = preparedStatement.executeQuery()){
 					if(resultSet.next()){
@@ -188,12 +187,12 @@ public class UserSQL implements UserDAO {
 					}
 				}
 			} catch (SQLException e) {
-				logger.error(ErrorMessage.ERROR_GET_CURRENT_PASSWORD, e);
-				throw new DAOException(ErrorMessage.ERROR_GET_CURRENT_PASSWORD);
+				logger.error(ErrorMessageDAO.ERROR_GET_CURRENT_PASSWORD, e);
+				throw new DAOException(ErrorMessageDAO.ERROR_GET_CURRENT_PASSWORD);
 			}
 		} catch (ConnectionPoolException e) {
-			logger.error(ErrorMessage.ERROR_CONNECTION, e);
-			throw new DAOException(ErrorMessage.ERROR_CONNECTION);
+			logger.error(ErrorMessageDAO.ERROR_CONNECTION, e);
+			throw new DAOException(ErrorMessageDAO.ERROR_CONNECTION);
 		}
 		return answer;
 	}
@@ -208,12 +207,12 @@ public class UserSQL implements UserDAO {
 				preparedStatement.setInt(2, userId);
 				preparedStatement.executeUpdate();
 			} catch (SQLException e) {
-				logger.error(ErrorMessage.ERROR_UPDATE_PASSWORD, e);
-				throw new DAOException(ErrorMessage.ERROR_UPDATE_PASSWORD);
+				logger.error(ErrorMessageDAO.ERROR_UPDATE_PASSWORD, e);
+				throw new DAOException(ErrorMessageDAO.ERROR_UPDATE_PASSWORD);
 			}
 		} catch (ConnectionPoolException e) {
-			logger.error(ErrorMessage.ERROR_CONNECTION, e);
-			throw new DAOException(ErrorMessage.ERROR_CONNECTION);
+			logger.error(ErrorMessageDAO.ERROR_CONNECTION, e);
+			throw new DAOException(ErrorMessageDAO.ERROR_CONNECTION);
 		}finally {
 			ReleaseConnection.freeConnection(connection, connectionPool);
 		}	
@@ -232,12 +231,12 @@ public class UserSQL implements UserDAO {
 					preparedStatement.setInt(4, userId);
 					preparedStatement.executeUpdate();
 				} catch (SQLException e) {
-					logger.error(ErrorMessage.ERROR_UPDATE_USER, e);
-					throw new DAOException(ErrorMessage.ERROR_UPDATE_USER);
+					logger.error(ErrorMessageDAO.ERROR_UPDATE_USER, e);
+					throw new DAOException(ErrorMessageDAO.ERROR_UPDATE_USER);
 				}
 			} catch (ConnectionPoolException e) {
-				logger.error(ErrorMessage.ERROR_CONNECTION, e);
-				throw new DAOException(ErrorMessage.ERROR_CONNECTION);
+				logger.error(ErrorMessageDAO.ERROR_CONNECTION, e);
+				throw new DAOException(ErrorMessageDAO.ERROR_CONNECTION);
 			}finally {
 				ReleaseConnection.freeConnection(connection, connectionPool);
 			}	
@@ -254,12 +253,12 @@ public class UserSQL implements UserDAO {
 					preparedStatement.setInt(2, userId);
 					preparedStatement.executeUpdate();
 				} catch (SQLException e) {
-					logger.error(ErrorMessage.ERROR_UPDATE_USER, e);
-					throw new DAOException(ErrorMessage.ERROR_UPDATE_USER);
+					logger.error(ErrorMessageDAO.ERROR_LOCK_OR_UNLOCK_USER, e);
+					throw new DAOException(ErrorMessageDAO.ERROR_LOCK_OR_UNLOCK_USER);
 				}
 			} catch (ConnectionPoolException e) {
-				logger.error(ErrorMessage.ERROR_CONNECTION, e);
-				throw new DAOException(ErrorMessage.ERROR_CONNECTION);
+				logger.error(ErrorMessageDAO.ERROR_CONNECTION, e);
+				throw new DAOException(ErrorMessageDAO.ERROR_CONNECTION);
 			}finally {
 				ReleaseConnection.freeConnection(connection, connectionPool);
 			}	

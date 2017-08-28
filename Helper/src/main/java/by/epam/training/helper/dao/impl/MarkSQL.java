@@ -4,13 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-
 import by.epam.training.helper.bean.Mark;
 import by.epam.training.helper.constant.ColumnNameDB;
-import by.epam.training.helper.constant.ErrorMessage;
+import by.epam.training.helper.constant.ErrorMessageDAO;
 import by.epam.training.helper.constant.SQLCommand;
 import by.epam.training.helper.dao.MarkDAO;
 import by.epam.training.helper.dao.exception.ConnectionPoolException;
@@ -39,12 +37,12 @@ public class MarkSQL implements MarkDAO {
 					}
 				}
 			} catch (SQLException e) {
-				logger.error(ErrorMessage.ERROR_GET_ANSWER, e);
-				throw new DAOException(ErrorMessage.ERROR_GET_ANSWER);
+				logger.error(ErrorMessageDAO.ERROR_GET_MARK_ANSWER, e);
+				throw new DAOException(ErrorMessageDAO.ERROR_GET_MARK_ANSWER);
 			}
 		} catch (ConnectionPoolException e) {
-			logger.error(ErrorMessage.ERROR_CONNECTION, e);
-			throw new DAOException(ErrorMessage.ERROR_CONNECTION);
+			logger.error(ErrorMessageDAO.ERROR_CONNECTION, e);
+			throw new DAOException(ErrorMessageDAO.ERROR_CONNECTION);	
 		}finally {
 			ReleaseConnection.freeConnection(connection, connectionPool);
 		}
@@ -63,12 +61,12 @@ public class MarkSQL implements MarkDAO {
 				preparedStatement.setInt(3, mark);
 				preparedStatement.executeUpdate();
 			} catch (SQLException e) {
-				logger.error(ErrorMessage.ERROR_INSER_MARK, e);
-				throw new DAOException(ErrorMessage.ERROR_INSER_MARK);
+				logger.error(ErrorMessageDAO.ERROR_INSER_MARK, e);
+				throw new DAOException(ErrorMessageDAO.ERROR_INSER_MARK);
 			}
 		} catch (ConnectionPoolException e) {
-			logger.error(ErrorMessage.ERROR_CONNECTION, e);
-			throw new DAOException(ErrorMessage.ERROR_CONNECTION);
+			logger.error(ErrorMessageDAO.ERROR_CONNECTION, e);
+			throw new DAOException(ErrorMessageDAO.ERROR_CONNECTION);	
 		}finally {
 			ReleaseConnection.freeConnection(connection, connectionPool);
 		}
@@ -86,12 +84,12 @@ public class MarkSQL implements MarkDAO {
 				preparedStatement.setInt(2, markId);
 				preparedStatement.executeUpdate();
 			} catch (SQLException e) {
-				logger.error(ErrorMessage.ERROR_UPDATE_ANSWER, e);
-				throw new DAOException(ErrorMessage.ERROR_GET_ANSWER);
+				logger.error(ErrorMessageDAO.ERROR_UPDATE_MARK, e);
+				throw new DAOException(ErrorMessageDAO.ERROR_UPDATE_MARK);
 			}
 		} catch (ConnectionPoolException e) {
-			logger.error(ErrorMessage.ERROR_CONNECTION, e);
-			throw new DAOException(ErrorMessage.ERROR_CONNECTION);
+			logger.error(ErrorMessageDAO.ERROR_CONNECTION, e);
+			throw new DAOException(ErrorMessageDAO.ERROR_CONNECTION);	
 		}finally {
 			ReleaseConnection.freeConnection(connection, connectionPool);
 		}

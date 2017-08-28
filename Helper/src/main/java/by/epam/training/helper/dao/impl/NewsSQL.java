@@ -12,7 +12,7 @@ import org.apache.log4j.Logger;
 
 import by.epam.training.helper.bean.News;
 import by.epam.training.helper.constant.ColumnNameDB;
-import by.epam.training.helper.constant.ErrorMessage;
+import by.epam.training.helper.constant.ErrorMessageDAO;
 import by.epam.training.helper.constant.SQLCommand;
 import by.epam.training.helper.dao.NewsDAO;
 import by.epam.training.helper.dao.exception.ConnectionPoolException;
@@ -42,13 +42,12 @@ public class NewsSQL implements NewsDAO {
 						}
 					} 
 			} catch (SQLException e) {
-				logger.error(ErrorMessage.ERROR_GET_NEWS, e);
-				throw new DAOException(ErrorMessage.ERROR_GET_NEWS);
+				logger.error(ErrorMessageDAO.ERROR_GET_NEWS, e);
+				throw new DAOException(ErrorMessageDAO.ERROR_GET_NEWS);
 			}
 		} catch (ConnectionPoolException e) {
-			e.printStackTrace();
-			logger.error(ErrorMessage.ERROR_CONNECTION, e);
-			throw new DAOException(ErrorMessage.ERROR_CONNECTION);
+			logger.error(ErrorMessageDAO.ERROR_CONNECTION, e);
+			throw new DAOException(ErrorMessageDAO.ERROR_CONNECTION);	
 		}finally {
 			ReleaseConnection.freeConnection(connection, connectionPool);
 		}
@@ -65,12 +64,12 @@ public class NewsSQL implements NewsDAO {
 				preparedStatement.setString(2, contentNews);
 				preparedStatement.executeUpdate();
 			} catch (SQLException e) {
-				logger.error(ErrorMessage.ERROR_INSER_NEWS, e);
-				throw new DAOException(ErrorMessage.ERROR_INSER_NEWS);
+				logger.error(ErrorMessageDAO.ERROR_INSER_NEWS, e);
+				throw new DAOException(ErrorMessageDAO.ERROR_INSER_NEWS);
 			}
 		} catch (ConnectionPoolException e) {
-			logger.error(ErrorMessage.ERROR_CONNECTION, e);
-			throw new DAOException(ErrorMessage.ERROR_CONNECTION);
+			logger.error(ErrorMessageDAO.ERROR_CONNECTION, e);
+			throw new DAOException(ErrorMessageDAO.ERROR_CONNECTION);	
 		}finally {
 			ReleaseConnection.freeConnection(connection, connectionPool);
 		}
@@ -91,12 +90,12 @@ public class NewsSQL implements NewsDAO {
 					}
 				}
 			} catch (SQLException e) {
-				logger.error(ErrorMessage.ERROR_GET_COUNT_NEWS, e);
-				throw new DAOException(ErrorMessage.ERROR_GET_COUNT_NEWS);
+				logger.error(ErrorMessageDAO.ERROR_GET_COUNT_NEWS, e);
+				throw new DAOException(ErrorMessageDAO.ERROR_GET_COUNT_NEWS);
 			}
 		} catch (ConnectionPoolException e) {
-			logger.error(ErrorMessage.ERROR_CONNECTION, e);
-			throw new DAOException(ErrorMessage.ERROR_CONNECTION + e);
+			logger.error(ErrorMessageDAO.ERROR_CONNECTION, e);
+			throw new DAOException(ErrorMessageDAO.ERROR_CONNECTION);	
 		}finally {
 			ReleaseConnection.freeConnection(connection, connectionPool);
 		}

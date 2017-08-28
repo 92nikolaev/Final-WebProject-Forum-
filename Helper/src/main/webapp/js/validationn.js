@@ -89,7 +89,7 @@ const ValidateFormRulesRu = {
 		let fieldLabel = form.elements[field].parentNode; 
 		if (fieldLabel.classList.contains('error')) return
 		
-		let errorMessage = document.createElement('td')
+		let errorMessage = document.createElement('span')
 		errorMessage.innerHTML = ValidateFormRulesEn[field].message
 		
 		fieldLabel.appendChild(errorMessage);

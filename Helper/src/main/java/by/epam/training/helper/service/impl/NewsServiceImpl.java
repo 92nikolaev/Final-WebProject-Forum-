@@ -6,7 +6,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import by.epam.training.helper.bean.News;
-import by.epam.training.helper.constant.ErrorMessage;
+import by.epam.training.helper.constant.ErrorMessageService;
 import by.epam.training.helper.dao.NewsDAO;
 import by.epam.training.helper.dao.exception.DAOException;
 import by.epam.training.helper.dao.factory.DAOFactory;
@@ -19,7 +19,7 @@ import by.epam.training.helper.tools.ItemManager;
 public class NewsServiceImpl implements NewsService {
 	private static final Logger logger = LogManager.getLogger(NewsServiceImpl.class);
 	private final int NEWS_ON_PAGE = 10;
-	private final int NEWS_ON_HOME_PAGE = 5;
+	private final int NEWS_ON_HOME_PAGE = 10;
 	private int OFFSET = 0;
 	@Override
 	public ArrayList<News> getLastNews() throws ServiceException {
@@ -29,8 +29,7 @@ public class NewsServiceImpl implements NewsService {
 		try {
 			news = newsDAO.getNewsWithLimit(OFFSET, NEWS_ON_HOME_PAGE);
 		} catch (DAOException e) {
-			logger.error(ErrorMessage.ERROR_NEWS);
-			e.printStackTrace();
+			logger.error(ErrorMessageService.ERROR_NEWS + e);
 			news = new ArrayList<>(1);
 		}
 		return news;
@@ -42,9 +41,8 @@ public class NewsServiceImpl implements NewsService {
 			try {
 				newsDAO.addNews(titleNews, contentNews);
 			} catch (DAOException e) {
-				logger.error(ErrorMessage.ERROR_ADD_NEWS);
-				e.printStackTrace();
-				throw new ServiceException();
+				logger.error(ErrorMessageService.ERROR_ADD_NEWS + e);
+				throw new ServiceException(ErrorMessageService.ERROR_ADD_NEWS);
 			}
 	}
 	@Override
@@ -61,8 +59,8 @@ public class NewsServiceImpl implements NewsService {
 			int countPage = Calculation.pageCounting(countNews, NEWS_ON_PAGE);
 			item = new ItemManager<News>(news, countPage);
 		} catch (DAOException e) {
-			logger.error(e);
-			throw new ServiceException();
+			logger.error(ErrorMessageService.ERROR_GET_DATA + e);
+			throw new ServiceException(ErrorMessageService.ERROR_GET_DATA);
 		}
 		return item;
 	}

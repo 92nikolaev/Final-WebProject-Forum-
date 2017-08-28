@@ -14,8 +14,8 @@ import by.epam.training.helper.dao.impl.UserSQL;
 import by.epam.training.helper.dao.impl.ValidationSQL;
 
 /**
+ * A singleton class that connects a layer of services and DAO.
  * @author Nikolaev Ilya
- *
  */
 public class DAOFactory {
 	private static DAOFactory instance;

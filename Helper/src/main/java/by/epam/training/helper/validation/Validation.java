@@ -153,7 +153,7 @@ public class Validation {
 	}
 	public static void isValidMark(int mark) throws ValidationException {
 		if(mark < 0 || mark > MAX_MARK){
-			logger.error(ErrorMessage.ERROR_MARK_VALIDATION);
+			logger.error(ErrorMessage.ERROR_MARK_VALIDATION + mark);
 			throw new ValidationException(ErrorMessage.ERROR_MARK_VALIDATION);
 		}
 		
