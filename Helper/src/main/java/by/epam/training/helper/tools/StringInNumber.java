@@ -12,7 +12,7 @@ public class StringInNumber {
 	public static int parseString(String parametr, int pageNumber){
 		logger.info(InfoMessage.PARAMETR + parametr);
 		try{
-			pageNumber = Integer.parseInt(parametr);
+			return Integer.parseInt(parametr);
 		}catch (NumberFormatException e) {
 			logger.error(ErrorMessage.ERROR_UNABLE_DETERMINE_NUMBER + parametr);
 		}
@@ -21,8 +21,7 @@ public class StringInNumber {
 
 	public static int parseString(String parametr)throws NumberFormatException {
 		logger.info(InfoMessage.PARAMETR + parametr);
-		int id = Integer.parseInt(parametr);
-		return id;
+		return Integer.parseInt(parametr);
 	}
 
 

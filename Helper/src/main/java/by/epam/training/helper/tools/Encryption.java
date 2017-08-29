@@ -13,7 +13,6 @@ public class Encryption {
 		String text = login.concat(password);
 		MessageDigest messageDigest = MessageDigest.getInstance(ParameterName.ALGORITHM);
 		messageDigest.update(text.getBytes(Charset.forName(ParameterName.ECODING)));
-		String hashCode = Hex.encodeHexString(messageDigest.digest());
-		return hashCode;
+		return Hex.encodeHexString(messageDigest.digest());
 	}
 }

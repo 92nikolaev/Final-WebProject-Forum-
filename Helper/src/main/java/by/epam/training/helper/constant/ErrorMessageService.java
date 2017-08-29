@@ -5,9 +5,9 @@ public class ErrorMessageService {
 	public static final String ERROR_GET_DATA = "Failed to retrieve all data to send";
 	public static final String ERROR_ADD_ANSWER = "Failed to add a new answer";
 	public static final String ERROR_ANSWER_IS_EMPTY = "The answer can not be empty";
-	public static final String INVALID_ID = "Invalid id: ";
-	public static final String ERROR_GET_ANSWER_BY_ID = "Failed to get answer by ID. ID - ";
-	public static final String ERROR_UPDATE_ANSWER_BY_ID = "Failed to update answer by ID. ID - ";
+	public static final String INVALID_ID = "Invalid id = ";
+	public static final String ERROR_GET_ANSWER_BY_ID = "Failed to get answer by ID. ID = ";
+	public static final String ERROR_UPDATE_ANSWER_BY_ID = "Failed to update answer by ID. ID = ";
 	
 	public static final String ERROR_PROCESSING = "An error heppend while processing the data";
 	public static final String ERROR_ADD_MARK = "Failed add mark";
@@ -21,7 +21,7 @@ public class ErrorMessageService {
 	public static final String ERROR_NOT_FOUND_QUESTIONS = "Could not get list of questions asked user";
 	public static final String ERROR_ADD_QUESTION = "Could not add question";
 	public static final String ERROR_QUESTION_NOT_FOUND = "Failed find the question";
-	public static final String ERROR_QUESTION_NOT_EXISTS = "Question with such id does not exist: id - ";
+	public static final String ERROR_QUESTION_NOT_EXISTS = "Question with such id does not exist: id = ";
 	public static final String ERROR_QUESTION_NOT_UPDATE = "Could not update question";
 	
 	public static final String ERROR_SIGN_UP = "Error sign up";

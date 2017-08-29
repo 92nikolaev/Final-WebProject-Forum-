@@ -7,11 +7,7 @@ package by.epam.training.helper.tools;
 public final class NullOrEmpty {
 	
 	public static boolean isNullOrEmpty(String item){
-		if(item == null || item.equals("")||item.equals("null")){
-			return true;
-		}else{
-			return false;
-		}
+		return (item == null || item.equals("")||item.equals("null"));
 	}
 
 }
