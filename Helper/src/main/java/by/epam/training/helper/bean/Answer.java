@@ -6,7 +6,7 @@ import java.sql.Date;
  * @author Nikolaev Ilya
  *
  */
-public class Answer extends Entity {
+public class Answer extends BaseEntity {
 	
 	private int questionId;
 	/**

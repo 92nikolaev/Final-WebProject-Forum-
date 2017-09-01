@@ -2,26 +2,26 @@ package by.epam.training.helper.service;
 
 import java.util.ArrayList;
 
+import by.epam.training.helper.bean.PageItem;
 import by.epam.training.helper.bean.Question;
 import by.epam.training.helper.service.exception.ServiceException;
-import by.epam.training.helper.tools.ItemManager;
 
 public interface QuestionService {
 	/**
 	 * Select questions for the page and the number of pages
 	 * @param pageNumber page number to find
-	 * @return {@link ItemManager} current page and the number of pages
+	 * @return {@link PageItem} current page and the number of pages
 	 * @throws ServiceException
 	 */
-	ItemManager<Question> getQuestionsPage(int pageNumber) throws ServiceException;
+	PageItem<Question> getQuestionsPage(int pageNumber) throws ServiceException;
 	/**
 	 * Select questions of searched question user for the page and the number of pages
 	 * @param searchQuestion search query
 	 * @param pageNumber page number to find
-	 * @return {@link ItemManager} current search page and the number of pages
+	 * @return {@link PageItem} current search page and the number of pages
 	 * @throws ServiceException
 	 */
-	ItemManager<Question> getSearchPage(String searchQuestion, int pageNumber)throws ServiceException;
+	PageItem<Question> getSearchPage(String searchQuestion, int pageNumber)throws ServiceException;
 	/**
 	 * Selects all user questions
 	 * @param userId

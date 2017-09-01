@@ -20,7 +20,9 @@ public class InitializationConnectionPool {
 	}
 	public void init() throws ConnectionPoolException{
 		ConnectionPool pool = ConnectionPool.getInstance();
-		pool.init();
+		if(!pool.checkInit()){
+			pool.init();
+		}
 	}
 	public void destroy()throws ConnectionPoolException, IOException{
 		ConnectionPool pool = ConnectionPool.getInstance();

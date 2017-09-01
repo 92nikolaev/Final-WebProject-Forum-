@@ -20,7 +20,7 @@ import by.epam.training.helper.constant.Url;
 import by.epam.training.helper.service.UserService;
 import by.epam.training.helper.service.exception.ServiceException;
 import by.epam.training.helper.service.factory.ServiceFactory;
-import by.epam.training.helper.tools.StringInNumber;
+import by.epam.training.helper.utils.StringParser;
 import by.epam.training.helper.validation.Validation;
 
 public class UnlockUser implements Command {
@@ -36,7 +36,7 @@ public class UnlockUser implements Command {
 			ServiceFactory serviceFactory = ServiceFactory.getInstance();
 			UserService userService = serviceFactory.getUserService();
 			try{
-				int userId = StringInNumber.parseString(userIdParametr);
+				int userId = StringParser.parseString(userIdParametr);
 				if(Validation.isValidationId(userId)){
 					userService.lockUser(userId, UNLOCK_STATUS);
 					response.sendRedirect(Url.SHOW_ALL_USER_WITH_MESSAGE + SuccessMessage.USER_UNLOCK);

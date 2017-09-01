@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import by.epam.training.helper.bean.PageItem;
 import by.epam.training.helper.bean.Question;
 import by.epam.training.helper.constant.ErrorMessageService;
 import by.epam.training.helper.dao.QuestionDAO;
@@ -12,9 +13,8 @@ import by.epam.training.helper.dao.exception.DAOException;
 import by.epam.training.helper.dao.factory.DAOFactory;
 import by.epam.training.helper.service.QuestionService;
 import by.epam.training.helper.service.exception.ServiceException;
-import by.epam.training.helper.tools.Calculation;
-import by.epam.training.helper.tools.FormatterString;
-import by.epam.training.helper.tools.ItemManager;
+import by.epam.training.helper.utils.PaginationUtils;
+import by.epam.training.helper.utils.StringConverter;
 import by.epam.training.helper.validation.Validation;
 import by.epam.training.helper.validation.exception.ValidationException;
 
@@ -22,8 +22,8 @@ public class QuestionServiceImpl implements QuestionService {
 	private static final Logger logger = LogManager.getLogger(QuestionServiceImpl.class);
 	private final int ITEM_ON_PAGE = 10;
 	@Override
-	public ItemManager<Question> getQuestionsPage(int pageNumber) throws ServiceException {
-		ItemManager<Question> item = null;
+	public PageItem<Question> getQuestionsPage(int pageNumber) throws ServiceException {
+		PageItem<Question> item = null;
 		ArrayList<Question> questions = null;
 		int amountQuestions = 0;
 		int offset = (pageNumber - 1) * ITEM_ON_PAGE;
@@ -33,8 +33,8 @@ public class QuestionServiceImpl implements QuestionService {
 			questions = questionDAO.getQuestionsWithLimit(offset, ITEM_ON_PAGE);
 			formattingQuestion(questions);
 			amountQuestions = questionDAO.getAmountQuestions();
-			int amountPage = Calculation.pageCounting(amountQuestions, ITEM_ON_PAGE);
-			item = new ItemManager<Question>(questions, amountPage);
+			int amountPage = PaginationUtils.pageCounting(amountQuestions, ITEM_ON_PAGE);
+			item = new PageItem<Question>(questions, amountPage);
 		} catch (DAOException e) {
 			logger.error(ErrorMessageService.ERROR_GET_QUESTION_PAGE);
 			throw new ServiceException(ErrorMessageService.ERROR_GET_QUESTION_PAGE);
@@ -43,20 +43,20 @@ public class QuestionServiceImpl implements QuestionService {
 	}
 
 	@Override
-	public ItemManager<Question> getSearchPage(String searchQuestion, int pageNumber) throws ServiceException {
-		ItemManager<Question> item = null;
+	public PageItem<Question> getSearchPage(String searchQuestion, int pageNumber) throws ServiceException {
+		PageItem<Question> item = null;
 		ArrayList<Question> questions = null;
 		int countQuestions = 0;
 		int offset = (pageNumber - 1) * ITEM_ON_PAGE;
 		DAOFactory daoFactory = DAOFactory.getInstance();
 		QuestionDAO questionDAO = daoFactory.getQuestionDAO();
 		try {
-			String query = FormatterString.conversionForSearchDB(searchQuestion);
+			String query = StringConverter.conversionForSearchDB(searchQuestion);
 			questions = questionDAO.getSearchQuestionWithLimit(offset, ITEM_ON_PAGE, query);
 			formattingQuestion(questions);
 			countQuestions = questionDAO.getAmountSearchQuestion(searchQuestion);
-			int amountPage = Calculation.pageCounting(countQuestions, ITEM_ON_PAGE);
-			item = new ItemManager<>(questions, amountPage);
+			int amountPage = PaginationUtils.pageCounting(countQuestions, ITEM_ON_PAGE);
+			item = new PageItem<>(questions, amountPage);
 		} catch (DAOException e) {
 			logger.error(ErrorMessageService.ERROR_GET_SEARCH_QUESTION_PAGE,e);
 			throw new ServiceException(ErrorMessageService.ERROR_GET_SEARCH_QUESTION_PAGE);
@@ -148,9 +148,9 @@ public class QuestionServiceImpl implements QuestionService {
 	 */
 	private void formattingQuestion(ArrayList<Question> questions) {
 		for (Question question : questions) {
-			String title = FormatterString.formattingTitle(question.getTitle());
+			String title = StringConverter.formattingTitle(question.getTitle());
 			question.setTitle(title);
-			String content = FormatterString.formattingContent(question.getContent());
+			String content = StringConverter.formattingContent(question.getContent());
 			question.setContent(content);
 		}	
 	}
@@ -160,7 +160,7 @@ public class QuestionServiceImpl implements QuestionService {
 	 */
 	private void formattingQuestionTitle(ArrayList<Question> questions) {
 		for (Question question : questions) {
-			String title = FormatterString.formattingTitle(question.getTitle());
+			String title = StringConverter.formattingTitle(question.getTitle());
 			question.setTitle(title);
 		}	
 	}

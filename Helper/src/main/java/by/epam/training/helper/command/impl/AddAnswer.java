@@ -21,8 +21,8 @@ import by.epam.training.helper.service.AnswerService;
 import by.epam.training.helper.service.QuestionService;
 import by.epam.training.helper.service.exception.ServiceException;
 import by.epam.training.helper.service.factory.ServiceFactory;
-import by.epam.training.helper.tools.NullOrEmpty;
-import by.epam.training.helper.tools.StringInNumber;
+import by.epam.training.helper.utils.StringUtils;
+import by.epam.training.helper.utils.StringParser;
 /**
  * The class is used to create a new answer
  * @author Nikolaev Ilya
@@ -45,9 +45,9 @@ public class AddAnswer implements Command {
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute(ParameterName.USER);
 		try{
-			int	questionId = StringInNumber.parseString(questionIdParametr);
+			int	questionId = StringParser.parseString(questionIdParametr);
 			ServiceFactory serviceFactory = ServiceFactory.getInstance();
-			if(!NullOrEmpty.isNullOrEmpty(questionIdParametr)&&!NullOrEmpty.isNullOrEmpty(answerContent)){
+			if(!StringUtils.isNullOrEmpty(questionIdParametr)&&!StringUtils.isNullOrEmpty(answerContent)){
 				QuestionService questionService = serviceFactory.getQuestionService();
 				if(questionService.isExistQuestion(questionId)){
 					AnswerService answerService = serviceFactory.getAnswerService();

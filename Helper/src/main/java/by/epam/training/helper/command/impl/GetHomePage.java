@@ -1,5 +1,7 @@
 package by.epam.training.helper.command.impl;
 
+import static by.epam.training.helper.utils.StringUtils.isNullOrEmpty;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -10,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import by.epam.training.helper.bean.PageItem;
 import by.epam.training.helper.bean.News;
 import by.epam.training.helper.bean.Question;
 import by.epam.training.helper.command.Command;
@@ -21,9 +24,7 @@ import by.epam.training.helper.service.NewsService;
 import by.epam.training.helper.service.QuestionService;
 import by.epam.training.helper.service.exception.ServiceException;
 import by.epam.training.helper.service.factory.ServiceFactory;
-import by.epam.training.helper.tools.ItemManager;
-import static by.epam.training.helper.tools.NullOrEmpty.isNullOrEmpty;
-import by.epam.training.helper.tools.StringInNumber;
+import by.epam.training.helper.utils.StringParser;
 /**
  *  @author Nikolaev Ilya
  *	Home page, with all questions, you can also search for questions, show the latest news
@@ -39,10 +40,10 @@ public class GetHomePage implements Command {
 		int pageNumber = 1;
 		ServiceFactory serviceFactory = ServiceFactory.getInstance();
 		QuestionService questionService = serviceFactory.getQuestionService();
-		ItemManager<Question> itemManager = null;
+		PageItem<Question> itemManager = null;
 		ArrayList<News> listNews = null;
 		if(!isNullOrEmpty(pageIndex)){
-			pageNumber = StringInNumber.parseString(pageIndex, pageNumber);
+			pageNumber = StringParser.parseString(pageIndex, pageNumber);
 		}
 		try{ 
 			if(isNullOrEmpty(searchQuestion)){

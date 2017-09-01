@@ -19,8 +19,8 @@ import by.epam.training.helper.constant.Url;
 import by.epam.training.helper.service.QuestionService;
 import by.epam.training.helper.service.exception.ServiceException;
 import by.epam.training.helper.service.factory.ServiceFactory;
-import by.epam.training.helper.tools.NullOrEmpty;
-import by.epam.training.helper.tools.StringInNumber;
+import by.epam.training.helper.utils.StringUtils;
+import by.epam.training.helper.utils.StringParser;
 
 public class EditQuestion implements Command {
 	private static final Logger logger = LogManager.getLogger(EditQuestion.class);
@@ -31,11 +31,11 @@ public class EditQuestion implements Command {
 		String questionTitleParamet = request.getParameter(ParameterName.QUESTION_TITLE);
 		String questionContentParamet = request.getParameter(ParameterName.QUESTION_CONTENT);
 		try{
-			int questionId =  StringInNumber.parseString(questionIdParamet);
+			int questionId =  StringParser.parseString(questionIdParamet);
 			HttpSession session = request.getSession();
 			User user = (User) session.getAttribute(ParameterName.USER);
 			if(user != null){
-				if(!NullOrEmpty.isNullOrEmpty(questionTitleParamet)&&!NullOrEmpty.isNullOrEmpty(questionContentParamet)){
+				if(!StringUtils.isNullOrEmpty(questionTitleParamet)&&!StringUtils.isNullOrEmpty(questionContentParamet)){
 					ServiceFactory serviceFactory = ServiceFactory.getInstance();
 					QuestionService questionService = serviceFactory.getQuestionService();
 					questionService.updateQuestionById(questionId, questionTitleParamet, questionContentParamet);

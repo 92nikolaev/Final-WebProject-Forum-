@@ -495,8 +495,15 @@ th, td{
 	padding: 10px;
 	border-bottom: 1px solid #ddd;
 }
+
+.successful{
+	color: #4286f4;
+}
 /* при некоректном вводе */
 .error {
+	color: #EF5A42;
+}
+.error_valid{
 	color: #EF5A42;
 }
 /*			table question style			*/

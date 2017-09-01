@@ -31,6 +31,7 @@ public class ConnectionPool implements Closeable {
 	private String url;
 	private BlockingQueue<Connection> freeConnection ;
 	private BlockingQueue<Connection> busyConnection;
+	private boolean flag = false;
 	
 	/**
 	 * This constructor serves to initialize the connection parameters to the database. 
@@ -65,6 +66,7 @@ public class ConnectionPool implements Closeable {
 				Connection connection = DriverManager.getConnection(url, user, password);
 				freeConnection.add(connection);
 			}
+			flag = true;
 		} catch (ClassNotFoundException e) {
 			logger.error(ErrorMessageDAO.ERROR_DB_DRIVER + e);
 			throw new ConnectionPoolException(ErrorMessageDAO.ERROR_DB_DRIVER);
@@ -105,7 +107,9 @@ public class ConnectionPool implements Closeable {
 		busyConnection.remove(temporaryConnection);
 		freeConnection.put(temporaryConnection);
 	}
-	
+	public boolean checkInit() {
+		return flag;
+	}
 	/**
 	 * Method for close all connection
 	 */

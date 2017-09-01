@@ -11,16 +11,16 @@
 <%@ include file="../elementpage/element_header.jspf" %>
 	<div class="container">
 		<c:if test="${message == 'changed successfully'}">
-			<div><p>${profile_data_changed_successfully}</p></div>
+			<div><p class="successful">${profile_data_changed_successfully}</p></div>
 		</c:if>
 		<c:if test="${message == 'faild change'}">
-			<div><p>${profile_data_changed_faild}</p></div>
+			<div><p class="error">${profile_data_changed_faild}</p></div>
 		</c:if>
 		<c:if test="${message == 'Successfully changed pasword'}">
-			<div><p>Successfully changed pasword</p></div>
+			<div><p class="successful">Successfully changed pasword</p></div>
 		</c:if>
 		<c:if test="${message == 'Failed to change password'}">
-			<div><p>Failed to change password</p></div>
+			<div><p class="error">Failed to change password</p></div>
 		</c:if>
 		<div class="inner-content">
 			<div class="big-heading">

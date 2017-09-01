@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import by.epam.training.helper.bean.PageItem;
 import by.epam.training.helper.bean.User;
 import by.epam.training.helper.constant.ErrorMessage;
 import by.epam.training.helper.constant.ErrorMessageService;
@@ -16,9 +17,8 @@ import by.epam.training.helper.dao.exception.DAOException;
 import by.epam.training.helper.dao.factory.DAOFactory;
 import by.epam.training.helper.service.UserService;
 import by.epam.training.helper.service.exception.ServiceException;
-import by.epam.training.helper.tools.Calculation;
-import by.epam.training.helper.tools.Encryption;
-import by.epam.training.helper.tools.ItemManager;
+import by.epam.training.helper.utils.PaginationUtils;
+import by.epam.training.helper.utils.Encryption;
 import by.epam.training.helper.validation.Validation;
 import by.epam.training.helper.validation.exception.ValidationException;
 
@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService {
 				logger.error(ErrorMessageService.ERROR_SIGN_UP);
 				throw new ServiceException(ErrorMessageService.ERROR_SIGN_UP);
 		} catch (ValidationException e) {
-			String error = getErrorStatus(e.getMessage());
+			String error = e.getMessage();
 			logger.error(ErrorMessageService.EROR_VERIFICATION_FIELDS + error);
 			throw new ServiceException(error);
 		} catch (NoSuchAlgorithmException e) {
@@ -66,7 +66,7 @@ public class UserServiceImpl implements UserService {
 			logger.error(ErrorMessageService.ERROR_SIGN_IN);
 			throw new ServiceException(ErrorMessageService.ERROR_SIGN_IN);
 		}catch (ValidationException e) {
-			String error = getErrorStatus(e.getMessage());
+			String error = e.getMessage();
 			throw new ServiceException(error);
 		}catch (NoSuchAlgorithmException e) {
 			logger.error(ErrorMessageService.ERROR_ENCRYPTION);
@@ -75,8 +75,8 @@ public class UserServiceImpl implements UserService {
 		return user;
 	}
 	@Override
-	public ItemManager<User> getUsersPage(int pageNumber) throws ServiceException {
-		ItemManager<User> itemManager = null;
+	public PageItem<User> getUsersPage(int pageNumber) throws ServiceException {
+		PageItem<User> itemManager = null;
 		ArrayList<User> users = null;
 		int countUsers = 0;
 		int itemOnPage = 5;
@@ -86,8 +86,8 @@ public class UserServiceImpl implements UserService {
 		try {
 			users = userDAO.getUsersWithLimit(offset, itemOnPage);
 			countUsers = userDAO.getCountUser();
-			int countPage = Calculation.pageCounting(countUsers, itemOnPage);
-			itemManager = new ItemManager<>(users, countPage);
+			int countPage = PaginationUtils.pageCounting(countUsers, itemOnPage);
+			itemManager = new PageItem<>(users, countPage);
 			return itemManager;
 		} catch (DAOException e) {
 			logger.error(ErrorMessageService.ERROR_GET_USERS);
@@ -165,7 +165,7 @@ public class UserServiceImpl implements UserService {
 			throw new ServiceException(ErrorMessageService.ERROR_UPDATE_USER_FIELLDS);
 		} catch (ValidationException e) {
 			logger.error(ErrorMessageService.ERROR_CHECK_FIELDS);
-			String error = getErrorStatus(e.getMessage());
+			String error = e.getMessage();
 			throw new ServiceException(error);
 		}	
 	}
@@ -180,7 +180,7 @@ public class UserServiceImpl implements UserService {
 			throw new ServiceException(ErrorStatus.USER_NOT_LOCK);
 		}
 	}
-	private String getErrorStatus(String message) {
+	/*private String getErrorStatus(String message) {
 		String error = null;
 		switch (message) {
 		case ErrorMessage.LOGIN_EXISTS:
@@ -215,6 +215,6 @@ public class UserServiceImpl implements UserService {
 			break;
 		}
 		return error;
-	}
+	}*/
 
 }

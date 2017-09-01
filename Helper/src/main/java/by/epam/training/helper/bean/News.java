@@ -6,7 +6,7 @@ import java.sql.Date;
  * @author Nikolaev Ilya
  *
  */
-public class News extends Entity{
+public class News extends BaseEntity{
 	
 	private String title;
 	private String content;

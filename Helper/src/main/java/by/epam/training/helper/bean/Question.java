@@ -6,7 +6,7 @@ import java.sql.Date;
  * 	The question that asked the user
  */
 
-public class Question extends Entity {
+public class Question extends BaseEntity {
 	
 	private String userLogin;
 	private String title;

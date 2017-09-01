@@ -10,6 +10,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import by.epam.training.helper.bean.Answer;
+import by.epam.training.helper.bean.PageItem;
 import by.epam.training.helper.bean.Question;
 import by.epam.training.helper.command.Command;
 import by.epam.training.helper.constant.ErrorMessage;
@@ -19,9 +20,8 @@ import by.epam.training.helper.service.AnswerService;
 import by.epam.training.helper.service.QuestionService;
 import by.epam.training.helper.service.exception.ServiceException;
 import by.epam.training.helper.service.factory.ServiceFactory;
-import by.epam.training.helper.tools.ItemManager;
-import by.epam.training.helper.tools.NullOrEmpty;
-import by.epam.training.helper.tools.StringInNumber;
+import by.epam.training.helper.utils.StringUtils;
+import by.epam.training.helper.utils.StringParser;
 
 
 public class GetQuestionById implements Command{
@@ -37,21 +37,21 @@ public class GetQuestionById implements Command{
 		Question question = null;
 		ServiceFactory serviceFactory = ServiceFactory.getInstance();
 		QuestionService questionService = serviceFactory.getQuestionService();
-		if(!NullOrEmpty.isNullOrEmpty(pageIndex)){
-			pageNumber = StringInNumber.parseString(pageIndex, pageNumber);
+		if(!StringUtils.isNullOrEmpty(pageIndex)){
+			pageNumber = StringParser.parseString(pageIndex, pageNumber);
 		}
-		if(!NullOrEmpty.isNullOrEmpty(questionIdParametr)){
+		if(!StringUtils.isNullOrEmpty(questionIdParametr)){
 			try {
-				questionId = StringInNumber.parseString(questionIdParametr);
+				questionId = StringParser.parseString(questionIdParametr);
 				question = questionService.getQuestionById(questionId);
 				if(question != null){
 					 AnswerService answerService = serviceFactory.getAnswerService();
-					 ItemManager<Answer> answerManager = null;
+					 PageItem<Answer> answerManager = null;
 					 answerManager = answerService.getAnswerWithLimit(pageNumber, questionId);
 					 request.setAttribute(ParameterName.QUESTION, question);
 					 request.setAttribute(ParameterName.ANSWERS, answerManager.getItems());
 					 request.setAttribute(ParameterName.CURRENT_PAGE, pageNumber);
-					 if(!NullOrEmpty.isNullOrEmpty(message)){
+					 if(!StringUtils.isNullOrEmpty(message)){
 						 request.setAttribute(ParameterName.MESSAGE, message);
 					 }
 					 request.getRequestDispatcher(Url.QUESTION).forward(request, response);

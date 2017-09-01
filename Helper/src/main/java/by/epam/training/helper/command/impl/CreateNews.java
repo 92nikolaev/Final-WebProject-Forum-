@@ -19,7 +19,7 @@ import by.epam.training.helper.constant.Url;
 import by.epam.training.helper.service.NewsService;
 import by.epam.training.helper.service.exception.ServiceException;
 import by.epam.training.helper.service.factory.ServiceFactory;
-import by.epam.training.helper.tools.NullOrEmpty;
+import by.epam.training.helper.utils.StringUtils;
 
 public class CreateNews implements Command {
 	private static final Logger logger = LogManager.getLogger(CreateNews.class);
@@ -28,7 +28,7 @@ public class CreateNews implements Command {
 			throws ServletException, IOException, CommandException {
 		String titleNews = request.getParameter(ParameterName.NEWS_TITLE);
 		String contentNews = request.getParameter(ParameterName.NEWS_CONTENT);
-		if(!NullOrEmpty.isNullOrEmpty(titleNews) && !NullOrEmpty.isNullOrEmpty(contentNews)){
+		if(!StringUtils.isNullOrEmpty(titleNews) && !StringUtils.isNullOrEmpty(contentNews)){
 			HttpSession session = request.getSession();
 			User user = (User) session.getAttribute(ParameterName.USER);
 			if(user != null){

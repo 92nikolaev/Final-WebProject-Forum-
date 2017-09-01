@@ -6,7 +6,7 @@ package by.epam.training.helper.bean;
 
  *
  */
-public class Mark extends Entity {
+public class Mark extends BaseEntity {
 
 	int userId;
 	int answerId;

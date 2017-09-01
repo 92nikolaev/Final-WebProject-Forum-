@@ -1,8 +1,8 @@
 package by.epam.training.helper.service;
 
+import by.epam.training.helper.bean.PageItem;
 import by.epam.training.helper.bean.User;
 import by.epam.training.helper.service.exception.ServiceException;
-import by.epam.training.helper.tools.ItemManager;
 /**
  * @author Nikolaev Ilya
  *
@@ -13,7 +13,7 @@ public interface UserService {
 
 	User signIn(String login, String password)throws ServiceException;
 
-	ItemManager<User> getUsersPage(int pageNumber)throws ServiceException;
+	PageItem<User> getUsersPage(int pageNumber)throws ServiceException;
 
 	User getUserById(int id)throws ServiceException;
 

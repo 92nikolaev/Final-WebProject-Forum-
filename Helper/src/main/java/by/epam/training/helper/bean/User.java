@@ -7,7 +7,7 @@ import java.sql.Date;
  * @author Nikolaev Ilya
  *
  */
-public class User extends Entity {
+public class User extends BaseEntity {
 	
 	private String name;
 	private String surname;

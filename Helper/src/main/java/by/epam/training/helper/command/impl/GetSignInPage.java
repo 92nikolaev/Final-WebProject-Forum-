@@ -10,7 +10,7 @@ import by.epam.training.helper.command.Command;
 import by.epam.training.helper.command.exception.CommandException;
 import by.epam.training.helper.constant.ParameterName;
 import by.epam.training.helper.constant.Url;
-import by.epam.training.helper.tools.NullOrEmpty;
+import by.epam.training.helper.utils.StringUtils;
 
 public class GetSignInPage implements Command{
 
@@ -18,7 +18,7 @@ public class GetSignInPage implements Command{
 	public void execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException, CommandException {
 		String errorStatus = request.getParameter(ParameterName.ERROR_STATUS);
-		if(!NullOrEmpty.isNullOrEmpty(errorStatus)){
+		if(!StringUtils.isNullOrEmpty(errorStatus)){
 			request.setAttribute(ParameterName.ERROR_STATUS, errorStatus);
 		}
 		request.getRequestDispatcher(Url.SIGN_IN).forward(request, response);

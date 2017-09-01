@@ -18,7 +18,7 @@ import by.epam.training.helper.constant.Url;
 import by.epam.training.helper.service.NewsService;
 import by.epam.training.helper.service.exception.ServiceException;
 import by.epam.training.helper.service.factory.ServiceFactory;
-import by.epam.training.helper.tools.NullOrEmpty;
+import by.epam.training.helper.utils.StringUtils;
 
 public class GetSignUpPage implements Command {
 	private static final Logger logger = LogManager.getLogger(GetSignUpPage.class);
@@ -32,8 +32,8 @@ public class GetSignUpPage implements Command {
 			listNews = newsService.getLastNews();
 			request.setAttribute(ParameterName.NEWS, listNews);
 			String errorStatus = request.getParameter(ParameterName.ERROR_STATUS);
-			if(!NullOrEmpty.isNullOrEmpty(errorStatus)){
-				request.setAttribute(ParameterName.ERROR_STATUS, true);
+			if(!StringUtils.isNullOrEmpty(errorStatus)){
+				request.setAttribute(ParameterName.ERROR_STATUS, errorStatus);
 			}
 			request.getRequestDispatcher(Url.SIGN_UP).forward(request, response);
 		} catch (ServiceException e) {

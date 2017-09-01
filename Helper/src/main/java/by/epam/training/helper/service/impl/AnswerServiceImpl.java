@@ -6,22 +6,22 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import by.epam.training.helper.bean.Answer;
+import by.epam.training.helper.bean.PageItem;
 import by.epam.training.helper.constant.ErrorMessageService;
 import by.epam.training.helper.dao.AnswerDAO;
 import by.epam.training.helper.dao.exception.DAOException;
 import by.epam.training.helper.dao.factory.DAOFactory;
 import by.epam.training.helper.service.AnswerService;
 import by.epam.training.helper.service.exception.ServiceException;
-import by.epam.training.helper.tools.Calculation;
-import by.epam.training.helper.tools.ItemManager;
-import by.epam.training.helper.tools.NullOrEmpty;
+import by.epam.training.helper.utils.PaginationUtils;
+import by.epam.training.helper.utils.StringUtils;
 import by.epam.training.helper.validation.Validation;
 
 public class AnswerServiceImpl implements AnswerService {
 	private static final Logger logger = LogManager.getLogger(AnswerServiceImpl.class);
 	@Override
-	public ItemManager<Answer> getAnswerWithLimit(int pageNumber, int questionId) throws ServiceException {
-		ItemManager<Answer> item = null;
+	public PageItem<Answer> getAnswerWithLimit(int pageNumber, int questionId) throws ServiceException {
+		PageItem<Answer> item = null;
 		ArrayList<Answer> answers = null;
 		int amountAnswers = 0;
 		DAOFactory daoFactory = DAOFactory.getInstance();
@@ -31,8 +31,8 @@ public class AnswerServiceImpl implements AnswerService {
 		try {
 			answers = answerDAO.getAnswerWithLimit(questionId, offset, itemOnPage);
 			amountAnswers = answerDAO.getAmountAnswers(questionId);
-			int amountPage = Calculation.pageCounting(amountAnswers, itemOnPage);
-			item = new ItemManager<>(answers, amountPage);
+			int amountPage = PaginationUtils.pageCounting(amountAnswers, itemOnPage);
+			item = new PageItem<>(answers, amountPage);
 		} catch (DAOException e) {
 			logger.error(ErrorMessageService.ERROR_GET_DATA, e);
 			throw new ServiceException(ErrorMessageService.ERROR_GET_DATA);
@@ -42,7 +42,7 @@ public class AnswerServiceImpl implements AnswerService {
 	@Override
 	public void addAnswer(Answer answer) throws ServiceException {
 		String contnent = answer.getContent().trim();
-		if(!NullOrEmpty.isNullOrEmpty(contnent)){
+		if(!StringUtils.isNullOrEmpty(contnent)){
 		answer.setContent(contnent);
 		DAOFactory daoFactory = DAOFactory.getInstance();
 		AnswerDAO answerDAO = daoFactory.getAnswerDAO();

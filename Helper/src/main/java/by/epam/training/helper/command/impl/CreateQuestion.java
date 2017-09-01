@@ -19,7 +19,7 @@ import by.epam.training.helper.constant.ParameterName;
 import by.epam.training.helper.service.QuestionService;
 import by.epam.training.helper.service.exception.ServiceException;
 import by.epam.training.helper.service.factory.ServiceFactory;
-import by.epam.training.helper.tools.NullOrEmpty;
+import by.epam.training.helper.utils.StringUtils;
 
 public class CreateQuestion implements Command {
 	private static final Logger logger = LogManager.getLogger(CreateQuestion.class);
@@ -30,8 +30,8 @@ public class CreateQuestion implements Command {
 		String questionContent = request.getParameter(ParameterName.QUESTION_CONTENT);
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute(ParameterName.USER);
-		if(!NullOrEmpty.isNullOrEmpty(questionTitle)
-				&&!NullOrEmpty.isNullOrEmpty(questionContent)
+		if(!StringUtils.isNullOrEmpty(questionTitle)
+				&&!StringUtils.isNullOrEmpty(questionContent)
 				&&user!=null){
 			ServiceFactory serviceFactory = ServiceFactory.getInstance();
 			QuestionService questionService = serviceFactory.getQuestionService();

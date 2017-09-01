@@ -20,7 +20,7 @@ import by.epam.training.helper.constant.Url;
 import by.epam.training.helper.service.AnswerService;
 import by.epam.training.helper.service.exception.ServiceException;
 import by.epam.training.helper.service.factory.ServiceFactory;
-import by.epam.training.helper.tools.StringInNumber;
+import by.epam.training.helper.utils.StringParser;
 
 public class GetPageEditAnswer implements Command {
 	private static final Logger logger = LogManager.getLogger(GetPageEditAnswer.class);
@@ -29,7 +29,7 @@ public class GetPageEditAnswer implements Command {
 			throws ServletException, IOException, CommandException {
 		String answerIdParametr = request.getParameter(ParameterName.ANSWER_ID);
 		try{
-			int answerId = StringInNumber.parseString(answerIdParametr);
+			int answerId = StringParser.parseString(answerIdParametr);
 			HttpSession session = request.getSession();
 			User user = (User) session.getAttribute(ParameterName.USER);
 			if(user != null){

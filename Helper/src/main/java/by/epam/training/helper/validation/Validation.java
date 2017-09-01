@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 
 import by.epam.training.helper.bean.User;
 import by.epam.training.helper.constant.ErrorMessage;
+import by.epam.training.helper.constant.ErrorStatus;
 import by.epam.training.helper.constant.ParameterName;
 import by.epam.training.helper.constant.RegularExpression;
 import by.epam.training.helper.constant.SuccessMessage;
@@ -32,14 +33,14 @@ public class Validation {
 					}break;
 					case ParameterName.EXISTS_LOGIN:{
 						logger.error(ErrorMessage.LOGIN_EXISTS + user.getLogin());
-						throw new ValidationException(ErrorMessage.LOGIN_EXISTS + user.getLogin());
+						throw new ValidationException(ErrorStatus.LOGIN_EXISTS);
 					}
 					case ParameterName.EXISTS_EMAIL:{
 						logger.error(ErrorMessage.EMAIL_EXISTS + user.getEmail());
-						throw new ValidationException(ErrorMessage.EMAIL_EXISTS + user.getEmail());
+						throw new ValidationException(ErrorStatus.EMAIL_EXISTS);
 					}case ParameterName.EXISTS_LOGIN_AND_EMAIL:{
 						logger.error(ErrorMessage.LOGIN_EXISTS + user.getLogin() + ErrorMessage.EMAIL_EXISTS + user.getEmail());
-						throw new ValidationException(ErrorMessage.LOGIN_EXISTS + user.getLogin() + ErrorMessage.EMAIL_EXISTS + user.getEmail());
+						throw new ValidationException(ErrorStatus.LOGIN_EMAIL_EXISTS);
 					}
 				}	
 		} catch (DAOException e) {
@@ -50,11 +51,11 @@ public class Validation {
 	public static void validateSignIn(String login, String password) throws ValidationException {
 		if(!Pattern.matches(RegularExpression.LOGIN_REGEX, login)){
 			logger.error(ErrorMessage.INVALID_LOGIN + login);
-			throw new ValidationException(ErrorMessage.INVALID_LOGIN);
+			throw new ValidationException(ErrorStatus.INVALID_LOGIN);
 		}
 		if(!Pattern.matches(RegularExpression.PASSWORD_REGEX, password)){
 			logger.error(ErrorMessage.INVALID_PASSWORD);
-			throw new ValidationException(ErrorMessage.INVALID_PASSWORD);
+			throw new ValidationException(ErrorStatus.INVALID_PASSWORD);
 		}
 	}
 
@@ -64,52 +65,52 @@ public class Validation {
 		if(isValidPassword && isVerificationPassword && password.equals(verificationPassword)){	
 		}else{
 			logger.error(ErrorMessage.INVALID_PASSWORD);
-			throw new ValidationException(ErrorMessage.INVALID_PASSWORD);
+			throw new ValidationException(ErrorStatus.INVALID_PASSWORD);
 		}
 	}
 	public static void validatePassword(String password) throws ValidationException {
 		if(!Pattern.matches(RegularExpression.PASSWORD_REGEX, password)){
 			logger.error(ErrorMessage.INVALID_PASSWORD);
-			throw new ValidationException(ErrorMessage.INVALID_PASSWORD);
+			throw new ValidationException(ErrorStatus.INVALID_PASSWORD);
 		}	
 	}
 	private static void validateUserField(User user) throws ValidationException {
 		if(!Pattern.matches(RegularExpression.NAME_REGEX, user.getName())){
 			logger.error(ErrorMessage.INVALID_NAME + user.getName());
-			throw new ValidationException(ErrorMessage.INVALID_NAME);
+			throw new ValidationException(ErrorStatus.INVALID_NAME);
 		}
 		if(!Pattern.matches(RegularExpression.NAME_REGEX, user.getSurname())){
 			logger.error(ErrorMessage.INVALID_SURNAME + user.getSurname());
-			throw new ValidationException(ErrorMessage.INVALID_SURNAME);
+			throw new ValidationException(ErrorStatus.INVALID_SURNAME);
 		}
 		if(!Pattern.matches(RegularExpression.LOGIN_REGEX, user.getLogin())){
 			logger.error(ErrorMessage.INVALID_LOGIN + user.getLogin());
-			throw new ValidationException(ErrorMessage.INVALID_LOGIN);
+			throw new ValidationException(ErrorStatus.INVALID_LOGIN);
 		}	
 		if(!Pattern.matches(RegularExpression.EMAIL_REGEX, user.getEmail())){
 			logger.error(ErrorMessage.INVALID_EMAIL + user.getEmail());
-			throw new ValidationException(ErrorMessage.INVALID_EMAIL);
+			throw new ValidationException(ErrorStatus.INVALID_EMAIL);
 		}
 	}
 	public static void validateUserField(String nameEdit, String surnameEdit, String emailEdit) throws ValidationException{
 		if(!Pattern.matches(RegularExpression.NAME_REGEX, nameEdit)){
 			logger.error(ErrorMessage.INVALID_NAME + nameEdit);
-			throw new ValidationException(ErrorMessage.INVALID_NAME);
+			throw new ValidationException(ErrorStatus.INVALID_NAME);
 		}
 		if(!Pattern.matches(RegularExpression.NAME_REGEX, surnameEdit)){
 			logger.error(ErrorMessage.INVALID_SURNAME + surnameEdit);
-			throw new ValidationException(ErrorMessage.INVALID_SURNAME);
+			throw new ValidationException(ErrorStatus.INVALID_SURNAME);
 		}
 		if(!Pattern.matches(RegularExpression.EMAIL_REGEX, emailEdit)){
 			logger.error(ErrorMessage.INVALID_EMAIL + emailEdit);
-			throw new ValidationException(ErrorMessage.INVALID_EMAIL);
+			throw new ValidationException(ErrorStatus.INVALID_EMAIL);
 		}
 		
 	}
 	public static void validationId(int id) throws ValidationException {
 		if(id <= 0){
 			logger.error(ErrorMessage.INVALID_ID + id);
-			throw new ValidationException(ErrorMessage.INVALID_ID + id);
+			throw new ValidationException(ErrorStatus.INVALID_ID + id);
 		}
 	}
 
@@ -121,7 +122,7 @@ public class Validation {
 			isValid = password.equals(verificationPassword);
 		}else{
 			logger.error(ErrorMessage.INVALID_PASSWORD);
-			throw new ValidationException(ErrorMessage.INVALID_PASSWORD);
+			throw new ValidationException(ErrorStatus.INVALID_PASSWORD);
 		}
 		return isValid;		
 	}
@@ -152,7 +153,7 @@ public class Validation {
 		return id <= 0 ? false : true;	
 	}
 	public static void isValidMark(int mark) throws ValidationException {
-		if(mark < 0 || mark > MAX_MARK){
+		if(mark <= 0 || mark > MAX_MARK){
 			logger.error(ErrorMessage.ERROR_MARK_VALIDATION + mark);
 			throw new ValidationException(ErrorMessage.ERROR_MARK_VALIDATION);
 		}
