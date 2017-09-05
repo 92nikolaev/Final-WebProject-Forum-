@@ -21,7 +21,7 @@ public class Url {
 	public static final String REDIRECT_SIGN_UP = "controller?command=sign_up_page&error_status=";
 	public static final String REDIRECT_SIGN_IN = "controller?command=sign_in_page&error_status=";
 	public static final String REDIRECT_HOME_PAGE = "controller?command=home";
-	public static final String REDIRECT_USER_PROFILE = "controller?command=user_profile&message=";
+	public static final String REDIRECT_USER_PROFILE_WITH_MESSAGE = "controller?command=user_profile&message=";
 	public static final String SHOW_ALL_USER_WITH_MESSAGE = "controller?command=showAllUsers&message=";
 	public static final String REDIRECT_QUESTION_PAGE = "controller?command=show_question&question_id=";
 	public static final String REDIRECT_HOME_PAGE_WITH_MESSAGE = "controller?command=home&message=";
@@ -34,6 +34,7 @@ public class Url {
 	public static final String REDIRECT_SHOW_ALL_NEWS_SUCCESS_ADD = "controller?command=show_all_news&message=news successfully add";
 	public static final String REDIRECT_FAILED_ADD_NEWS = "controller?command=home&message=failed add";
 	public static final String REDIRECT_SHOW_ALL_NEWS_NOT_ADD_EMPTY = "controller?command=show_all_news&message=news_empty";
+	public static final String REDIRECT_USER_PROFILE = "controller?command=user_profile";
 	
 	
 }

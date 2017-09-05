@@ -17,14 +17,19 @@
 			<div><p class="error">${profile_data_changed_faild}</p></div>
 		</c:if>
 		<c:if test="${message == 'Successfully changed pasword'}">
-			<div><p class="successful">Successfully changed pasword</p></div>
+			<div><p class="successful">${successfully_changed_password}</p></div>
 		</c:if>
-		<c:if test="${message == 'Failed to change password'}">
-			<div><p class="error">Failed to change password</p></div>
+		<c:if test="${message == 'failed to change password'}">
+			<div><p class="error">${failed_change_password}</p></div>
 		</c:if>
+		<c:if test="${message == 'profile_create_question_error_message'}">
+			<div><p class="successful">${profile_create_question_error_message}</p></div>
+		</c:if>
+		
 		<div class="inner-content">
 			<div class="big-heading">
 				<h2>${profile_title}</h2>
+				${message}
 			</div>
 			<div class="inner-columns clearfix">
 				<div class="cabinet-inner-column-left">

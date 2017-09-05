@@ -27,7 +27,11 @@
 <fmt:message bundle="${loc}" key="question.item.title" var="question_common_title" />
 <fmt:message bundle="${loc}" key="home.count.answer" var="home_count_answer" />
 <fmt:message bundle="${loc}" key="home.author.post" var="home_author_post" />
+<fmt:message bundle="${loc}" key="question.not.found" var="question_not_found" />
+<fmt:message bundle="${loc}" key="error.add.answer" var="error_add_answer" />
 
+<!-- ELEMENT ERROR ITEM -->
+<fmt:message bundle="${loc}" key="errorpage.message" var="errorpage_message" />
 
 
 <!-- ELEMENT SIGN IN POP UP -->
@@ -156,6 +160,10 @@
 <!-- ELEMENT EDIT QUESTION PAGE -->
 <fmt:message bundle="${loc}" key="question.edit.title" var="question_edit_title" />
 <fmt:message bundle="${loc}" key="question.edit.btn" var="question_edit_btn" />
+
+<fmt:message bundle="${loc}" key="successfully.changed.password" var="successfully_changed_password" />
+<fmt:message bundle="${loc}" key="failed.change.password" var="failed_change_password" />
+<fmt:message bundle="${loc}" key="profile.create.question.error.message" var="profile_create_question_error_message" />
 
 <!-- ELEMENT EDIT ANSWER PAGE -->
 <fmt:message bundle="${loc}" key="answer.edit.title" var="answer_edit_title" />

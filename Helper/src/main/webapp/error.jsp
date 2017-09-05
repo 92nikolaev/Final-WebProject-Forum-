@@ -14,7 +14,7 @@
 			<h2>Error page</h2>
 		</div>
 		<h3>
-			We apologize, there were unforeseen difficulties when working with the system, try to execute the actions again....
+			${errorpage_message}
 		</h3>
 	</div>
 	<%@include file="../elementpage/element_footer.jspf" %>

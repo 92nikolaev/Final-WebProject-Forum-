@@ -100,7 +100,7 @@
 				<tr>
 				<td>${user.login}</td>
 				<c:choose>
-					<c:when test="${user.role == 1}">
+					<c:when test="${user.role == 1 || user.role == 2}">
 						<td>${users_administrator}</td>
 					</c:when>
 					<c:otherwise>

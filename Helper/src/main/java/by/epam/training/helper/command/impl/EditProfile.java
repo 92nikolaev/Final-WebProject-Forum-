@@ -40,10 +40,10 @@ public class EditProfile implements Command {
 		UserService userService = serviceFactory.getUserService();
 		try {
 			userService.editProfile(user.getId(), nameEdit, surnameEdit, emailEdit);
-			response.sendRedirect(Url.REDIRECT_USER_PROFILE + SuccessMessage.EDIT_USER_FIELD);
+			response.sendRedirect(Url.REDIRECT_USER_PROFILE_WITH_MESSAGE + SuccessMessage.EDIT_USER_FIELD);
 		} catch (ServiceException e) {
 			logger.error(e);
-			response.sendRedirect(Url.REDIRECT_USER_PROFILE + ErrorMessage.ERROR_EDIT_USER_FIELD);
+			response.sendRedirect(Url.REDIRECT_USER_PROFILE_WITH_MESSAGE  + ErrorMessage.ERROR_EDIT_USER_FIELD);
 		}
 	}
 

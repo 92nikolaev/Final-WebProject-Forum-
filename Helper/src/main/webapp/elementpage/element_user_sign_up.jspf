@@ -43,12 +43,12 @@
 										minlength: "Фамилия должна быть не менее 4 символов."
 									},
 									user_login: {
-										required: "Этот логин недействителен .. (пример: Furious07)",
+										required: "Этот логин недействителен .. (пример: Furious)",
 										minlength: "Логин должен быть не менее 5 символов."
 									},
 									user_password: {
 										required: "Пароль обязательно",
-										minlength: "Пароль должен быть не менее 6 символов."
+										minlength: "Пароль должен быть не менее 6 символов. (пример: Furious07)"
 									},
 									verification_password: {
 										required: "Пароль обязательно",
@@ -61,7 +61,6 @@
 									}
 								},
 								submitHandler: function(){
-									alert("valid");
 									form.submit();
 								}
 								
@@ -108,12 +107,12 @@
 									minlength: "Last name must be at least 4 characters."
 								},
 								user_login: {
-									required: "This login is invalid .. (example: Furious07)",
+									required: "This login is invalid .. (example: Furious)",
 									minlength: "Login must be at least 5 characters."
 								},
 								user_password: {
 									required: "Password required",
-									minlength: "Password must be at least 6 characters."
+									minlength: "Password must be at least 6 characters. (example: Furious07)"
 								},
 								verification_password: {
 									required: "Password required",

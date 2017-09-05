@@ -30,13 +30,13 @@ public class CreateQuestion implements Command {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException, CommandException {
-		String questionTitle = request.getParameter(ParameterName.QUESTION_TITLE);
-		String questionContent = request.getParameter(ParameterName.QUESTION_CONTENT);
+		String questionTitle = request.getParameter(ParameterName.QUESTION_TITLE).trim();
+		String questionContent = request.getParameter(ParameterName.QUESTION_CONTENT).trim();
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute(ParameterName.USER);
 		if(!StringUtils.isNullOrEmpty(questionTitle)
 				&&!StringUtils.isNullOrEmpty(questionContent)
-				&&user!=null){
+				&&user!=null && questionTitle.length() < 5){
 			ServiceFactory serviceFactory = ServiceFactory.getInstance();
 			QuestionService questionService = serviceFactory.getQuestionService();
 			try {
@@ -45,13 +45,11 @@ public class CreateQuestion implements Command {
 			} catch (ServiceException e) {
 				e.printStackTrace();
 				logger.error(ErrorMessage.ERROR_CREATE_QUESTION);
-				request.setAttribute(ParameterName.MESSAGE, ErrorMessage.ERROR_CREATE_QUESTION_MESSAGE);
-				request.getRequestDispatcher(Url.REDIRECT_USER_PROFILE).forward(request, response);
+				response.sendRedirect(Url.REDIRECT_USER_PROFILE_WITH_MESSAGE  + ErrorMessage.ERROR_CREATE_QUESTION_MESSAGE);
 			}
 		}else{
 			logger.error(ErrorMessage.ERROR_CREATE_QUESTION);
-			request.setAttribute(ParameterName.MESSAGE, ErrorMessage.ERROR_CREATE_QUESTION_MESSAGE);
-			request.getRequestDispatcher(Url.REDIRECT_USER_PROFILE).forward(request, response);
+			response.sendRedirect(Url.REDIRECT_USER_PROFILE_WITH_MESSAGE  + ErrorMessage.ERROR_CREATE_QUESTION_MESSAGE);
 		}
 	}
 }

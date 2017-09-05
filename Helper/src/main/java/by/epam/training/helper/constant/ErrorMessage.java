@@ -54,6 +54,7 @@ public class ErrorMessage {
 	public static final String ERROR_SHOW_LIST_NEWS = "Can not process request and display news list";
 	public static final String ERROR_NOT_EDIT_NEWS = "Failed update news";
 	public static final String USER_CAN_NOT_EDIT_NEWS = "User can not edit news";
+	public static final Object ERROR_ADD_ANSWER = "error add answer";
 	
 	
 }

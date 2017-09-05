@@ -71,7 +71,8 @@ public class AddAnswer implements Command {
 			throw new CommandException();
 		} catch (ServiceException e) {
 			logger.error(e);
-			throw new CommandException();
+			String page = String.format(Url.REDIRECT_HOME_PAGE_WITH_MESSAGE_FORMATING, ErrorMessage.ERROR_ADD_ANSWER);
+			request.getRequestDispatcher(page).forward(request, response); 
 		}
 	}
 	
