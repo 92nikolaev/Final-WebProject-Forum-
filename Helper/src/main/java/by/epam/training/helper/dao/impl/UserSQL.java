@@ -262,5 +262,26 @@ public class UserSQL implements UserDAO {
 			}finally {
 				ReleaseConnection.freeConnection(connection, connectionPool);
 			}	
+	}
+	@Override
+	public void assignModeratorOrUser(int userId, byte moderator_role) throws DAOException {
+		ConnectionPool connectionPool = ConnectionPool.getInstance();
+		Connection connection = null;
+			try {
+				connection = connectionPool.take();
+				try(PreparedStatement preparedStatement = connection.prepareStatement(SQLCommand.UPDATE_USER_ROLE)){
+					preparedStatement.setByte(1, moderator_role);
+					preparedStatement.setInt(2, userId);
+					preparedStatement.executeUpdate();
+				} catch (SQLException e) {
+					logger.error(ErrorMessageDAO.ERROR_CHANGE_ROLE, e);
+					throw new DAOException(ErrorMessageDAO.ERROR_CHANGE_ROLE);
+				}
+			} catch (ConnectionPoolException e) {
+				logger.error(ErrorMessageDAO.ERROR_CONNECTION, e);
+				throw new DAOException(ErrorMessageDAO.ERROR_CONNECTION);
+			}finally {
+				ReleaseConnection.freeConnection(connection, connectionPool);
+			}	
 	}	
 }

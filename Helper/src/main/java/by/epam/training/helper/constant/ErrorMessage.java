@@ -1,6 +1,8 @@
 package by.epam.training.helper.constant;
 
-
+/**
+ * @author Nikolaev Ilya
+ */
 public class ErrorMessage {
 	
 	public static final String INVALID_NAME = "Invalid user name ";
@@ -18,6 +20,7 @@ public class ErrorMessage {
 	public static final String ERROR_SIGN_UOT = "Unauthorized user attempts to log out";
 	public static final String ERROR_CREATE_QUESTION = "The question was not asked, perhaps you did not fill the title or description";
 	public static final String ERROR_CHANGE_PASSWORD = "Failed to change password";
+	public static final Object ERROR_CREATE_QUESTION_MESSAGE = "profile_create_question_error_message";
 	public static final String ERROR_EDIT_USER_FIELD = "faild change";
 	public static final String ERROR_QUESTION_NOT_EXISTS = "Question with such id does not exist: id - ";
 	public static final String ERROR_DETERMIN_ID = "Can not determine Id";
@@ -26,7 +29,7 @@ public class ErrorMessage {
 	public static final String ERROR_MARK_VALIDATION = "Mark is less than zero or more than the maximum. Mark = ";
 	public static final String ERROR_NOT_ADD_NEWS = "The news has not been added";
 	public static final String ERROR_ADD_NEWS = "Failed to check and add news";
-	public static final String USER_CAN_NOT_CREATE_NEWS = "User can not create news";
+	public static final String USER_CAN_NOT_CREATE_NEWS = "user can_not create news";
 	public static final String USER_NOT_SIGN_IP = "User is not sign in or the session has expired";
 	public static final String INVALID_TITLE_OR_CONTET_NEWS = "The title and text can not contain less than 5 characters";
 	public static final String ERROR_ENCRYPTION = "Error encryption";
@@ -43,5 +46,14 @@ public class ErrorMessage {
 	public static final String ERROR_NOT_FOUND = "failed found";
 	public static final String ERROR_NOT_EXISTS = "don't exists";
 	public static final String ERROR_HOME_PAGE_NOT_DISPLAY = "Home can not be displayed";
+	public static final String ERROR_USER_ASSIGN_MODERATOR_HIMSELF = "Trying to designate himself as a moderator";
+	public static final String ERROR_USER_ASSIGN_ROLE = "Failed to set role";
+	public static final String ERROR_COMMAND_NOT_FOUND = "The command that came with from the client was not found. command - ";
+	public static final String ERROR_USER_ASSIGN_USER_HIMSELF = "Trying to designate himself as a user";
+	public static final String ERROR_DETERMINETED_NEWS_ID = "Failed to determine the id of the news. ID = ";
+	public static final String ERROR_SHOW_LIST_NEWS = "Can not process request and display news list";
+	public static final String ERROR_NOT_EDIT_NEWS = "Failed update news";
+	public static final String USER_CAN_NOT_EDIT_NEWS = "User can not edit news";
+	
 	
 }

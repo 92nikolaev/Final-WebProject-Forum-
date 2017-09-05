@@ -20,7 +20,12 @@ import by.epam.training.helper.constant.Url;
 import by.epam.training.helper.service.UserService;
 import by.epam.training.helper.service.exception.ServiceException;
 import by.epam.training.helper.service.factory.ServiceFactory;
-
+/**
+ * This command for editing user fields
+ * @author Nikolaev Ilya
+ * {@link Command}  invokes method execute() with the request , response  and return jsp question
+ *
+ */
 public class EditProfile implements Command {
 	private static final Logger logger = LogManager.getLogger(EditProfile.class);
 	@Override
@@ -37,7 +42,6 @@ public class EditProfile implements Command {
 			userService.editProfile(user.getId(), nameEdit, surnameEdit, emailEdit);
 			response.sendRedirect(Url.REDIRECT_USER_PROFILE + SuccessMessage.EDIT_USER_FIELD);
 		} catch (ServiceException e) {
-			e.printStackTrace();
 			logger.error(e);
 			response.sendRedirect(Url.REDIRECT_USER_PROFILE + ErrorMessage.ERROR_EDIT_USER_FIELD);
 		}

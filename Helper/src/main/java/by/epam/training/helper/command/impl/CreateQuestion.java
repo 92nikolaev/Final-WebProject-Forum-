@@ -14,13 +14,17 @@ import by.epam.training.helper.bean.User;
 import by.epam.training.helper.command.Command;
 import by.epam.training.helper.command.exception.CommandException;
 import by.epam.training.helper.constant.ErrorMessage;
-import by.epam.training.helper.constant.ErrorMessageLocation;
 import by.epam.training.helper.constant.ParameterName;
+import by.epam.training.helper.constant.Url;
 import by.epam.training.helper.service.QuestionService;
 import by.epam.training.helper.service.exception.ServiceException;
 import by.epam.training.helper.service.factory.ServiceFactory;
 import by.epam.training.helper.utils.StringUtils;
-
+/**
+ * Command create new question
+ * @author Nikolaev Ilya
+ * {@link Command}  invokes method execute() with the request , response  and return jsp question
+ */
 public class CreateQuestion implements Command {
 	private static final Logger logger = LogManager.getLogger(CreateQuestion.class);
 	@Override
@@ -37,17 +41,17 @@ public class CreateQuestion implements Command {
 			QuestionService questionService = serviceFactory.getQuestionService();
 			try {
 				questionService.addNewQuestion(user.getId(), questionTitle, questionContent);
-				response.sendRedirect("controller?command=user_profile");
+				response.sendRedirect(Url.REDIRECT_USER_PROFILE);
 			} catch (ServiceException e) {
 				e.printStackTrace();
 				logger.error(ErrorMessage.ERROR_CREATE_QUESTION);
-				request.setAttribute("message", ErrorMessageLocation.ERROR_CREATE_QUESTION);
-				request.getRequestDispatcher("controller?command=user_profile").forward(request, response);
+				request.setAttribute(ParameterName.MESSAGE, ErrorMessage.ERROR_CREATE_QUESTION_MESSAGE);
+				request.getRequestDispatcher(Url.REDIRECT_USER_PROFILE).forward(request, response);
 			}
 		}else{
 			logger.error(ErrorMessage.ERROR_CREATE_QUESTION);
-			request.setAttribute("message", ErrorMessageLocation.ERROR_CREATE_QUESTION);
-			request.getRequestDispatcher("controller?command=user_profile").forward(request, response);
+			request.setAttribute(ParameterName.MESSAGE, ErrorMessage.ERROR_CREATE_QUESTION_MESSAGE);
+			request.getRequestDispatcher(Url.REDIRECT_USER_PROFILE).forward(request, response);
 		}
 	}
 }

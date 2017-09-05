@@ -23,7 +23,7 @@ public class ColumnNameDB {
 	public static final String QUESTION_TEXT = "question_content";
 	public static final String QUESTION_COUNT_ANSWER = "count_answer";
 	public static final String QUESTION_AMOUNT = "amount_question";
-	public static final String QUESTION_COUNT_SEARCH = "count_search_qestion";
+	public static final String QUESTION_COUNT_SEARCH = "count_search_question";
 	
 	/* NEWS  */
 	public static final String NEWS_ID = "news_id";
@@ -42,7 +42,5 @@ public class ColumnNameDB {
 	public static final String MARK_COUNT = "count_mark";
 	public static final String MARK_ID = "mark_id";
 	public static final String MARK_VALUE = "mark_value";
-	
-	
 	
 }

@@ -21,7 +21,11 @@ import by.epam.training.helper.service.exception.ServiceException;
 import by.epam.training.helper.service.factory.ServiceFactory;
 import by.epam.training.helper.utils.StringUtils;
 import by.epam.training.helper.utils.StringParser;
-
+/**
+ * Command edit answer
+ * @author Nikolaev Ilya
+ * {@link Command}  invokes method execute() with the request , response  and return jsp question
+ */
 public class EditAnswer implements Command {
 	private static final Logger logger = LogManager.getLogger(EditAnswer.class);
 	@Override
@@ -40,9 +44,9 @@ public class EditAnswer implements Command {
 					ServiceFactory serviceFactory = ServiceFactory.getInstance();
 					AnswerService answerService = serviceFactory.getAnswerService();
 					answerService.updateAnswerById(answerId, answerContentParamet);
-					response.sendRedirect("controller?command=show_question&question_id="+questionId);
+					response.sendRedirect(Url.REDIRECT_QUESTION_PAGE+questionId);
 				}else{
-					request.getRequestDispatcher("controller?command=page_edit_answer&answer_id="+answerId).forward(request, response);
+					request.getRequestDispatcher(Url.REDIRECT_EDIT_ANSWER+answerId).forward(request, response);
 				}
 			}else {
 				logger.warn(ErrorMessage.USER_NOT_SIGN_IP);

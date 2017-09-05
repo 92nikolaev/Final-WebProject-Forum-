@@ -11,6 +11,8 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import by.epam.training.helper.constant.Url;
 /**
  * Servlet Filter implementation class SessionFilter
  */
@@ -29,7 +31,7 @@ public class SessionFilter implements Filter {
 			HttpSession session = request.getSession(false);
 			if(session == null){
 				request.getSession(true);
-				response.sendRedirect("controller?command=home");
+				response.sendRedirect(Url.REDIRECT_HOME_PAGE);
 			}else{
 				filterChain.doFilter(servletRequest, servletResponse);
 			}

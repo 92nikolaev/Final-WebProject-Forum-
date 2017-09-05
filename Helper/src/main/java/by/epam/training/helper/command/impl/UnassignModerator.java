@@ -23,40 +23,46 @@ import by.epam.training.helper.service.factory.ServiceFactory;
 import by.epam.training.helper.utils.StringParser;
 import by.epam.training.helper.validation.Validation;
 /**
- * Commands for unlocking the user
+ * Command to remove the powers of a moderator
  * @author Nikolaev Ilya
  * {@link Command}  invokes method execute() with the request , response  and return jsp question
  */
-public class UnlockUser implements Command {
-	private static final Logger logger = LogManager.getLogger(UnlockUser.class);
-	byte UNLOCK_STATUS = 1;
+public class UnassignModerator implements Command {
+	private static final Logger logger = LogManager.getLogger(AssignModerator.class);
+	byte USER_ROLE = 0;
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException, CommandException {
 		String userIdParametr = request.getParameter(ParameterName.USER_ID);
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute(ParameterName.USER);
-		if(user!=null && (user.getRole() == ParameterName.MODERATOR || user.getRole() == ParameterName.ADMIN)){
+		if(user!=null && user.getRole() == ParameterName.ADMIN){
 			ServiceFactory serviceFactory = ServiceFactory.getInstance();
 			UserService userService = serviceFactory.getUserService();
 			try{
 				int userId = StringParser.parseString(userIdParametr);
-				if(Validation.isValidationId(userId)){
-					userService.lockUnlockUser(userId, UNLOCK_STATUS);
-					response.sendRedirect(Url.SHOW_ALL_USER_WITH_MESSAGE + SuccessMessage.USER_UNLOCK);
-				}else{
-					response.sendRedirect(Url.SHOW_ALL_USER_WITH_MESSAGE + ErrorMessage.ERROR_USER_INDEFINED);
+				if(user.getId() != userId){
+					if(Validation.isValidationId(userId)){
+						userService.assignModeratorOrUser(userId, USER_ROLE);
+						response.sendRedirect(Url.SHOW_ALL_USER_WITH_MESSAGE + SuccessMessage.USER_ROLE);
+					}else{
+						response.sendRedirect(Url.SHOW_ALL_USER_WITH_MESSAGE + ErrorMessage.ERROR_USER_INDEFINED);
+					}
+				}else {
+					logger.error(ErrorMessage.ERROR_USER_ASSIGN_MODERATOR_HIMSELF);
+					response.sendRedirect(Url.SHOW_ALL_USER_WITH_MESSAGE + ErrorMessage.ERROR_USER_ASSIGN_MODERATOR_HIMSELF);
 				}
 			}catch (NumberFormatException e) {
 				logger.error(ErrorMessage.ERROR_DETERMIN_ID);
 				response.sendRedirect(Url.SHOW_ALL_USER_WITH_MESSAGE + ErrorMessage.ERROR_USER_INDEFINED);
 			} catch (ServiceException e) {
-				logger.error(ErrorMessage.ERROR_LOCK_USER);
-				response.sendRedirect(Url.SHOW_ALL_USER_WITH_MESSAGE + ErrorMessage.ERROR_UNLOCK);
+				logger.error(ErrorMessage.ERROR_USER_ASSIGN_ROLE);
+				response.sendRedirect(Url.SHOW_ALL_USER_WITH_MESSAGE + ErrorMessage.ERROR_USER_ASSIGN_ROLE);
 			}	
 		}else{
 			response.sendRedirect(Url.SIGN_IN);
 		}
-	}
+		}
+
 
 }

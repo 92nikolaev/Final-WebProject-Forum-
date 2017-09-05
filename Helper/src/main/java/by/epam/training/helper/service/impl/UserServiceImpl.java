@@ -170,7 +170,7 @@ public class UserServiceImpl implements UserService {
 		}	
 	}
 	@Override
-	public void lockUser(int userId, byte status) throws ServiceException {
+	public void lockUnlockUser(int userId, byte status) throws ServiceException {
 		DAOFactory daoFactory = DAOFactory.getInstance();
 		UserDAO userDAO = daoFactory.getUserDAO();
 		try {
@@ -180,41 +180,16 @@ public class UserServiceImpl implements UserService {
 			throw new ServiceException(ErrorStatus.USER_NOT_LOCK);
 		}
 	}
-	/*private String getErrorStatus(String message) {
-		String error = null;
-		switch (message) {
-		case ErrorMessage.LOGIN_EXISTS:
-			error = ErrorStatus.LOGIN_EXISTS;
-			break;
-		case ErrorMessage.EMAIL_EXISTS:
-			error = ErrorStatus.EMAIL_EXISTS;
-			break;
-		case ErrorMessage.LOGIN_EMAIL_EXISTS:
-			error = ErrorStatus.LOGIN_EMAIL_EXISTS;
-			break;
-		case ErrorMessage.INVALID_NAME:
-			error = ErrorStatus.INVALID_NAME;
-			break;
-		case ErrorMessage.INVALID_SURNAME:
-			error = ErrorStatus.INVALID_SURNAME;
-			break;
-		case ErrorMessage.INVALID_LOGIN:
-			error = ErrorStatus.INVALID_LOGIN;
-			break;
-		case ErrorMessage.INVALID_PASSWORD:
-			error = ErrorStatus.INVALID_PASSWORD;
-			break;
-		case ErrorMessage.INVALID_EMAIL:
-			error = ErrorStatus.INVALID_EMAIL;
-			break;
-		case ErrorMessage.INVALID_ID:
-			error = ErrorStatus.INVALID_ID;
-			break;
-		default:
-			error = ErrorStatus.ERROR_SIGN_UP;
-			break;
+	@Override
+	public void assignModeratorOrUser(int userId, byte moderator_role) throws ServiceException {
+		DAOFactory daoFactory = DAOFactory.getInstance();
+		UserDAO userDAO = daoFactory.getUserDAO();
+		try {
+			userDAO.assignModeratorOrUser(userId, moderator_role);
+		} catch (DAOException e) {
+			logger.error(ErrorMessageService.ERROR_ASSIGN_MODERATOR);
+			throw new ServiceException(ErrorStatus.ERROR_ASSIGN_MODERATOR);
 		}
-		return error;
-	}*/
+	}
 
 }

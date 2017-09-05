@@ -13,7 +13,12 @@ import org.apache.log4j.Logger;
 import by.epam.training.helper.command.Command;
 import by.epam.training.helper.command.exception.CommandException;
 import by.epam.training.helper.constant.ErrorMessage;
-
+import by.epam.training.helper.constant.Url;
+/**
+ * Class is used for sign out.
+ * @author Nikolaev Ilya
+ * {@link Command}  invokes method execute() with the request , response  and return jsp question
+ */
 public class SignOut implements Command{
 	private static final Logger logger = LogManager.getLogger(SignOut.class);
 	@Override
@@ -22,10 +27,10 @@ public class SignOut implements Command{
 		HttpSession session = request.getSession(false);
 		if(session != null){
 			session.invalidate();
-			response.sendRedirect("controller?command=home");	
+			response.sendRedirect(Url.REDIRECT_HOME_PAGE);	
 		}else{
 			logger.error(ErrorMessage.ERROR_SIGN_UOT);
-			response.sendRedirect("controller?command=home");	
+			response.sendRedirect(Url.REDIRECT_HOME_PAGE);	
 		}
 	}
 

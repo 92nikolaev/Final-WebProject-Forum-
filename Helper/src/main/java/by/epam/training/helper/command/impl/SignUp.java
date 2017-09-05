@@ -11,7 +11,6 @@ import org.apache.log4j.Logger;
 
 import by.epam.training.helper.bean.User;
 import by.epam.training.helper.command.Command;
-import by.epam.training.helper.command.exception.CommandException;
 import by.epam.training.helper.constant.ParameterName;
 import by.epam.training.helper.constant.Url;
 import by.epam.training.helper.service.UserService;
@@ -20,7 +19,7 @@ import by.epam.training.helper.service.factory.ServiceFactory;
 /**
  * Class is used for sign up.
  * @author Nikolaev Ilya
- *
+ * {@link Command}  invokes method execute() with the request , response  and return jsp question
  */
 public class SignUp implements Command {
 	private static final Logger logger = LogManager.getLogger(SignUp.class);
@@ -31,11 +30,10 @@ public class SignUp implements Command {
 	 *  @param response - send response to client with parameters to work with on client side
 	 *  @throws IOException  
      * 	@throws ServletException
-     *  @throws CommandException  If the command can not be executed
 	 */
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException, CommandException {
+			throws ServletException, IOException{
 		User user = new User();
 		user.setName(request.getParameter(ParameterName.USER_NAME));
 		user.setSurname(request.getParameter(ParameterName.USER_SURNAME));
@@ -55,8 +53,6 @@ public class SignUp implements Command {
 			logger.error(e);
 			String errorStatus= e.getMessage();
 			response.sendRedirect(Url.REDIRECT_SIGN_UP + errorStatus);
-			
 		}
-
 	}
 }

@@ -24,8 +24,9 @@ import by.epam.training.helper.service.factory.ServiceFactory;
 import by.epam.training.helper.utils.StringUtils;
 import by.epam.training.helper.utils.StringParser;
 /**
- * The class is used to create a new answer
+ * The command is used to create a new answer
  * @author Nikolaev Ilya
+ * {@link Command}  invokes method execute() with the request , response  and return jsp question
  */
 public class AddAnswer implements Command {
 	private static final Logger logger = LogManager.getLogger(AddAnswer.class);
@@ -36,6 +37,7 @@ public class AddAnswer implements Command {
 	 *  @param response - send response to client with parameters to work with on client side
 	 *  @throws IOException  
      * 	@throws ServletException
+     *  @throws CommandException
 	 */
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response)
@@ -56,20 +58,20 @@ public class AddAnswer implements Command {
 					request.getRequestDispatcher(Url.REDIRECT_QUESTION_PAGE + questionId).forward(request, response); 
 				}else{
 					logger.error(ErrorMessage.ERROR_QUESTION_NOT_EXISTS + questionId);
-					request.getRequestDispatcher("controller?command=home").forward(request, response); 
+					String page = String.format(Url.REDIRECT_HOME_PAGE_WITH_MESSAGE_FORMATING, ErrorMessage.ERROR_QUESTION_NOT_EXISTS );
+					request.getRequestDispatcher(page).forward(request, response); 
 				}
 			}else{
 				logger.error(ErrorMessage.ERROR_ANSWER_INVALID);
-				String page = String.format("controller?command=show_question&qestion_id=%d&message=%s", questionId, ErrorMessage.ERROR_ANSWER_INVALID );
-				System.out.println(page);
-				request.getRequestDispatcher("controller?command=home").forward(request, response); 
+				String page = String.format(Url.REDIRECT_HOME_PAGE_WITH_MESSAGE_FORRMATING, questionId, ErrorMessage.ERROR_ANSWER_INVALID );
+				request.getRequestDispatcher(page).forward(request, response); 
 			}
 		}catch (NumberFormatException e) {
 			logger.error(e);
-			e.printStackTrace();
+			throw new CommandException();
 		} catch (ServiceException e) {
 			logger.error(e);
-			e.printStackTrace();
+			throw new CommandException();
 		}
 	}
 	

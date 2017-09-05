@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 	<div class="message">
 		<c:choose>
@@ -19,6 +19,21 @@
 			</c:when>	
 			<c:when test="${message == 'Error lock himself'}">
 				<div>${users_error_lock_himself}</div>
-			</c:when>	
+			</c:when>
+			<c:when test="${message == 'Role moderator'}">
+				<div>${users_role_moderator}</div>
+			</c:when>
+			<c:when test="${message == 'Role user'}">
+				<div>${users_role_user}</div>
+			</c:when>
+			<c:when test="${message == 'Failed to set role'}">
+				<div>${users_failed_set_role}</div>
+			</c:when>
+			<c:when test="${message == 'Trying to designate himself as a moderator'}">
+				<div>${users_designate_himself_moderator}</div>
+			</c:when>
+			<c:when test="${message == 'Trying to designate himself as an user'}">
+				<div>${users_designate_himself_user}</div>
+			</c:when>			
 		</c:choose>
 	</div>

@@ -1,6 +1,6 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:if test="${sessionScope.user.role == 1||sessionScope.user.role == 2}">
+<c:if test="${sessionScope.user.role == 1}">
 	<div class="modal-content-edit modal_create_news">
 		<button class="modal-content-close" type="button" title="Close">Close</button>
 		<h2 class="modal-content-title">${administrator_title_create_news}</h2>

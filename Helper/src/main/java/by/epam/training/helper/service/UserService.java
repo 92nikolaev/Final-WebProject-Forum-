@@ -21,6 +21,7 @@ public interface UserService {
 
 	void editProfile(int id, String nameEdit, String surnameEdit, String emailEdit)throws ServiceException;
 
-	void lockUser(int userId, byte status) throws ServiceException;
+	void lockUnlockUser(int userId, byte status) throws ServiceException;
 
+	void assignModeratorOrUser(int userId, byte moderator_role)throws ServiceException;
 }

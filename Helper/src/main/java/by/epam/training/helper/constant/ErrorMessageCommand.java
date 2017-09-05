@@ -1,5 +1,7 @@
 package by.epam.training.helper.constant;
-
+/**
+ * @author Nikolaev Ilya
+ */
 public class ErrorMessageCommand {
 	
 	public static final String ERROR_DETERMINE_MARK = "error determineted mark, value mark - ";

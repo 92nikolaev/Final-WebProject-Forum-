@@ -34,5 +34,6 @@
 	</div>
 	<%@include file="../elementpage/element_footer.jspf" %>
 	<script type="text/javascript" src="js/common.js"></script>
+	
 </body>
 </html>

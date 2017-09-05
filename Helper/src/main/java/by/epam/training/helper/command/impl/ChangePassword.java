@@ -20,7 +20,11 @@ import by.epam.training.helper.service.UserService;
 import by.epam.training.helper.service.exception.ServiceException;
 import by.epam.training.helper.service.factory.ServiceFactory;
 
-
+/**
+ * The command to change the user password
+ * @author Nikolaev Ilya
+ * {@link Command}  invokes method execute() with the request , response  and return jsp question
+ */
 public class ChangePassword implements Command {
 	private static final Logger logger = LogManager.getLogger(ChangePassword.class);
 	@Override

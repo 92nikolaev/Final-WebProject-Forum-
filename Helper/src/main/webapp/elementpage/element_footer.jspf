@@ -1,17 +1,16 @@
-<%@ taglib uri="../WEB-INF/tlds/like.tld" prefix="s" %>
+﻿<%-- <%@ taglib uri="../WEB-INF/tlds/like.tld" prefix="s" %> --%>
 <footer>
 	<div class="container">
-		<div class="footer-col"><span><s:CopyrightTag/></span></div>
+		<!-- <div class="footer-col"><span><s:CopyrightTag/></span></div> -->
+		<div class="footer-col">Develop Nikolaev Ilya 2017</div>
 		<div class="footer-col">
 			<div class="social-bar-wrap">
-				<a title="Facebook" href="#" target="_blank"><i class="fa fa-facebook"></i></a>
-				<a title="Twitter" href="#" target="_blank"><i class="fa fa-twitter"></i></a>
-				<a title="Pinterest" href="#" target="_blank"><i class="fa fa-pinterest"></i></a>
-				<a title="Instagram" href="#" target="_blank"><i class="fa fa-instagram"></i></a>
+				<a title="VK" href="https://vk.com/id15024859" target="_blank"><i class="fa fa-vk" aria-hidden="true"></i></a>
+				<a title="Instagram" href="https://www.instagram.com/ilya_.nikolaev/" target="_blank"><i class="fa fa-instagram"></i></a>
 			</div>
 		</div>
 		<div class="footer-col">
-			<a href="92nikolaev@gmail.com">Send letter</a>
+			<a href="#">Send letter</a>
 		</div>
 	</div>
 </footer>

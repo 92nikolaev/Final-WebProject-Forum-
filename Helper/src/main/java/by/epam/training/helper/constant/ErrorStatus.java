@@ -1,5 +1,7 @@
 package by.epam.training.helper.constant;
-
+/**
+ * @author Nikolaev Ilya
+ */
 public class ErrorStatus {
 
 	public static final String LOGIN_EXISTS = "login_exist";
@@ -17,5 +19,7 @@ public class ErrorStatus {
 	public static final String USER_NOT_LOCK = "user_not_lock";
 	public static final String ERROR_DETERMINE_MARK = "error determineted mark";
 	public static final String ERROR_NOT_SIGN_IN = "User not logged in or session timeout";
+	public static final String ERROR_ASSIGN_MODERATOR = "Failed assign moderator";
+	public static final Object NEWS_NOT_FOUND = "No news was found";
 
 }

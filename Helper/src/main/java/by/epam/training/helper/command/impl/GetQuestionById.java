@@ -23,7 +23,11 @@ import by.epam.training.helper.service.factory.ServiceFactory;
 import by.epam.training.helper.utils.StringUtils;
 import by.epam.training.helper.utils.StringParser;
 
-
+/**
+ * Command to get the question by ID
+ * @author Nikolaev Ilya
+ * {@link Command}  invokes method execute() with the request , response  and return jsp question
+ */
 public class GetQuestionById implements Command{
 	private static final Logger logger = LogManager.getLogger(GetQuestionById.class);
 	@Override

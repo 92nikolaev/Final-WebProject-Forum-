@@ -1,5 +1,7 @@
 package by.epam.training.helper.constant;
-
+/**
+ * @author Nikolaev Ilya
+ */
 public class ParameterName {
 	
 	public static final String USER = "user";
@@ -39,14 +41,16 @@ public class ParameterName {
 	public static final String EXISTS_QUESTION = "exists question";
 	public static final String ERROR = "error_message";
 	public static final String USER_ID = "user_id";
-	public static final byte ADMIN = 1;
+	public static final byte MODERATOR = 1;
 	public static final byte BAN = 0;
+	public static final byte ADMIN = 2;
 	public static final String ANSWER_ID = "answer_id";
 	public static final String ANSWER = "answer";
 	public static final String MARK_VALUE = "mark_value";
 	public static final String NEWS_TITLE = "news_title";
 	public static final String NEWS_CONTENT = "news_content";
 	public static final String ERROR_STATUS = "error_status";
+	public static final String NEWS_ID = "news_id";
 	
 
 }

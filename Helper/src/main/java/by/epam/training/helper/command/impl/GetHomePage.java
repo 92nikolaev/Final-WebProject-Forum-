@@ -1,4 +1,4 @@
-package by.epam.training.helper.command.impl;
+﻿package by.epam.training.helper.command.impl;
 
 import static by.epam.training.helper.utils.StringUtils.isNullOrEmpty;
 
@@ -30,7 +30,6 @@ import by.epam.training.helper.utils.StringParser;
  *	Home page, with all questions, you can also search for questions, show the latest news
  */
 public class GetHomePage implements Command {
-	
 	private static final Logger logger = LogManager.getLogger(GetHomePage.class);
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, CommandException {
@@ -59,6 +58,9 @@ public class GetHomePage implements Command {
 			request.setAttribute(ParameterName.NEWS, listNews);
 			if(!isNullOrEmpty(message)){
 				request.setAttribute(ParameterName.MESSAGE, message);
+			}
+			if(!isNullOrEmpty(searchQuestion)){
+				request.setAttribute(ParameterName.SEARCH_QUESTION,searchQuestion);
 			}
 			request.getRequestDispatcher(Url.HOME).forward(request, response);
 		} catch (ServiceException e) {

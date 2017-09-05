@@ -8,11 +8,11 @@ public class EditUserTest {
 
 	@Test(expected = ValidationException.class)
 	public void test() throws ValidationException {
-		Validation.validateUserField("»Î¸ˇ", ".,s12", "nikolaev@mail.ru");
+		Validation.validateUserField("–ò–ª—å—è", ",s12", "nikolaev@mail.ru");
 	}
 	@Test(expected = ValidationException.class)
 	public void test2() throws ValidationException {
-		Validation.validateUserField("»Î¸ˇ", "nikolaev", "nik");
+		Validation.validateUserField("–ò–ª—å—è", "nikolaev", "nik");
 	}
 	@Test(expected = ValidationException.class)
 	public void test3() throws ValidationException {

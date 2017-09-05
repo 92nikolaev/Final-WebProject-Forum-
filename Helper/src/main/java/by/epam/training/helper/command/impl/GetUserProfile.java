@@ -25,7 +25,7 @@ import by.epam.training.helper.service.factory.ServiceFactory;
 /**
  * The class is used to enter personal area and display personal information and asked a question
  * @author Nikolaev Ilya
- *
+ * {@link Command}  invokes method execute() with the request , response  and return jsp question
  */
 public class GetUserProfile implements Command {
 	private static final Logger logger = LogManager.getLogger(GetUserProfile.class);

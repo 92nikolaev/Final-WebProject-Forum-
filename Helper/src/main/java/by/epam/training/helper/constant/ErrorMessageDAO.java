@@ -1,5 +1,7 @@
 package by.epam.training.helper.constant;
-
+/**
+ * @author Nikolaev Ilya
+ */
 public class ErrorMessageDAO {
 
 	public static final String ERROR_DB_DRIVER = "Can't find database driver class";
@@ -22,6 +24,7 @@ public class ErrorMessageDAO {
 	
 	public static final String ERROR_GET_NEWS = "Failed to get news from database";
 	public static final String ERROR_INSER_NEWS = "Failed to save news in database";
+	public static final String ERROR_UPDATE_NEWS = "Failed to update news in database";
 	public static final String ERROR_GET_COUNT_NEWS = "Failed to get number of news  from database";
 	
 	public static final String ERROR_GET_QUESTIONS = "Failed to get questions data from database";
@@ -44,5 +47,6 @@ public class ErrorMessageDAO {
 	
 	public static final String ERROR_CHECK_USER_EXISTS = "Failed to check if the user exists with the login or e-mail in database ";
 	public static final String ERROR_CHECK_QUESTION_EXISTS = "Failed to check if the question exists in database";
+	public static final String ERROR_CHANGE_ROLE = "Failed change user role in database";
 	
 }

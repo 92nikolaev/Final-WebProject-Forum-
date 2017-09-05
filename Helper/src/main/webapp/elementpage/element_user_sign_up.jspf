@@ -1,75 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.11.1/jquery.validate.min.js"></script>
 <c:choose>
-	<c:when test="${sessionScope.locale == 'en'}">
+	<c:when test="${sessionScope.locale == 'ru'}">
 		<script type="text/javascript">
-			$("#RegistrationForm").validate({
-				rules:{
-						user_name:{
-									required: true,
-									minlength: 4
-									},
-						user_surname:{
-										required: true,
-										minlength: 4
-									},
-						user_login:{
-										required: true,
-										minlength: 5
-									},
-						user_password:{
-										minlength: 6,
-									},
-						verification_password:{
-										required: true,
-										minlength: 6,
-										equalTo: "#user_password"
-									},
-						user_email:{
-										required: true,
-										email: true
-									}
-								
-							},
-							messages: {
-								user_name: {
-									required: "Name requarament",
-									minlength: "Имя должно быть не менее 4 символов."
-								},
-								user_surname: {
-									required: "Фамилия обязательно",
-									minlength: "Фамилия должна быть не менее 4 символов."
-								},
-								user_login: {
-									required: "Этот логин недействителен .. (пример: Furious07)",
-									minlength: "Логин должен быть не менее 5 символов."
-								},
-								user_password: {
-									required: "Пароль обязательно",
-									minlength: "Пароль должен быть не менее 6 символов."
-								},
-								verification_password: {
-									required: "Пароль обязательно",
-									minlength: "Пароль должен быть не менее 6 символов.",
-									equalTo: " Введенные пароли не совпадают."
-								},
-								user_email: {
-									required: 'Электронная почта обязательно',
-									email: 'Этот адрес электронной почты недоступен. (пример: niolaev7@mail.ru) '
-								}
-							},
-							submitHandler: function(){
-								alert("valid");
-								form.submit();
-							}
-							
-					});
-		</script>
-	</c:when>
-	<c:otherwise>
-	<script type="text/javascript">
 				$("#RegistrationForm").validate({
 					rules:{
 							user_name:{
@@ -131,6 +66,70 @@
 								}
 								
 				});
+		</script>
+	</c:when>
+	<c:otherwise>
+		<script type="text/javascript">
+			$("#RegistrationForm").validate({
+				rules:{
+						user_name:{
+									required: true,
+									minlength: 4
+									},
+						user_surname:{
+										required: true,
+										minlength: 4
+									},
+						user_login:{
+										required: true,
+										minlength: 5
+									},
+						user_password:{
+										minlength: 6,
+									},
+						verification_password:{
+										required: true,
+										minlength: 6,
+										equalTo: "#user_password"
+									},
+						user_email:{
+										required: true,
+										email: true
+									}
+								
+							},
+							messages: {
+								user_name: {
+									required: "Name is required",
+									minlength: "The name must be at least 4 characters."
+								},
+								user_surname: {
+									required: "Surname is required",
+									minlength: "Last name must be at least 4 characters."
+								},
+								user_login: {
+									required: "This login is invalid .. (example: Furious07)",
+									minlength: "Login must be at least 5 characters."
+								},
+								user_password: {
+									required: "Password required",
+									minlength: "Password must be at least 6 characters."
+								},
+								verification_password: {
+									required: "Password required",
+									minlength: "Password must be at least 6 characters.",
+									equalTo: "The passwords you entered do not match."
+								},
+								user_email: {
+									required: 'E-mail required',
+									email: 'This email address is not available. (example: niolaev7@mail.ru) '
+								}
+							},
+							submitHandler: function(){
+								form.submit();
+							}
+							
+					});
 		</script>
 	</c:otherwise>
 </c:choose>

@@ -70,6 +70,13 @@ public interface UserDAO {
 	 * @param status
 	 * @throws DAOException
 	 */
-	void lockUnlockUser(int userId, byte status)throws DAOException;;
+	void lockUnlockUser(int userId, byte status)throws DAOException;
+	/**
+	 * Method to assign a user to a moderator or removes this authority
+	 * @param userId
+	 * @param moderator_role
+	 * @throws DAOException
+	 */
+	void assignModeratorOrUser(int userId, byte moderator_role)throws DAOException;
 
 }

@@ -14,4 +14,8 @@ public interface NewsService {
 
 	PageItem<News> getNewsPage(int pageNumber)throws ServiceException;
 
+	News getNewsById(int newsId)throws ServiceException;
+
+	void editNews(int newsId, String titleNews, String contentNews)throws ServiceException;
+
 }

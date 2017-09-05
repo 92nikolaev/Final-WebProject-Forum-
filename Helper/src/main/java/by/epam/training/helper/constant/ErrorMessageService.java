@@ -1,5 +1,8 @@
 package by.epam.training.helper.constant;
 
+/**
+ * @author Nikolaev Ilya
+ */
 public class ErrorMessageService {
 
 	public static final String ERROR_GET_DATA = "Failed to retrieve all data to send";
@@ -26,7 +29,7 @@ public class ErrorMessageService {
 	
 	public static final String ERROR_SIGN_UP = "Error sign up";
 	public static final String ERROR_ENCRYPTION = "Error encryption password";
-	public static final Object EROR_VERIFICATION_FIELDS = "An error occurred while verifying the user fields. Error -";
+	public static final String EROR_VERIFICATION_FIELDS = "An error occurred while verifying the user fields. Error -";
 	public static final String ERROR_USER_BAN = "User is locked";
 	public static final String ERROR_NOT_EXISTS_USER = "User not exist or login or password incorrect ";
 	public static final String ERROR_SIGN_IN = "Failed sign in";
@@ -36,7 +39,11 @@ public class ErrorMessageService {
 	public static final String ERROR_PASSWORD_NOT_EQUALS = "The password in the database does not match what the user entered";
 	public static final String ERROR_UPDATE_USER_FIELLDS = "Failed to update user fields";
 	public static final String ERROR_CHECK_FIELDS = "Error checking fields";
-	public static final Object ERROR_LOCK_UNLOCK_USER = "There was a problem when trying to block the user or unlock";
+	public static final String ERROR_LOCK_UNLOCK_USER = "There was a problem when trying to block the user or unlock";
+	public static final String ERROR_ASSIGN_MODERATOR = "Failed assign moderator";
+	public static final String ERROR_GET_NEWS = "Failed to get news";
+	public static final String ERROR_EDIT_NEWS = "Failed to update news";
+	public static final String ERROR_NEWS_NOT_FOUND = "News with such an ID was not found";
 	
 	
 	

@@ -2,9 +2,7 @@ package by.epam.training.helper.bean;
 
 import java.sql.Date;
 /**
- * 
  * @author Nikolaev Ilya
- *
  */
 public class Answer extends BaseEntity {
 	

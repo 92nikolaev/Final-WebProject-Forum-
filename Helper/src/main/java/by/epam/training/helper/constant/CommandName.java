@@ -1,5 +1,7 @@
 package by.epam.training.helper.constant;
-
+/**
+ * @author Nikolaev Ilya
+ */
 public class CommandName {
 
 	public static final String HOME = "home";
@@ -25,5 +27,10 @@ public class CommandName {
 	public static final String SHOW_NEWS = "show_all_news";
 	public static final String SIGN_IN_PAGE = "sign_in_page";
 	public static final String UNLOCK_USER = "unlock_user";
+	public static final String ASSIGN_MODERATOR = "assign_moderator";
+	public static final String UNASSIGN_MODERATOR = "unassign_moderator";
+	public static final String SHOW_NEWS_BY_ID = "show_news";
+	public static final String EDIT_NEWS = "edit_news";
+	public static final String HomePage = "home_page";
 
 }

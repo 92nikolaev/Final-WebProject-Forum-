@@ -29,5 +29,6 @@
 	<%@include file="../elementpage/element_popUp.jspf"%>
 	<%@include file="../elementpage/element_modal_overlay.jspf"%>
 	<script type="text/javascript" src="js/common.js"></script>
+	<%@include file="../elementpage/element_news_create.jspf"%>
 </body>
 </html>

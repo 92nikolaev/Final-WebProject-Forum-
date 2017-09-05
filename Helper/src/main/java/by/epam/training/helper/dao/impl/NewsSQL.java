@@ -101,5 +101,56 @@ public class NewsSQL implements NewsDAO {
 		}
 		return count;
 	}
+	@Override
+	public News getNewsById(int newsId) throws DAOException {
+		ConnectionPool connectionPool = ConnectionPool.getInstance();
+		Connection connection = null;
+		News news = null;
+		try {
+			connection = connectionPool.take();
+			try(PreparedStatement preparedStatement = connection.prepareStatement(SQLCommand.SELECT_NEWS_BY_ID)){
+					preparedStatement.setInt(1, newsId);
+					try(ResultSet resultSet = preparedStatement.executeQuery()){
+						while(resultSet.next()){
+							news = new News();
+							news.setId(resultSet.getInt(ColumnNameDB.NEWS_ID));
+							news.setTitle(resultSet.getString(ColumnNameDB.NEWS_TITLE));
+							news.setContent(resultSet.getString(ColumnNameDB.NEWS_CONTENT));
+						}
+					} 
+			} catch (SQLException e) {
+				logger.error(ErrorMessageDAO.ERROR_GET_NEWS, e);
+				throw new DAOException(ErrorMessageDAO.ERROR_GET_NEWS);
+			}
+		} catch (ConnectionPoolException e) {
+			logger.error(ErrorMessageDAO.ERROR_CONNECTION, e);
+			throw new DAOException(ErrorMessageDAO.ERROR_CONNECTION);	
+		}finally {
+			ReleaseConnection.freeConnection(connection, connectionPool);
+		}
+		return news;
+	}
+	@Override
+	public void editNews(int newsId, String titleNews, String contentNews) throws DAOException {
+		ConnectionPool connectionPool = ConnectionPool.getInstance();
+		Connection connection = null;
+		try {
+			connection = connectionPool.take();
+			try(PreparedStatement preparedStatement = connection.prepareStatement(SQLCommand.UPDATE_NEWS)){				
+				preparedStatement.setString(1, titleNews);
+				preparedStatement.setString(2, contentNews);
+				preparedStatement.setInt(3, newsId);
+				preparedStatement.executeUpdate();
+			} catch (SQLException e) {
+				logger.error(ErrorMessageDAO.ERROR_UPDATE_NEWS, e);
+				throw new DAOException(ErrorMessageDAO.ERROR_UPDATE_NEWS);
+			}
+		} catch (ConnectionPoolException e) {
+			logger.error(ErrorMessageDAO.ERROR_CONNECTION, e);
+			throw new DAOException(ErrorMessageDAO.ERROR_CONNECTION);	
+		}finally {
+			ReleaseConnection.freeConnection(connection, connectionPool);
+		}
+	}
 
 }

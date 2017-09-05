@@ -385,7 +385,7 @@ a:hover{
 	width:16%;
 	padding: 10px 10px 9px; /*Отступы внутри ячеек*/
     line-height: 18px; /*Межстрочный интервал*/
-    text-align: left; /*Выравнивание текста по левому краю*/
+    text-align: center; /*Выравнивание текста по центру*/
 }
 .table_list th{
 	padding-top: 9px; /*Отступы внутри ячеек*/
@@ -394,7 +394,7 @@ a:hover{
     color: black; /*Черный цвет в ячейках заголовков таблицы*/
 }
 .table_list td{
-	vertical-align: top; /*Выравнивание содержимого ячейки по верхнему краю*/
+	vertical-align: middle; /*Выравнивание содержимого ячейки по верхнему краю*/
     border-top: 1px solid #ddd; /*Верхняя граница ячейки*/
 }
 .table_list th+th,.table_list td+td,.table_list th+td {
@@ -544,7 +544,10 @@ color: red;
  .login_user{
 	margin: 3px 0;
 }
-
+/* table news*/
+.news-list{
+	margin-bottom: 35px;
+}
 
 /*			table question style			*/
 
@@ -910,17 +913,17 @@ color: red;
 }
  /* выстроим элементы в линию */
 .rating:not(:checked) > input {
-  display: none;
+	float:right;
+  display: inline-block;
   }
 /*позиционированного элемента от верхнего края родительского элемента до верхнего края дочернего элемента.*/ 
-#rate {
-	width: 60%
+.rating {
+	width: 100%;
 }
 /*  :not задаёт правила стилей для элементов, которые не содержат указанный селектор.
 :checked применяется к radio, когда они находятся в включенном режиме 
 */
-#rate:not(:checked) > label {
-  cursor:pointer;
+.rating > label {
   float:right;
   font-size: 20pt;
   width: 15px;
@@ -932,17 +935,20 @@ color: red;
   line-height: 15px;
   text-align: center;
 }/*режим наведения  при наведении меняеться цвет */
-#rate:not(:checked) > label:hover, /* принимает  цвет при наведении*/ 
-#rate:not(:checked) > label:hover ~ 
+.rating:not(:checked) > label:hover, /* принимает  цвет при наведении*/ 
+.rating:not(:checked) > label:hover ~ 
  label { color:  #fe9506;
  } /* остаються в выбранном цвете предыдущие элементы*/
  /* выбранный элемент при нажатии применит цвет */ 
-#rate > input:checked ~ label {color:  #fe9506;}
+.rating > form > input:checked  label {color:  #fe9506;}
  /* Rate>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>   */
 
 
 /*			pagination			*/
 .pagination{
+	position: absolute;
+	display:inline-block;
+	bottom: 70px;
 	float: left;
 	margin-top: 10px;
 	margin-bottom: 10px;
@@ -950,12 +956,26 @@ color: red;
 	margin-right: auto;
 }
 
-.pagination a {
+
+.pagination form{
+	display:inline-block;
+	}
+	
+.pagination button {
 	padding: 6px 6px;
 	border: 1px solid #ccc;
 }
-.pagination a.active,
-.pagination a:HOVER{
+.pagination button.active,
+.pagination button:HOVER{
+	background: #878787;
+	border: 1px solid #878787;
+}
+.pagination .pagin {
+	padding: 6px 6px;
+	border: 1px solid #ccc;
+}
+.pagination .pagin.active,
+.pagination .pagin:HOVER{
 	background: #878787;
 	border: 1px solid #878787;
 }
@@ -1002,6 +1022,7 @@ color: red;
 }
 
 /*			Создание вопроса		*/
+
 @media (max-width: 768px) {
 /* показываем кнопку для переключения верхней навигации */
 .nav-toggle {

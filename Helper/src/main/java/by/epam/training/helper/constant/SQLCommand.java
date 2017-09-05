@@ -15,7 +15,9 @@ public class SQLCommand {
 	public static final String UPDATE_USER_STATUS = "UPDATE user SET user.user_status = ? WHERE user.user_id = ?";
 	public static final String UPDATE_ANSWER = "UPDATE answer SET answer.answer_content = ? WHERE answer.answer_id = ?";
 	public static final String UPDATE_QUESTION = "UPDATE question SET question.question_title = ?, question.question_content = ? WHERE question.question_id = ?";
+	public static final String UPDATE_USER_ROLE = "UPDATE user SET user.user_role=? WHERE user_id = ?";
 	public static final String UPDATE_MARK = "UPDATE mark SET mark.mark_value = ? WHERE mark.mark_id = ?";
+	public static final String UPDATE_NEWS = "UPDATE news SET news.news_title = ?, news.news_content = ? WHERE news.news_id = ?" ;
 	public static final String SELECT_SIGN_IN = "SELECT * FROM user WHERE user_login = ? AND user_password = ?";
 	public static final String SELECT_USER_BY_ID = "SELECT user_id, user_name, user_surname, user_login, user_email, user_created FROM user WHERE user_id = ?";
 	public static final String SELECT_TEN_LAST_QUESTION_USER = "SELECT * FROM question WHERE user_id = ? ORDER BY question_created DESC;";
@@ -31,9 +33,11 @@ public class SQLCommand {
 	public static final String SELECT_CHECK_QUESTION = "select checkQuestionExist(?)";
 	public static final String SELECT_CHECK_USER_LOGIN_EMAIL= "select checkUserLoginEmail(?, ?)";
 	public static final String SELECT_QUESTIONS_SEARCH_WITH_LIMIT = "SELECT question.question_id, question.question_title, question.question_content, user.user_login, COUNT(answer.question_id) as count_answer FROM question JOIN user ON question.user_id = user.user_id LEFT JOIN answer ON question.question_id = answer.question_id WHERE ((LOWER(question.question_content) LIKE LOWER(?)) OR (LOWER(question.question_title) LIKE LOWER(?))) GROUP BY question.question_id ORDER BY question.question_id DESC LIMIT ?,?";
-	public static final String SELECT_QUESTIONS_COUNT_SEARCH = "SELECT COUNT(*) AS count_search_qestion FROM question WHERE ((LOWER(question.question_content) LIKE LOWER(?)) OR (LOWER(question.question_title) LIKE LOWER(?)))";
+	public static final String SELECT_QUESTIONS_COUNT_SEARCH = "SELECT COUNT(*) AS count_search_question FROM question WHERE ((LOWER(question.question_content) LIKE LOWER(?)) OR (LOWER(question.question_title) LIKE LOWER(?)))";
 	public static final String SELECT_ANSWER_BY_ID = "SELECT * FROM answer WHERE answer.answer_id = ?";
 	public static final String SELECT_NEWS_WITH_LIMIT = "SELECT news_id, news_title, news_content FROM news ORDER BY news_title DESC LIMIT ?,?";
 	public static final String SELECT_NEWS_COUNT = "SELECT COUNT(*) AS news_count FROM news";
 	public static final String SELECT_USER_PASSWORD_BY_USER_ID = "SELECT user_password FROM user WHERE user_id = ?";
+	public static final String SELECT_NEWS_BY_ID = "SELECT * FROM news WHERE news_id=?";
+	
 }

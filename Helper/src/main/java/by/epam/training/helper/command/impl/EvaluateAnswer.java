@@ -33,6 +33,7 @@ public class EvaluateAnswer implements Command {
 	public void execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException, CommandException {
 		String markValueParamet = request.getParameter(ParameterName.MARK_VALUE);
+		System.out.println(markValueParamet + " markValueParamet");
 		String answerIdParametr = request.getParameter(ParameterName.ANSWER_ID);
 		String questionIdParametr = request.getParameter(ParameterName.QUESTION_ID);
 		try{

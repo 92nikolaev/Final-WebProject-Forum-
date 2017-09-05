@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <div class="item-list">
@@ -21,12 +21,11 @@
 					<div class="forum-sections-moderators-container"></div>
 				</div>
 			</td>
-			<td class="topics-posts shrink-to-fit">Количество ответов<span class="test-topics-count space-left-small" data-original-title="">${questions.answerCount}</span>
+			<td class="topics-posts shrink-to-fit">${home_count_answer}<span class="test-topics-count space-left-small" data-original-title="">${questions.answerCount}</span>
 			</td>
 			<td class="latest-by shrink-to-fit">
 				<a class="date" href="#" data-original-title="">${questions.dateCreated}</a>
-				<p>Автор<a class="space-left-small" href="#" >${questions.userLogin}</a>
-				</p>
+				<p>${home_author_post}  ${questions.userLogin}</p>
 			</td>
 		</tr>
 		</c:forEach>		
@@ -35,10 +34,18 @@
 			<c:forEach begin="1" end="${requestScope.amont_page}" var="i">
 			<c:choose>
 				<c:when test="${requestScope.current_page == i}">
-					<a href="controller?command=home&number_page=${i}" class="active">${i}</a>
+					<form action="controller" method="post">
+						<input type="hidden" name="number_page" value="${i}">
+						<input type="hidden" name="search_questions" value="${search_questions}">
+						<button type="submit" name="command" value="home" class="active">${i}</button>
+					</form>
 				</c:when>
 				<c:otherwise>
-					<a href="controller?command=home&number_page=${i}">${i}</a>	
+					<form action="controller" method="post">
+						<input type="hidden" name="number_page" value="${i}">
+						<input type="hidden" name="search_questions" value="${search_questions}">
+						<button type="submit" name="command" value="home">${i}</button>
+					</form>
 				</c:otherwise>
 			</c:choose>
 			</c:forEach>

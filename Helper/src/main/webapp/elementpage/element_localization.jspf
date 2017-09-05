@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <fmt:setLocale value="${sessionScope.locale}" />
@@ -25,6 +25,9 @@
 
 <!-- ELEMENT QUESTION ITEM -->
 <fmt:message bundle="${loc}" key="question.item.title" var="question_common_title" />
+<fmt:message bundle="${loc}" key="home.count.answer" var="home_count_answer" />
+<fmt:message bundle="${loc}" key="home.author.post" var="home_author_post" />
+
 
 
 <!-- ELEMENT SIGN IN POP UP -->
@@ -129,6 +132,25 @@
 <fmt:message bundle="${loc}" key="users.unlock" var="users_unlock" />
 <fmt:message bundle="${loc}" key="users.error.lock.himself" var="users_error_lock_himself" />
 <fmt:message bundle="${loc}" key="users.profile" var="users_profile" />
+<fmt:message bundle="${loc}" key="users.profile" var="users_profile" />
+<fmt:message bundle="${loc}" key="users.assign.moderator" var="users_assign_moderator" />
+<fmt:message bundle="${loc}" key="users.assign.user" var="users_assign_user" />
+<fmt:message bundle="${loc}" key="users.moderator.or.user" var="users_moderator_or_user" />
+
+<fmt:message bundle="${loc}" key="users.role.moderator" var="users_role_moderator" />
+<fmt:message bundle="${loc}" key="users.role.user" var="users_role_user" />
+<fmt:message bundle="${loc}" key="users.failed.set.role" var="users_failed_set_role" />
+<fmt:message bundle="${loc}" key="users.designate.himself.moderator" var="users_designate_himself_moderator" />
+<fmt:message bundle="${loc}" key="users.designate.himself.user" var="users_designate_himself_user" />
+
+<!-- ELEMENT EDIT NEWS PAGE -->
+<fmt:message bundle="${loc}" key="news.failed.add" var="news_failed_add" />
+<fmt:message bundle="${loc}" key="news.user.can.not.create" var="news_user_can_not_create" />
+<fmt:message bundle="${loc}" key="news.successful.add" var="news_successful_add" />
+<fmt:message bundle="${loc}" key="news.not.found" var="news_not_found" />
+<fmt:message bundle="${loc}" key="administrator.news.edit.btn" var="administrator_news_edit_btn" />
+<fmt:message bundle="${loc}" key="news.empty.not.add" var="news_empty_not_add" />
+
 
 
 <!-- ELEMENT EDIT QUESTION PAGE -->

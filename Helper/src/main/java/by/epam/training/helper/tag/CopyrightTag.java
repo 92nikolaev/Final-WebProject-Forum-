@@ -5,7 +5,7 @@ import java.io.IOException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
-import org.apache.jasper.el.JspELException;
+
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -14,17 +14,16 @@ import org.apache.log4j.Logger;
  *
  */
 public class CopyrightTag extends SimpleTagSupport{
-	private static final Logger logger = LogManager.getLogger(CopyrightTag.class);
-	public void doTag() throws JspELException{
+	/*private static final Logger logger = LogManager.getLogger(CopyrightTag.class);
+	public void doTag() {
 		
 		JspWriter writer = getJspContext().getOut();
 		
 		try {
-			writer.println("Nikolaev Ilya © 2017");
+			writer.println("Nikolaev Ilya  2017");
 		} catch (IOException e) {
 			logger.error(e);
-			e.printStackTrace();
 		}
-	}
+	}*/
 	
 }

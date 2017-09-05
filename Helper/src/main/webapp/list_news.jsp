@@ -6,28 +6,30 @@
 <html>
 <head>
 <%@ include file="../elementpage/element_head.jspf"%>
-<title>Edit Question</title>
+<title>News</title>
 </head>
 <body>
 	<%@ include file="../elementpage/element_header.jspf"%>
 	<div class="container">
-			<div class="big-heading">
-				<h2>${question_edit_title}</h2>
-			</div>
-			<div class="form_item">
-			<form  action="controller" method="post">
-				<label>
-					<span>${profile_question_title}</span>
-					<input type="text" name="question_title" value="${question.title}">
-				</label>
-				<label>
-					<span>${profile_question_description}</span>
-					<textarea name="question_content" >${question.content}</textarea>
-				</label>
-				<input type="hidden" name="question_id" value="${question.id}">
-				<button class="btn" type="submit" name="command" value="edit_question">${question_edit_btn}</button>
-			</form>
-			</div>
+		<div class="message">
+			<c:if test="${message == 'failed add'}">
+				<div>${news_failed_add}</div>
+			</c:if>
+			<c:if test="${message == 'user can_not create news'}">
+				<div>${news_user_can_not_create}</div>
+			</c:if>
+			<c:if test="${message == 'news successfully add'}">
+				<div>${news_successful_add}</div>
+			</c:if>
+			<c:if test="${message == 'No news was found'}">
+				<div>${news_not_found}</div>
+			</c:if>
+			<c:if test="${message == 'news_empty'}">
+				<div>${news_empty_not_add}</div>
+			</c:if>
+			
+		</div>
+		<%@include file="../elementpage/element_news_items.jspf"%>
 	</div>
 	<%@include file="../elementpage/element_footer.jspf"%>
 	<%@include file="../elementpage/element_popUp.jspf"%>

@@ -36,6 +36,12 @@
 							<div class="login_user">	
 								<h3>${requestScope.question.userLogin}</h3>
 							</div>
+							<c:if test="${(sessionScope.user.role == 2 ||sessionScope.user.role==1) && sessionScope.user.login != question.userLogin}">
+									<form action="controller" method="post">
+											<input type="hidden" name="question_id" value="${requestScope.question.id}">
+											<button class="btn edit_question_btn" type="submit" name="command" value="page_edit_question">${question_edit_btn}</button>
+									</form>
+							</c:if>	
 							<span class="post_user_avatar"><img alt="${question_avatar}" src="img/avatar_question.gif" width="100px" height="100px"></span>
 							<div class="average_mark">
 								${question_answers} ${requestScope.question.answerCount}
@@ -73,6 +79,13 @@
 							<div class="login_user">	
 								<h3>${answer.userLogin}</h3>
 							</div>
+							<c:if test="${(sessionScope.user.role == 2 ||sessionScope.user.role==1) && sessionScope.user.login != question.userLogin}">
+									<form action="controller" method="post">
+											<input type="hidden" name="question_id" value="${requestScope.question.id}">
+											<input type="hidden" name="answer_id" value="${answer.id}">
+											<button class="btn edit_answer_btn" type="submit" name="command" value="page_edit_answer">${question_edit_answer}</button>
+									</form>
+							</c:if>	
 							<span class="post_user_avatar"><img alt="${question_avatar}" src="img/avatar_answer.jpg" width="100px" height="100px"></span>
 							<div class="average_mark">
 								${question_average_rating}: ${answer.averageMark}
@@ -87,29 +100,23 @@
 										</form>
 									</c:when>
 									<c:otherwise>
-									<form action="controller" method="post">
-										<div id="rate" class="rating">
-										  <!-- Пятая звезда  -->
-										  <input type="radio" id="star_5" name="mark_value" value="5" />
-										  <label for="star_5" title="Incredible"><i class="fa fa-star" aria-hidden="true"></i></label>
-										  <!-- Четвертая звезда -->
-										  <input type="radio" id="star_4" name="mark_value" value="4" />
-										  <label for="star_4" title="Well"><i class="fa fa-star" aria-hidden="true"></i></label>
-										  <!-- Третия звезда  -->
-										  <input type="radio" id="star_3" name="mark_value" value="3" />
-										  <label for="star_3" title="Normally"><i class="fa fa-star" aria-hidden="true"></i></label>
-										  <!-- Вторая звезда  -->
-										  <input type="radio" id="star_2" name="mark_value" value="2" />
-										  <label for="star_2" title="Bad"><i class="fa fa-star" aria-hidden="true"></i></label>
-										  <!-- Первая звезда -->
-										  <input type="radio" id="star_1" name="mark_value" value="1" />
-										  <label for="star_1" title="Awful"><i class="fa fa-star" aria-hidden="true"></i></label>
+									<form  id="ratingsForm" action="controller" method="post">
+										<div class="stars">
+											 <input type="radio" id="star_1" name="mark_value" value="1" />
+											<label class="star-1" title="Awful" for="star_1">1</label>
+											<input type="radio" id="star_2" name="mark_value" value="2" />
+											<label class="star-2" title="Bad" for="star_2">2</label>
+											<input type="radio" id="star_3" name="mark_value" value="3" />
+											<label class="star-3" title="Normally" for="star_3">3</label>
+											<input type="radio" id="star_4" name="mark_value" value="4" />
+											<label class="star-4" title="Well" for="star_4">4</label>
+											<input type="radio" id="star_5" name="mark_value" value="5" />
+											<label class="star-5" title="Incredible" for="star_5">5</label>
 										</div>
 										<input type="hidden" name="answer_id" value="${answer.id}">
 										<input type="hidden" name="question_id" value="${requestScope.question.id}">
 										<button class="btn" type="submit" name="command" value="evaluate_answer">${question_rate_answer}</button>
-										</form>
-										 
+									</form>
 									</c:otherwise>
 								</c:choose>
 							</c:if>
@@ -136,6 +143,7 @@
 	<%@include file="../elementpage/element_footer.jspf" %>
 	<%@include file="../elementpage/element_popUp.jspf" %>
 	<%@include file="../elementpage/element_modal_overlay.jspf" %>
+	<%@include file="../elementpage/element_news_create.jspf"%>
 	<div class="modal-content-edit modal_create_qestion">
 		<button class="modal-content-close" type="button" title="Close">Close</button>
 		<h2 class="modal-content-title">${question_create_answer_action_description}</h2>

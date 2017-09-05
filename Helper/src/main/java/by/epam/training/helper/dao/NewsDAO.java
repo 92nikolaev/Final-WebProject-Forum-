@@ -27,10 +27,26 @@ public interface NewsDAO {
 	void addNews(String titleNews, String contentNews)throws DAOException;
 
 	/**
-	 * The method counts the amount of news
+	 * Method counts the amount of news
 	 * @return count news in the database
 	 * @throws DAOException
 	 */
 	int getCountNews()throws DAOException;
+
+	/**
+	 * Method get news by ID
+	 * @param newsId
+	 * @return {@link News}
+	 * @throws DAOException
+	 */
+	News getNewsById(int newsId)throws DAOException;
+	/**
+	 * Method edit news
+	 * @param newsId
+	 * @param titleNews
+	 * @param contentNews
+	 * @throws DAOException
+	 */
+	void editNews(int newsId, String titleNews, String contentNews)throws DAOException;
 
 }

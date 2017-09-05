@@ -15,10 +15,11 @@ import by.epam.training.helper.service.NewsService;
 import by.epam.training.helper.service.exception.ServiceException;
 import by.epam.training.helper.utils.PaginationUtils;
 import by.epam.training.helper.utils.StringConverter;
+import by.epam.training.helper.validation.Validation;
 
 public class NewsServiceImpl implements NewsService {
 	private static final Logger logger = LogManager.getLogger(NewsServiceImpl.class);
-	private final int NEWS_ON_PAGE = 10;
+	private final int NEWS_ON_PAGE = 8;
 	private final int NEWS_ON_HOME_PAGE = 10;
 	private int OFFSET = 0;
 	@Override
@@ -71,6 +72,42 @@ public class NewsServiceImpl implements NewsService {
 			String content = StringConverter.formattingContent(news.getContent());
 			news.setContent(content);
 		}
+		
+	}
+	@Override
+	public News getNewsById(int newsId) throws ServiceException {
+		News news = null;
+		DAOFactory daoFactory = DAOFactory.getInstance();
+		NewsDAO newsDAO = daoFactory.getNewsDAO();
+		try {
+			news = newsDAO.getNewsById(newsId);
+		} catch (DAOException e) {
+			logger.error(ErrorMessageService.ERROR_GET_NEWS + e);
+			throw new ServiceException(ErrorMessageService.ERROR_GET_NEWS);
+		}
+		return news;
+	}
+	@Override
+	public void editNews(int newsId, String titleNews, String contentNews) throws ServiceException {
+		if(Validation.isValidationId(newsId)){
+			DAOFactory daoFactory = DAOFactory.getInstance();
+			NewsDAO newsDAO = daoFactory.getNewsDAO();
+			try {
+				if(newsDAO.getNewsById(newsId) != null){
+					newsDAO.editNews(newsId, titleNews, contentNews);
+				}else{
+					logger.error(ErrorMessageService.ERROR_NEWS_NOT_FOUND + newsId);
+					throw new ServiceException(ErrorMessageService.ERROR_EDIT_NEWS);
+				}
+			} catch (DAOException e) {
+				logger.error(ErrorMessageService.ERROR_EDIT_NEWS + e);
+				throw new ServiceException(ErrorMessageService.ERROR_EDIT_NEWS);
+			}
+		}else{
+			logger.error(ErrorMessageService.ERROR_EDIT_NEWS);
+			throw new ServiceException(ErrorMessageService.ERROR_EDIT_NEWS);
+		}
+		
 		
 	}
 

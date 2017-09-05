@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!-- POP UP -->
 <div class="modal-content">
 		<button class="modal-content-close" type="button" title="Закрыть">Close</button>

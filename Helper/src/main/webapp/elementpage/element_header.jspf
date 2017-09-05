@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 	<header>
 		<nav class="container">
@@ -7,7 +7,7 @@
 		</a>
 		<div class="nav-toggle"><span></span></div>
 		<ul id="menu">
-			<c:if test="${sessionScope.user.role == 1}">
+			<c:if test="${sessionScope.user.role == 1 || sessionScope.user.role == 2}">
 				<li><a href="#"><i class="fa fa-cogs" aria-hidden="true"></i>${nav_management} </a>
 					<ul class="dropdown-menu dropdown-menu_admin">
               		<li>

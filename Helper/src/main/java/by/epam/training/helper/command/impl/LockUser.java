@@ -22,7 +22,11 @@ import by.epam.training.helper.service.exception.ServiceException;
 import by.epam.training.helper.service.factory.ServiceFactory;
 import by.epam.training.helper.utils.StringParser;
 import by.epam.training.helper.validation.Validation;
-
+/**
+ * The command to lock the user
+ * @author Nikolaev Ilya
+ * {@link Command}  invokes method execute() with the request , response  and return jsp question
+ */
 public class LockUser implements Command {
 	private static final Logger logger = LogManager.getLogger(LockUser.class);
 	byte BLOCK_STATUS = 0;
@@ -32,14 +36,14 @@ public class LockUser implements Command {
 		String userIdParametr = request.getParameter(ParameterName.USER_ID);
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute(ParameterName.USER);
-		if(user!=null && user.getRole() == ParameterName.ADMIN){
+		if(user!=null && (user.getRole() == ParameterName.MODERATOR || user.getRole() == ParameterName.ADMIN)){
 			ServiceFactory serviceFactory = ServiceFactory.getInstance();
 			UserService userService = serviceFactory.getUserService();
 			try{
 				int userId = StringParser.parseString(userIdParametr);
 				if(user.getId() != userId){
 					if(Validation.isValidationId(userId)){
-						userService.lockUser(userId, BLOCK_STATUS);
+						userService.lockUnlockUser(userId, BLOCK_STATUS);
 						response.sendRedirect(Url.SHOW_ALL_USER_WITH_MESSAGE + SuccessMessage.USER_LOCK);
 					}else{
 						response.sendRedirect(Url.SHOW_ALL_USER_WITH_MESSAGE + ErrorMessage.ERROR_USER_INDEFINED);

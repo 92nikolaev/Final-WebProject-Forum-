@@ -20,7 +20,7 @@ import by.epam.training.helper.validation.exception.ValidationException;
 
 public class QuestionServiceImpl implements QuestionService {
 	private static final Logger logger = LogManager.getLogger(QuestionServiceImpl.class);
-	private final int ITEM_ON_PAGE = 10;
+	private final int ITEM_ON_PAGE = 7;
 	@Override
 	public PageItem<Question> getQuestionsPage(int pageNumber) throws ServiceException {
 		PageItem<Question> item = null;
@@ -54,7 +54,7 @@ public class QuestionServiceImpl implements QuestionService {
 			String query = StringConverter.conversionForSearchDB(searchQuestion);
 			questions = questionDAO.getSearchQuestionWithLimit(offset, ITEM_ON_PAGE, query);
 			formattingQuestion(questions);
-			countQuestions = questionDAO.getAmountSearchQuestion(searchQuestion);
+			countQuestions = questionDAO.getAmountSearchQuestion(query);
 			int amountPage = PaginationUtils.pageCounting(countQuestions, ITEM_ON_PAGE);
 			item = new PageItem<>(questions, amountPage);
 		} catch (DAOException e) {

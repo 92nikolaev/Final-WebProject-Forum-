@@ -10,9 +10,11 @@ import javax.servlet.http.HttpSession;
 import by.epam.training.helper.command.Command;
 import by.epam.training.helper.constant.ParameterName;
 import by.epam.training.helper.constant.Url;
-/**
+
+ /**
  * To change the language on the site
  * @author Nikolaev Ilya
+ * {@link Command}  invokes method execute() with the request , response  and return jsp question
  */
 public class SetLocale implements Command {
 	/**

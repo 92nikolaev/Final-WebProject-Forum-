@@ -21,7 +21,11 @@ import by.epam.training.helper.service.AnswerService;
 import by.epam.training.helper.service.exception.ServiceException;
 import by.epam.training.helper.service.factory.ServiceFactory;
 import by.epam.training.helper.utils.StringParser;
-
+/**
+ * Command get page edit answer
+ * @author Nikolaev Ilya
+ * {@link Command}  invokes method execute() with the request , response  and return jsp question
+ */
 public class GetPageEditAnswer implements Command {
 	private static final Logger logger = LogManager.getLogger(GetPageEditAnswer.class);
 	@Override
@@ -48,11 +52,9 @@ public class GetPageEditAnswer implements Command {
 			}
 		}catch (NumberFormatException e) {
 			logger.error(ErrorMessage.INVALID_ID);
-			e.printStackTrace();
-			throw new CommandException(ErrorMessage.INVALID_ID);
+			throw new CommandException();
 		} catch (ServiceException e) {
 			logger.error(e);
-			e.printStackTrace();
 			throw new CommandException();
 		}
 	}

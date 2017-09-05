@@ -21,7 +21,11 @@ import by.epam.training.helper.service.QuestionService;
 import by.epam.training.helper.service.exception.ServiceException;
 import by.epam.training.helper.service.factory.ServiceFactory;
 import by.epam.training.helper.utils.StringParser;
-
+/**
+ * Command to get the question by ID
+ * @author Nikolaev Ilya
+ * {@link Command}  invokes method execute() with the request , response  and return jsp question
+ */
 public class GetPageEditQuestion implements Command {
 	private static final Logger logger = LogManager.getLogger(GetPageEditAnswer.class);
 	@Override
@@ -36,7 +40,9 @@ public class GetPageEditQuestion implements Command {
 				ServiceFactory serviceFactory = ServiceFactory.getInstance();
 				QuestionService questionService = serviceFactory.getQuestionService();
 				Question question = questionService.getQuestionById(questionId);
-				if(question.getUserLogin().equals(user.getLogin())){
+				if(question.getUserLogin().equals(user.getLogin()) 
+						|| user.getRole() == ParameterName.ADMIN 
+						|| user.getRole() == ParameterName.MODERATOR ){
 					request.setAttribute(ParameterName.QUESTION, question);
 					request.getRequestDispatcher(Url.EDIT_QUESTION).forward(request, response);
 				}else{
@@ -48,11 +54,9 @@ public class GetPageEditQuestion implements Command {
 			}
 		}catch (NumberFormatException e) {
 			logger.error(ErrorMessage.INVALID_ID);
-			e.printStackTrace();
 			throw new CommandException(ErrorMessage.INVALID_ID);
 		} catch (ServiceException e) {
 			logger.error(e);
-			e.printStackTrace();
 			throw new CommandException();
 		}
 	}

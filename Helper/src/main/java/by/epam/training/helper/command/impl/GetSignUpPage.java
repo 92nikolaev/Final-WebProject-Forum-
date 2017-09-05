@@ -12,19 +12,22 @@ import org.apache.log4j.Logger;
 
 import by.epam.training.helper.bean.News;
 import by.epam.training.helper.command.Command;
-import by.epam.training.helper.command.exception.CommandException;
 import by.epam.training.helper.constant.ParameterName;
 import by.epam.training.helper.constant.Url;
 import by.epam.training.helper.service.NewsService;
 import by.epam.training.helper.service.exception.ServiceException;
 import by.epam.training.helper.service.factory.ServiceFactory;
 import by.epam.training.helper.utils.StringUtils;
-
+/**
+ * Commands to go to the registration page
+ * @author Nikolaev Ilya
+ * {@link Command}  invokes method execute() with the request , response  and return jsp question
+ */
 public class GetSignUpPage implements Command {
 	private static final Logger logger = LogManager.getLogger(GetSignUpPage.class);
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException, CommandException {
+			throws ServletException, IOException {
 		ArrayList<News> listNews = null;
 		ServiceFactory serviceFactory = ServiceFactory.getInstance();
 		NewsService newsService = serviceFactory.getNewsService();

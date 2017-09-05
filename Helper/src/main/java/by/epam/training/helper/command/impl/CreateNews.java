@@ -20,7 +20,11 @@ import by.epam.training.helper.service.NewsService;
 import by.epam.training.helper.service.exception.ServiceException;
 import by.epam.training.helper.service.factory.ServiceFactory;
 import by.epam.training.helper.utils.StringUtils;
-
+/**
+ * The command to create new news
+ * @author Nikolaev Ilya
+ * {@link Command}  invokes method execute() with the request , response  and return jsp question
+ */
 public class CreateNews implements Command {
 	private static final Logger logger = LogManager.getLogger(CreateNews.class);
 	@Override
@@ -32,25 +36,28 @@ public class CreateNews implements Command {
 			HttpSession session = request.getSession();
 			User user = (User) session.getAttribute(ParameterName.USER);
 			if(user != null){
-				if(user.getRole() == ParameterName.ADMIN){
+				if(user.getRole() == ParameterName.MODERATOR ||user.getRole() == ParameterName.ADMIN){
 					ServiceFactory serviceFactory = ServiceFactory.getInstance();
 					NewsService newsService = serviceFactory.getNewsService();
 					try {
 						newsService.addNews(titleNews, contentNews);
-						response.sendRedirect("controller?command=show_all_news&message=news_successfully_add");
+						response.sendRedirect(Url.REDIRECT_SHOW_ALL_NEWS_SUCCESS_ADD);
 					} catch (ServiceException e) {
 						logger.error(ErrorMessage.ERROR_NOT_ADD_NEWS);
 						e.printStackTrace();
-						response.sendRedirect("controller?command=home&message=news_not_add");
+						response.sendRedirect(Url.REDIRECT_FAILED_ADD_NEWS);
 					}	
 				}else{
 					logger.warn(ErrorMessage.USER_CAN_NOT_CREATE_NEWS);
-					response.sendRedirect("controller?command=home&message=user_can_not_create_news");
+					response.sendRedirect(Url.REDIRECT_LIST_NEWS_WITH_MESSAGE+ErrorMessage.USER_CAN_NOT_CREATE_NEWS);
 				}
 			}else {
 				logger.warn(ErrorMessage.USER_NOT_SIGN_IP);
 				response.sendRedirect(Url.SIGN_IN);
 			}
+		}else{
+			logger.warn("NEWS_EMPTY");
+			response.sendRedirect(Url.REDIRECT_SHOW_ALL_NEWS_NOT_ADD_EMPTY);
 		}
 		
 		

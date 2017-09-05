@@ -1,6 +1,8 @@
 package by.epam.training.helper.constant;
 
-
+/**
+ * @author Nikolaev Ilya
+ */
 public class SuccessMessage {
 	
 	public static final String USER_NOT_EXISTS = "User with such login and email does not exist. login - ";
@@ -10,5 +12,7 @@ public class SuccessMessage {
 	public static final String USER_LOCK = "User lock";
 	public static final String USER_UNLOCK = "User unlock";
 	public static final String RATE_ANSWER = "rate answer";
+	public static final String MODERATOR_ROLE = "Role moderator";
+	public static final String USER_ROLE = "Role user";
 
 }
