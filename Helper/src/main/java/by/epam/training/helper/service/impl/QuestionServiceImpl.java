@@ -20,7 +20,7 @@ import by.epam.training.helper.validation.exception.ValidationException;
 
 public class QuestionServiceImpl implements QuestionService {
 	private static final Logger logger = LogManager.getLogger(QuestionServiceImpl.class);
-	private final int ITEM_ON_PAGE = 7;
+	private final int ITEM_ON_PAGE = 6;
 	@Override
 	public PageItem<Question> getQuestionsPage(int pageNumber) throws ServiceException {
 		PageItem<Question> item = null;

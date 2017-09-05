@@ -123,7 +123,7 @@
 <fmt:message bundle="${loc}" key="users.date.registration" var="users_date_registration" />
 <fmt:message bundle="${loc}" key="users.rating.answers" var="users_rating_answers" />
 <fmt:message bundle="${loc}" key="users.count.mark" var="users_count_mark" />
-<fmt:message bundle="${loc}" key="users.count.question" var="users_count_question" />
+<fmt:message bundle="${loc}" key="users.count.answers" var="users_count_answer" />
 <fmt:message bundle="${loc}" key="users.lock.unlock" var="users_lock_unlock" />
 <fmt:message bundle="${loc}" key="users.unlock.user" var="users_unlock_user" />
 <fmt:message bundle="${loc}" key="users.lock.user" var="users_lock_user" />

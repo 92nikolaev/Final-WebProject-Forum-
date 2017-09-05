@@ -18,7 +18,7 @@
 		<div class="big-heading">
 			<h2>${news.title}</h2>
 		</div>
-		<div>
+		<div class="content_news">
 			${news.content}
 		</div>
 	</div>

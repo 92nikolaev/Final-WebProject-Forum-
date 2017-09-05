@@ -15,6 +15,7 @@ import by.epam.training.helper.command.Command;
 import by.epam.training.helper.command.CommandHelper;
 import by.epam.training.helper.command.exception.CommandException;
 import by.epam.training.helper.command.exception.CommandNotFoundException;
+import by.epam.training.helper.constant.InfoMessage;
 import by.epam.training.helper.constant.ParameterName;
 import by.epam.training.helper.constant.Url;
 
@@ -68,7 +69,7 @@ public class ServletHelper extends HttpServlet {
 		CommandHelper commandHelper = CommandHelper.getInstance();
 		String commandName = request.getParameter(ParameterName.COMMAND);
 		Command command;
-				System.out.println(commandName);
+		logger.info(InfoMessage.COMMAND_NAME + commandName);
 		try {
 			command = commandHelper.getCommand(commandName);
 			command.execute(request, response);

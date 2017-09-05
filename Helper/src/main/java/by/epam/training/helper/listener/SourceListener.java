@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebListener;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import by.epam.training.helper.constant.ErrorMessageDAO;
+import by.epam.training.helper.constant.InfoMessage;
 import by.epam.training.helper.dao.exception.ConnectionPoolException;
 import by.epam.training.helper.dao.pool.InitializationConnectionPool;
 
@@ -26,7 +27,7 @@ public class SourceListener implements ServletContextListener {
      * @see ServletContextListener#contextDestroyed(ServletContextEvent)
      */
     public void contextDestroyed(ServletContextEvent destroyed)  { 
-    	System.out.println("Destroi conection pool");
+    	logger.info(InfoMessage.DESTROI_CONECTION_POOL);
 		InitializationConnectionPool pool = InitializationConnectionPool.getInctance();
 		try {
 			
@@ -43,7 +44,7 @@ public class SourceListener implements ServletContextListener {
      * @see ServletContextListener#contextInitialized(ServletContextEvent)
      */
     public void contextInitialized(ServletContextEvent initialized)  { 
-    	System.out.println(" conection pool init ");
+    	logger.info(InfoMessage.INIT_CONECTION_POOL);System.out.println();
 		InitializationConnectionPool pool = InitializationConnectionPool.getInctance();
 		try {
 			

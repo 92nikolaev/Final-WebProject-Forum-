@@ -10,7 +10,7 @@
 				<th>${users_date_registration}</th>
 				<th>${users_rating_answers}</th>
 				<th>${users_count_mark}</th>
-				<th>${users_count_question}</th>
+				<th>${users_count_answer}</th>
 				<c:if test="${sessionScope.user.role == 1 || sessionScope.user.role == 2 }">
 					<th>${users_lock_unlock}</th>
 				</c:if>
