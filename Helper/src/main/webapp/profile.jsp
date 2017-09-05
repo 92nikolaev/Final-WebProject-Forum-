@@ -29,7 +29,6 @@
 		<div class="inner-content">
 			<div class="big-heading">
 				<h2>${profile_title}</h2>
-				${message}
 			</div>
 			<div class="inner-columns clearfix">
 				<div class="cabinet-inner-column-left">
@@ -58,7 +57,7 @@
 						<tr id="question-my" class="question">
 						<td class="col1">
 								<h3 class="h-nostyle">
-									<a class="branch-title" href="#" data-original-title="">${question.title}</a>
+									<a class="branch-title" href="controller?command=show_question&question_id=${question.id}" data-original-title="">${question.title}</a>
 								</h3>
 						</td>
 						<td class="col2">
